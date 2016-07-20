@@ -1,0 +1,69 @@
+﻿@font-face {
+	font-family: 'iconfont';
+	src: url('/Content/themes/fonts/iconfont.eot');
+	src: url('/Content/themes/fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+		 url('/Content/themes/fonts/iconfont.ttf') format('truetype'),
+		 url('/Content/themes/fonts/iconfont.woff') format('woff'),
+		 url('/Content/themes/fonts/iconfont.svg?#iconfont') format('svg');
+                    
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-font-"], [class*=" icon-font-"] {
+	font-family: 'iconfont';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.x-icon-accept {
+    background-image: url("/Content/themes/icons/tick.png") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-error {
+    background-image: url("/Content/themes/icons/error.png") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-hidden {
+    display:none;
+}
+
+.x-icon-loading {
+    background-image: url("/Content/themes/icons/loading.gif") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-tips {
+    background-image: url("/Content/themes/icons/tips.png") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-edit {
+    background-image: url("/Content/themes/icons/edit.png") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-delete {
+    background-image: url("/Content/themes/icons/delete.png") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-remote-control {
+    background-image: url("/Content/themes/icons/control.png") !important;
+    background-repeat: no-repeat;
+}
+
+.x-icon-remote-setting {
+    background-image: url("/Content/themes/icons/junheng.png") !important;
+    background-repeat: no-repeat;
+}

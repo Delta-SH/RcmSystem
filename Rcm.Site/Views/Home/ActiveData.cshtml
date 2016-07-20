@@ -1,0 +1,22 @@
+﻿<div id="defaut-title-bar">
+    <div class="title-bar clearfix">
+        <h1 class="l">实时数据</h1>
+        <div class="desc l"></div>
+        <a id="help-btn" title="点击可查看详细帮助" class="help l" href="javascript:void(0);">&nbsp;</a>
+    </div>
+    <div id="help-tip" class="help-tip" style="display:none;">
+        <div id="help-arrow" class="help-arrow"></div>
+        <div class="help-tip-content">
+            <div class="tip-content">
+                @*<p class="label">功能说明：</p>*@
+                <p class="text">本页展现了系统所有设备信号的实时数据，提供设备信号的实时测值曲线、遥控、遥调等功能。</p>
+                <p class="text">注：选中信号所在行，查看实时测值曲线（仅保留显示前15分钟的数据）。</p>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/echarts/echarts.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/echarts/theme/shine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/home.active.data.js")"></script>
+}

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>动力环境综合监控系统</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="bookmark" type="image/x-icon" href="~/favicon.ico" />
+    @Styles.Render("~/bundles/extjs/css")
+    @Styles.Render("~/bundles/ux/css")
+    @Styles.Render("~/bundles/global/css")
+    @RenderSection("head", required: false)
+</head>
+<body style="display:none;">
+    <div id="top-nav-panel" class="header">
+        <div class="header-content">
+            <div class="brand"></div>
+            <div class="top-nav">
+                <ul class="icon-nav">
+                    <li>
+                        <a href="/Home" target="_self" title="系统主页" class="@(ViewBag.BarIndex != null && ViewBag.BarIndex == 0 ? "current" : "")">
+                            <span class="bar-font-home" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/ActiveData" target="_self" title="实时数据" class="@(ViewBag.BarIndex != null && ViewBag.BarIndex == 1 ? "current" : "")">
+                            <span class="bar-font-meter" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/ActiveAlarm" target="_self" title="实时告警" class="@(ViewBag.BarIndex != null && ViewBag.BarIndex == 2 ? "current" : "")">
+                            <span class="bar-font-bell" aria-hidden="true"></span>
+                            <span id="actAlmCount" class="label" style="display:none">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/HistoryAlarm" target="_self" title="历时告警" class="@(ViewBag.BarIndex != null && ViewBag.BarIndex == 3 ? "current" : "")">
+                            <span class="bar-font-stats-bars" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/Map" target="_self" title="电子地图" class="@(ViewBag.BarIndex != null && ViewBag.BarIndex == 4 ? "current" : "")">
+                            <span class="bar-font-map" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Account/LogOut" target="_self" title="安全退出">
+                            <span class="bar-font-exit" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="page-body-content">
+        @RenderBody()
+    </div>
+    <div id="center-content-panel"></div>
+
+    <script type="text/javascript">
+        if (typeof window.$$Rcms === 'undefined' || typeof window.$$Rcms !== 'object')
+            window.$$Rcms = {};
+    </script>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/extjs")
+    @Scripts.Render("~/bundles/ux")
+    @Scripts.Render("~/bundles/global")
+    @Scripts.Render("~/bundles/components")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,15 @@
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\Rcm.Service.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\Rcm.Service.pdb
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\Rcm.Core.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\Rcm.Data.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\NPOI.OOXML.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\NPOI.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\NPOI.OpenXml4Net.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\Rcm.Core.pdb
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\Rcm.Data.pdb
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\bin\Debug\NPOI.xml
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\obj\Debug\Rcm.Service.csprojResolveAssemblyReference.cache
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\obj\Debug\Rcm.Service.dll
+E:\Steven\Delta\Work\Git\RcmSystem\Rcm.Service\obj\Debug\Rcm.Service.pdb

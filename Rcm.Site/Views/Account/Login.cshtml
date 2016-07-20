@@ -1,0 +1,88 @@
+﻿@{ Layout = null; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>动力环境综合监控系统 登录</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="bookmark" type="image/x-icon" href="~/favicon.ico" />
+    <link href="@Url.Content("~/Content/bootstrap-3.3.5/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/css/account.login.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        if (window.location != top.location)
+            top.location.href = window.location.href;
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="brand">
+                <span class="bar-font-delta"></span>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="container">
+            <div class="brand">
+                <h3>动力环境综合监控系统</h3>
+            </div>
+            <div class="panel panel-default login">
+                <div class="panel-heading header">
+                    <span style="margin-left:5px;">登录系统</span>
+                </div>
+                <div class="panel-body">
+                    @using(Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "login-form" })) {
+                        @Html.AntiForgeryToken()
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input id="uid" name="uid" type="text" class="form-control" placeholder="请输入用户名" value="@(ViewBag.UId != null ? ViewBag.Uid : "")" required />
+                        </div>
+                        <div class="error-tips"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" required />
+                        </div>
+                        <div class="error-tips"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
+                            <input id="captcha" name="captcha" type="text" maxlength="5" class="form-control" placeholder="请输入验证码" style="width:55%;" required />
+                            <img class="captcha" src="/Account/GetCaptcha" alt="点击换一张" title="点击换一张" />
+                        </div>
+                        <div class="error-tips"></div>
+                        <button class="btn btn-success btn-block" type="submit">登录</button>
+                        var validationSummary = Html.ValidationSummary(true);
+                        if(!MvcHtmlString.IsNullOrEmpty(validationSummary)) {
+                            <div id="alert" class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom:0;margin-top:5px;padding:10px 30px 10px 10px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @validationSummary
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p>@System.Configuration.ConfigurationManager.AppSettings["Version"]</p>
+            <p>浏览器：IE10+、Firefox、Chrome</p>
+            <p>中达电通股份有限公司｜台达集团 版权所有 ©2016</p>
+        </div>
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="@Url.Content("~/Scripts/jquery-1.11.3.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-3.3.5.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validation-1.14.0/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validation-1.14.0/additional-methods.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validation-1.14.0/localization/messages_zh.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/account.login.js")" type="text/javascript"></script>
+</body>
+</html>
