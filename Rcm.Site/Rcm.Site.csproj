@@ -209,6 +209,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\global.css" />
     <Content Include="Scripts\account.login.js" />
+    <Content Include="Scripts\account.login.min.js" />
     <Content Include="Scripts\bootstrap-3.3.5.js" />
     <Content Include="Scripts\bootstrap-3.3.5.min.js" />
     <Content Include="Scripts\components\AlarmLevelComponent.js" />
@@ -3228,11 +3229,17 @@
     <Content Include="Scripts\ext-4.2.1.883\resources\themes\images\gray\window\icon-question.gif" />
     <Content Include="Scripts\ext-4.2.1.883\resources\themes\images\gray\window\icon-warning.gif" />
     <Content Include="Scripts\global.js" />
+    <Content Include="Scripts\home.active.alarm.min.js" />
     <Content Include="Scripts\home.active.data.js" />
+    <Content Include="Scripts\home.active.data.min.js" />
     <Content Include="Scripts\home.history.alarm.js" />
+    <Content Include="Scripts\home.history.alarm.min.js" />
     <Content Include="Scripts\home.js" />
+    <Content Include="Scripts\home.map.iframe.min.js" />
     <Content Include="Scripts\home.map.js" />
     <Content Include="Scripts\home.map.iframe.js" />
+    <Content Include="Scripts\home.map.min.js" />
+    <Content Include="Scripts\home.min.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.validation-1.14.0\additional-methods.js" />
@@ -3453,6 +3460,9 @@
     <Content Include="Content\themes\fonts\barfont.eot" />
     <Content Include="Content\themes\fonts\barfont.ttf" />
     <Content Include="Content\themes\fonts\barfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\WebDeployConfig.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
