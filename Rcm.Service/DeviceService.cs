@@ -37,6 +37,7 @@ namespace Rcm.Service {
         }
 
         public virtual List<Device> GetAllDevices(int gid) {
+            if(gid == 10078) return this.GetAllDevices();
             return _deviceRepository.GetGroupEntities(gid);
         }
 

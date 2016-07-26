@@ -36,11 +36,17 @@ namespace Rcm.Service {
             return _stationRepository.GetEntities();
         }
 
+        public virtual List<Station> GetEntities(int pid) {
+            return _stationRepository.GetEntities(pid);
+        }
+
         public virtual List<Station> GetStations(int gid) {
+            if(gid == 10078) return this.GetAllStations();
             return _stationRepository.GetGroupEntities(gid);
         }
 
         public virtual List<Station> GetStations(int gid, int pid) {
+            if(gid == 10078) return this.GetEntities(pid);
             return _stationRepository.GetGroupEntities(gid, pid);
         }
 

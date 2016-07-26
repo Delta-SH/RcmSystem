@@ -13,7 +13,8 @@ namespace Rcm.Core.Data {
         //role repository
         public const string Sql_Role_Repository_GetEntity = @"SELECT [Id],[Name],[LastId],[Enabled] FROM [dbo].[UGroup] WHERE [Id]=@Id;";
         public const string Sql_Role_Repository_GetEntities = @"SELECT [Id],[Name],[LastId],[Enabled] FROM [dbo].[UGroup] ORDER BY [Id];";
-        public const string Sql_Role_Repository_GetValues = @"SELECT [OID] AS [Value] FROM [dbo].[UMGroup] WHERE [Id]=@Id;";
+        public const string Sql_Role_Repository_GetValues = @"SELECT [ID] AS [Value] FROM [dbo].[MStation];";        
+        public const string Sql_Role_Repository_GetValuesById = @"SELECT [OID] AS [Value] FROM [dbo].[UMGroup] WHERE [Id]=@Id;";
 
         //area repository
         public const string Sql_Area_Repository_GetEntity = @"SELECT [ID],[LastID],[Name],[Desc],[MID],[ExpSet] FROM [dbo].[MArea] WHERE [ID]=@ID;";
@@ -30,6 +31,7 @@ namespace Rcm.Core.Data {
         //station repository
         public const string Sql_Station_Repository_GetEntity = @"SELECT MS.*,ST.[Type] AS [StationTypeName] FROM [dbo].[MStation] MS LEFT OUTER JOIN [dbo].[CStationType] ST ON MS.[StationType]=ST.[ID] WHERE MS.[ID]=@Id;";
         public const string Sql_Station_Repository_GetEntities = @"SELECT MS.*,ST.[Type] AS [StationTypeName] FROM [dbo].[MStation] MS LEFT OUTER JOIN [dbo].[CStationType] ST ON MS.[StationType]=ST.[ID] ORDER BY MS.[Name];";
+        public const string Sql_Station_Repository_GetEntitiesByPId = @"SELECT MS.*,ST.[Type] AS [StationTypeName] FROM [dbo].[MStation] MS LEFT OUTER JOIN [dbo].[CStationType] ST ON MS.[StationType]=ST.[ID] WHERE MS.[AreaID]=@PId ORDER BY MS.[Name];";
         public const string Sql_Station_Repository_GetGroupEntities = @"SELECT MS.*,ST.[Type] AS [StationTypeName] FROM [dbo].[MStation] MS INNER JOIN [dbo].[UMGroup] UMG ON MS.ID = UMG.OID LEFT OUTER JOIN [dbo].[CStationType] ST ON MS.[StationType]=ST.[ID] WHERE UMG.[ID]=@GroupId ORDER BY MS.[Name];";
         public const string Sql_Station_Repository_GetGroupEntitiesByPId = @"
         ;WITH Keys AS (

@@ -62,12 +62,22 @@ namespace Rcm.Data {
             return entities;
         }
 
+        public virtual List<int> GetValues() {
+            var entities = new List<int>();
+            using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_Cfg.Sql_Role_Repository_GetValues, null)) {
+                while(rdr.Read()) {
+                    entities.Add(SqlTypeConverter.DBNullInt32Handler(rdr["Value"]));
+                }
+            }
+            return entities;
+        }
+
         public virtual List<int> GetValues(int id) {
             SqlParameter[] parms = { new SqlParameter("@Id", SqlDbType.Int) };
             parms[0].Value = id;
 
             var entities = new List<int>();
-            using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_Cfg.Sql_Role_Repository_GetValues, parms)) {
+            using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_Cfg.Sql_Role_Repository_GetValuesById, parms)) {
                 while(rdr.Read()) {
                     entities.Add(SqlTypeConverter.DBNullInt32Handler(rdr["Value"]));
                 }

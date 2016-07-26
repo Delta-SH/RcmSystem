@@ -43,6 +43,7 @@ namespace Rcm.Data {
                     entity.Password = SqlTypeConverter.DBNullStringHandler(rdr["Password"]);
                     entity.GroupId = SqlTypeConverter.DBNullInt32Handler(rdr["GroupId"]);
                     entity.DeptId = SqlTypeConverter.DBNullInt32Handler(rdr["DeptId"]);
+                    entity.LastId = SqlTypeConverter.DBNullInt32Handler(rdr["LastId"]);
                     entity.LimitTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["LimitTime"]);
                     entity.Enabled = SqlTypeConverter.DBNullBooleanHandler(rdr["Enabled"]);
                 }
@@ -60,6 +61,7 @@ namespace Rcm.Data {
                     entity.Password = SqlTypeConverter.DBNullStringHandler(rdr["Password"]);
                     entity.GroupId = SqlTypeConverter.DBNullInt32Handler(rdr["GroupId"]);
                     entity.DeptId = SqlTypeConverter.DBNullInt32Handler(rdr["DeptId"]);
+                    entity.LastId = SqlTypeConverter.DBNullInt32Handler(rdr["LastId"]);
                     entity.LimitTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["LimitTime"]);
                     entity.Enabled = SqlTypeConverter.DBNullBooleanHandler(rdr["Enabled"]);
                     entities.Add(entity);

@@ -74,6 +74,31 @@ namespace Rcm.Data {
             return entities;
         }
 
+        public virtual List<Station> GetEntities(int pid) {
+            SqlParameter[] parms = { new SqlParameter("@PId", SqlDbType.Int) };
+            parms[0].Value = pid;
+
+            var entities = new List<Station>();
+            using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_Cfg.Sql_Station_Repository_GetEntitiesByPId, parms)) {
+                while(rdr.Read()) {
+                    var entity = new Station();
+                    entity.Id = SqlTypeConverter.DBNullInt32Handler(rdr["Id"]);
+                    entity.Name = SqlTypeConverter.DBNullStringHandler(rdr["Name"]);
+                    entity.Desc = SqlTypeConverter.DBNullStringHandler(rdr["Desc"]);
+                    entity.MID = SqlTypeConverter.DBNullStringHandler(rdr["MID"]);
+                    entity.ExpSet = SqlTypeConverter.DBNullStringHandler(rdr["ExpSet"]);
+                    entity.StationType = SqlTypeConverter.DBNullInt32Handler(rdr["StationType"]);
+                    entity.StationTypeName = SqlTypeConverter.DBNullStringHandler(rdr["StationTypeName"]);
+                    entity.Longitude = SqlTypeConverter.DBNullDoubleHandler(rdr["Longitude"]);
+                    entity.Latitude = SqlTypeConverter.DBNullDoubleHandler(rdr["Latitude"]);
+                    entity.AreaId = SqlTypeConverter.DBNullInt32Handler(rdr["AreaId"]);
+                    entity.Enabled = SqlTypeConverter.DBNullBooleanHandler(rdr["Enabled"]);
+                    entities.Add(entity);
+                }
+            }
+            return entities;
+        }
+
         public virtual List<Station> GetGroupEntities(int gid) {
             SqlParameter[] parms = { new SqlParameter("@GroupId", SqlDbType.Int) };
             parms[0].Value = gid;

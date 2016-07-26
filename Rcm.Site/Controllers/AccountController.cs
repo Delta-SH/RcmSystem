@@ -136,7 +136,7 @@ namespace Rcm.Site.Controllers {
                         now,
                         now.Add(FormsAuthentication.Timeout),
                         false,
-                        current.GroupId.ToString(),
+                        current.LastId == 0 ? "10078" : current.GroupId.ToString(),
                         FormsAuthentication.FormsCookiePath);
 
                     var encryptedTicket = FormsAuthentication.Encrypt(ticket);

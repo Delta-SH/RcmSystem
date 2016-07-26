@@ -15,6 +15,8 @@ namespace Rcm.Core.Domain {
 
         public int DeptId { get; set; }
 
+        public int LastId { get; set; }
+
         public DateTime LimitTime { get; set; }
 
         public Boolean Enabled { get; set; }

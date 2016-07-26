@@ -196,6 +196,10 @@
     <Content Include="Content\themes\images\location2.png" />
     <Content Include="Content\themes\images\location3.png" />
     <Content Include="Content\themes\images\location4.png" />
+    <Content Include="Content\themes\images\logo\favicon.ico" />
+    <Content Include="Content\themes\images\logo\logo.png" />
+    <Content Include="Content\themes\images\logo\logo1.png" />
+    <Content Include="Content\themes\images\logo\favicon1.ico" />
     <Content Include="Content\themes\images\point.png" />
     <Content Include="Content\themes\images\search.png" />
     <Content Include="Content\themes\images\shadow.png" />

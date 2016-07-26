@@ -38,6 +38,8 @@ namespace Rcm.Service {
         }
 
         public virtual List<Area> GetAreas(int gid) {
+            if(gid == 10078) return this.GetAreas();
+
             var key = string.Format("rcms-group-{0}", gid);
             if(_cacheManager.IsSet(key))
                 return _cacheManager.Get<List<Area>>(key);

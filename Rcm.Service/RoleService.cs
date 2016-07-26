@@ -34,7 +34,12 @@ namespace Rcm.Service {
             return _roleRepository.GetEntities(autoload);
         }
 
+        public virtual List<int> GetValues() {
+            return _roleRepository.GetValues();
+        }
+
         public virtual List<int> GetValues(int id) {
+            if(id == 10078) return this.GetValues();
             return _roleRepository.GetValues(id);
         }
 

@@ -460,7 +460,7 @@ namespace Rcm.Site.Controllers {
 
                     for(int i = start; i < end; i++) {
                         data.data.Add(new ActAlarmModel {
-                            index = start + i + 1,
+                            index = i + 1,
                             id = models[i].Id,
                             level = (int)models[i].AlarmLevel,
                             levelDisplay = Common.GetAlarmDisplay(models[i].AlarmLevel),
@@ -543,7 +543,7 @@ namespace Rcm.Site.Controllers {
 
                     for(int i = start; i < end; i++) {
                         data.data.Add(new HisAlarmModel {
-                            index = start + i + 1,
+                            index = i + 1,
                             id = models[i].Id,
                             level = (int)models[i].AlarmLevel,
                             levelDisplay = Common.GetAlarmDisplay(models[i].AlarmLevel),

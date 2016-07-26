@@ -28,6 +28,14 @@ a:hover {
     font-size: 5.5em;
 }
 
+.header .brand .logo {
+    display: block;
+    height: 48px;
+    width: 48px;
+    margin: 32px auto 0;
+    background: url("/Content/themes/images/logo/logo.png") no-repeat 0 0;
+}
+
 .center {
     width: 100%;
     height: auto;
