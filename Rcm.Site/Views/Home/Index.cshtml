@@ -19,7 +19,7 @@
 </div>*@
 <div id="welcome" class="welcome">
     <div class="welcome-header">
-        <h2>欢迎使用动力环境综合监控系统</h2>
+        <h2>@(string.Format("欢迎使用{0}",System.Configuration.ConfigurationManager.AppSettings["Application"]))</h2>
         <p>系统可实现对设备的遥测、遥信、遥控及遥调，告警的统计分析等功能，为设备建设及维护提供客观、科学的依据。</p>
     </div>
     <div class="welcome-list">

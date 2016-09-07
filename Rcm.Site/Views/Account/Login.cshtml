@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>动力环境综合监控系统 登录</title>
+    <title>@(string.Format("{0} 登录", System.Configuration.ConfigurationManager.AppSettings["Application"]))</title>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,14 +23,14 @@
         <div class="container">
             <div class="brand">
                 @*<span class="bar-font-delta"></span>*@
-                <span class="logo"></span>
+                @*<span class="logo"></span>*@
             </div>
         </div>
     </div>
     <div class="center">
         <div class="container">
             <div class="brand">
-                <h3>动力环境综合监控系统</h3>
+                <h3>@System.Configuration.ConfigurationManager.AppSettings["Application"]</h3>
             </div>
             <div class="panel panel-default login">
                 <div class="panel-heading header">
@@ -68,13 +68,20 @@
                     }
                 </div>
             </div>
+            <div class="qrcode">
+                <div>
+                    <img src="/Account/GetQRCode" alt="扫描二维码,下载手机客户端" />
+                    <div class="comment">
+                        扫二维码 移动监控更实时
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="footer">
         <div class="container">
             <p>@System.Configuration.ConfigurationManager.AppSettings["Version"]</p>
             <p>浏览器：IE10+、Firefox、Chrome</p>
-            <p>中达电通股份有限公司｜台达集团 版权所有 ©2016</p>
         </div>
     </div>
 

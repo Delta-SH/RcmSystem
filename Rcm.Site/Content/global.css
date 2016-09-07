@@ -20,10 +20,9 @@ a, a:hover, a:active, a:visited, a:link {
     background-image: url("/Content/themes/images/brand.png");
     background-repeat: no-repeat;
     background-position: 0 0;
-    width: 220px;
-    height: 36px;
-    margin-left: 5px;
-    margin-top: 8px;
+    width: 267px;
+    height: 50px;
+    margin: 0 0 0 5px;
 }
 
 .header .top-nav {
@@ -332,14 +331,14 @@ a.custom-danger:active {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.bar-font-delta:before {
+.bar-font-users:before {
     content: "\f001";
 }
 .bar-font-home:before {
     content: "\f002";
 }
-.bar-font-map:before {
-    content: "\f006";
+.bar-font-meter:before {
+    content: "\f003";
 }
 .bar-font-bell:before {
     content: "\f004";
@@ -347,12 +346,18 @@ a.custom-danger:active {
 .bar-font-stats-bars:before {
     content: "\f005";
 }
-.bar-font-meter:before {
-    content: "\f003";
+.bar-font-map:before {
+    content: "\f006";
 }
 .bar-font-exit:before {
     content: "\f007";
 }
-.bar-font-github:before {
+.bar-font-windows8:before {
     content: "\f008";
+}
+.bar-font-stumbleupon:before {
+    content: "\f009";
+}
+.bar-font-ie:before {
+    content: "\f010";
 }

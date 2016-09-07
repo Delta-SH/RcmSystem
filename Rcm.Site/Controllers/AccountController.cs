@@ -3,6 +3,7 @@ using Rcm.Core.Enum;
 using Rcm.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,6 +59,34 @@ namespace Rcm.Site.Controllers {
                 cookie.HttpOnly = true;
                 Response.Cookies.Add(cookie);
                 return File(image, @"image/png");
+            } catch(Exception exc) {
+                return Content(exc.Message);
+            }
+        }
+
+        public ActionResult GetQRCode() {
+            try {
+                var code = @"http://www.peims.net:8085/Account/Download?v=mobile";
+                var image = CommonHelper.CreateQRCode(code);
+                return File(image, @"image/png");
+            } catch(Exception exc) {
+                return Content(exc.Message);
+            }
+        }
+
+        public ActionResult Download(string v) {
+            try {
+                if("mobile".Equals(v, StringComparison.CurrentCultureIgnoreCase)) {
+                    var filePath = Server.MapPath(@"/Content/files/rcms.apk");
+                    using(var fs = new FileStream(filePath, FileMode.Open)) {
+                        var bytes = new byte[(Int32)fs.Length];
+                        fs.Read(bytes, 0, bytes.Length);
+
+                        return File(bytes, @"application/octet-stream", string.Format("{0}.apk", Guid.NewGuid().ToString("N")));
+                    }
+                }
+
+                throw new Exception("无效的参数");
             } catch(Exception exc) {
                 return Content(exc.Message);
             }

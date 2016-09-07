@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -182,6 +184,16 @@ namespace Rcm.Core {
                 return false;
 
             return true;
+        }
+
+        public static byte[] CreateQRCode(string text) {
+            var encoder = new QrEncoder(ErrorCorrectionLevel.L);
+            QrCode qrCode; encoder.TryEncode(text, out qrCode);
+
+            var gRenderer = new GraphicsRenderer(new FixedModuleSize(3, QuietZoneModules.Two), new SolidBrush(ColorTranslator.FromHtml("#535353")), new SolidBrush(ColorTranslator.FromHtml("#f9f9f9")));
+            var ms = new MemoryStream();
+            gRenderer.WriteToStream(qrCode.Matrix, ImageFormat.Png, ms);
+            return ms.ToArray();
         }
     }
 }
