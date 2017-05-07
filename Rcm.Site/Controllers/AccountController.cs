@@ -140,7 +140,7 @@ namespace Rcm.Site.Controllers {
 
                 if(ModelState.IsValid) {
                     var current = _userService.GetUser(uid);
-                    var loginResult = _roleService.Validate(current.Id);
+                    var loginResult = _roleService.Validate(current.GroupId);
                     switch(loginResult) {
                         case LoginResult.Successful:
                             break;

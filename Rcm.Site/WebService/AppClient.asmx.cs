@@ -82,7 +82,7 @@ namespace Rcm.Site.WebService {
 
                 if(result.code == 300) {
                     var current = _userService.GetUser(uid);
-                    var rResult = _roleService.Validate(current.Id);
+                    var rResult = _roleService.Validate(current.GroupId);
                     switch(rResult) {
                         case LoginResult.Successful:
                             result.code = 200;
