@@ -13,7 +13,7 @@ using System.Web;
 using System.Web.Services;
 
 namespace Rcm.Site.WebService {
-    [WebService(Namespace = "http://rcms.com.cn/", Description="Rcms API")]
+    [WebService(Namespace = "http://rcms.com.cn/", Description = "Rcms API")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     public class AppClient : System.Web.Services.WebService {
@@ -56,15 +56,15 @@ namespace Rcm.Site.WebService {
         public string Validate(string uid, string password) {
             var result = new AjaxResultModel { code = 400, success = false, message = "登录失败" };
             try {
-                if(String.IsNullOrWhiteSpace(uid))
+                if (String.IsNullOrWhiteSpace(uid))
                     throw new Exception("用户名不能为空。");
 
                 uid = uid.Trim();
-                if(String.IsNullOrWhiteSpace(password))
+                if (String.IsNullOrWhiteSpace(password))
                     throw new Exception("密码不能为空。");
 
                 var uResult = _userService.Validate(uid, password);
-                switch(uResult) {
+                switch (uResult) {
                     case LoginResult.Successful:
                         result.code = 300;
                         result.message = "用户验证通过，角色待验证。";
@@ -80,15 +80,15 @@ namespace Rcm.Site.WebService {
                         throw new Exception("密码错误，登录失败。");
                 }
 
-                if(result.code == 300) {
+                if (result.code == 300) {
                     var current = _userService.GetUser(uid);
                     var rResult = _roleService.Validate(current.GroupId);
-                    switch(rResult) {
+                    switch (rResult) {
                         case LoginResult.Successful:
                             result.code = 200;
                             result.success = true;
                             result.message = Guid.NewGuid().ToString("N");
-                            if(current.LastId == 0) current.GroupId = 10078;
+                            if (current.LastId == 0) current.GroupId = 10078;
                             _cacheManager.Set<User>(result.message, current, TimeSpan.FromMinutes(10));
                             break;
                         case LoginResult.RoleNotExist:
@@ -99,11 +99,11 @@ namespace Rcm.Site.WebService {
                             throw new Exception("角色错误。");
                     }
                 }
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 result.message = exc.Message;
             }
 
-            return JsonConvert.SerializeObject(result, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include }); 
+            return JsonConvert.SerializeObject(result, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
         }
 
         [WebMethod(Description = "<b>获取监控树列表</b><br><i>输入参数：</i><br><font color='blue'>string</font> token:用户令牌<br><font color='blue'>string</font> node:请求节点编号，获取根节点传入root</br><i>输出结果：</i><br/><font color='blue'>json</font> 返回请求节点的一级子节点列表")]
@@ -116,23 +116,23 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
-                if(string.IsNullOrWhiteSpace(node))
+                if (string.IsNullOrWhiteSpace(node))
                     throw new Exception("无效的节点");
 
                 var user = _cacheManager.Get<User>(token);
-                if(node == "root") {
+                if (node == "root") {
                     #region root
                     var roots = _areaService.GetAreas(user.GroupId).FindAll(a => a.LastId == 0);
                     data.success = true;
                     data.message = "200 Ok";
                     data.total = roots.Count;
-                    for(var i = 0; i < roots.Count; i++) {
+                    for (var i = 0; i < roots.Count; i++) {
                         var root = new TreeModel {
                             id = roots[i].Id.ToString(),
                             text = roots[i].Name,
@@ -148,20 +148,20 @@ namespace Rcm.Site.WebService {
                 } else {
                     data.message = "无效的节点";
                     var keys = Common.SplitKeys(node);
-                    if(keys.Length == 2) {
+                    if (keys.Length == 2) {
                         var type = int.Parse(keys[0]);
                         var id = int.Parse(keys[1]);
                         var gid = user.GroupId;
                         var nodeType = Enum.IsDefined(typeof(EnmScType), type) ? (EnmScType)type : EnmScType.None;
-                        if(nodeType == EnmScType.Area) {
+                        if (nodeType == EnmScType.Area) {
                             #region area organization
                             var areas = _areaService.GetAreas(gid);
                             var children = areas.FindAll(a => a.LastId == id);
-                            if(children.Count > 0) {
+                            if (children.Count > 0) {
                                 data.success = true;
                                 data.message = "200 Ok";
                                 data.total = children.Count;
-                                for(var i = 0; i < children.Count; i++) {
+                                for (var i = 0; i < children.Count; i++) {
                                     var root = new TreeModel {
                                         id = children[i].Id.ToString(),
                                         text = children[i].Name,
@@ -175,11 +175,11 @@ namespace Rcm.Site.WebService {
                                 }
                             } else {
                                 var stations = _stationService.GetStations(gid, id);
-                                if(stations.Count > 0) {
+                                if (stations.Count > 0) {
                                     data.success = true;
                                     data.message = "200 Ok";
                                     data.total = stations.Count;
-                                    for(var i = 0; i < stations.Count; i++) {
+                                    for (var i = 0; i < stations.Count; i++) {
                                         var root = new TreeModel {
                                             id = stations[i].Id.ToString(),
                                             text = stations[i].Name,
@@ -194,14 +194,14 @@ namespace Rcm.Site.WebService {
                                 }
                             }
                             #endregion
-                        } else if(nodeType == EnmScType.Station) {
+                        } else if (nodeType == EnmScType.Station) {
                             #region station organization
                             var devices = _deviceService.GetDevices(id);
-                            if(devices.Count > 0) {
+                            if (devices.Count > 0) {
                                 data.success = true;
                                 data.message = "200 Ok";
                                 data.total = devices.Count;
-                                for(var i = 0; i < devices.Count; i++) {
+                                for (var i = 0; i < devices.Count; i++) {
                                     var root = new TreeModel {
                                         id = devices[i].Id.ToString(),
                                         text = devices[i].Name,
@@ -215,7 +215,7 @@ namespace Rcm.Site.WebService {
                                 }
                             }
                             #endregion
-                        } else if(nodeType == EnmScType.Device) {
+                        } else if (nodeType == EnmScType.Device) {
                             #region device organization
 
                             data.success = true;
@@ -226,7 +226,7 @@ namespace Rcm.Site.WebService {
                         }
                     }
                 }
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.message = exc.Message;
             }
 
@@ -243,10 +243,10 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
                 var user = _cacheManager.Get<User>(token);
@@ -257,23 +257,23 @@ namespace Rcm.Site.WebService {
                 data.total = stations.Count;
 
                 var end = start + limit;
-                if(end > stations.Count)
+                if (end > stations.Count)
                     end = stations.Count;
 
-                for(int i = start; i < end; i++) {
+                for (int i = start; i < end; i++) {
                     var current = stations[i];
                     var county = string.Empty;
                     var city = string.Empty;
                     var province = string.Empty;
 
                     var area = areas.Find(a => a.Id == current.AreaId);
-                    if(area != null) {
+                    if (area != null) {
                         county = area.Name;
                         var parea = areas.Find(a => a.Id == area.LastId);
-                        if(parea != null) {
+                        if (parea != null) {
                             city = parea.Name;
                             var pparea = areas.Find(a => a.Id == parea.LastId);
-                            if(pparea != null)
+                            if (pparea != null)
                                 province = pparea.Name;
                         }
                     }
@@ -287,7 +287,7 @@ namespace Rcm.Site.WebService {
                         province = province
                     });
                 }
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.message = exc.Message;
             }
 
@@ -304,10 +304,10 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
                 var user = _cacheManager.Get<User>(token);
@@ -317,17 +317,17 @@ namespace Rcm.Site.WebService {
                 data.total = devices.Count;
 
                 var end = start + limit;
-                if(end > devices.Count)
+                if (end > devices.Count)
                     end = devices.Count;
 
-                for(int i = start; i < end; i++) {
+                for (int i = start; i < end; i++) {
                     data.data.Add(new DeviceModel {
                         id = devices[i].Id,
                         name = devices[i].Name,
                         type = devices[i].DeviceTypeName
                     });
                 }
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.message = exc.Message;
             }
 
@@ -344,15 +344,15 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
                 var user = _cacheManager.Get<User>(token);
 
-                if(types == null || types.Length == 0) 
+                if (types == null || types.Length == 0)
                     types = new int[] { (int)EnmScType.Aic, (int)EnmScType.Aoc, (int)EnmScType.Dic, (int)EnmScType.Doc };
 
                 var gid = user.GroupId;
@@ -366,7 +366,7 @@ namespace Rcm.Site.WebService {
                               Value = pv
                           };
 
-                foreach(var pv in pWv) {
+                foreach (var pv in pWv) {
                     data.data.Add(new PointModel {
                         id = pv.Point.Id,
                         name = pv.Point.Name,
@@ -383,7 +383,7 @@ namespace Rcm.Site.WebService {
 
                 data.total = data.data.Count;
                 data.message = "200 Ok";
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.success = false;
                 data.message = exc.Message;
             }
@@ -400,10 +400,10 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
                 _orderService.SetOrder(new Order {
@@ -416,7 +416,7 @@ namespace Rcm.Site.WebService {
                 data.code = 200;
                 data.success = true;
                 data.message = "请求命令已下发";
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.message = exc.Message;
             }
 
@@ -426,13 +426,13 @@ namespace Rcm.Site.WebService {
         [WebMethod(Description = "<b>信号遥控</b><br><i>输入参数：</i><br><font color='blue'>string</font> token:用户令牌<br><font color='blue'>int</font> point:信号编号</br><font color='blue'>int</font> type:信号类型（Dic：2，Aic：3，Doc：4，Aoc：5）</br><font color='blue'>int</font> ctrl:遥控值（常开控制：0，常闭控制：1，脉冲控制：2）</br><i>输出结果：</i><br/><font color='blue'>json</font> 返回信号遥控是否成功")]
         public string ControlPoint(string token, int point, int type, int ctrl) {
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
-                if(type != (int)EnmScType.Doc)
+                if (type != (int)EnmScType.Doc)
                     throw new Exception("信号类型错误");
 
                 _orderService.SetOrder(new Order {
@@ -443,7 +443,7 @@ namespace Rcm.Site.WebService {
                 });
 
                 return JsonConvert.SerializeObject(new AjaxResultModel { success = true, code = 200, message = "参数设置成功" }, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 return JsonConvert.SerializeObject(new AjaxResultModel { success = false, code = 400, message = exc.Message }, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
             }
         }
@@ -451,13 +451,13 @@ namespace Rcm.Site.WebService {
         [WebMethod(Description = "<b>信号遥调</b><br><i>输入参数：</i><br><font color='blue'>string</font> token:用户令牌<br><font color='blue'>int</font> point:信号编号</br><font color='blue'>int</font> type:信号类型（Dic：2，Aic：3，Doc：4，Aoc：5）</br><font color='blue'>double</font> adjust:遥调值</br><i>输出结果：</i><br/><font color='blue'>json</font> 返回信号遥调是否成功")]
         public string AdjustPoint(string token, int point, int type, double adjust) {
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
-                if(type != (int)EnmScType.Aoc)
+                if (type != (int)EnmScType.Aoc)
                     throw new Exception("信号类型错误");
 
                 _orderService.SetOrder(new Order {
@@ -468,7 +468,7 @@ namespace Rcm.Site.WebService {
                 });
 
                 return JsonConvert.SerializeObject(new AjaxResultModel { success = true, code = 200, message = "参数设置成功" }, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 return JsonConvert.SerializeObject(new AjaxResultModel { success = false, code = 400, message = exc.Message }, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
             }
         }
@@ -483,23 +483,23 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
                 var user = _cacheManager.Get<User>(token);
                 var models = RequestActAlarms(user.GroupId, node, type, level);
-                if(models.Count > 0) {
+                if (models.Count > 0) {
                     data.message = "200 Ok";
                     data.total = models.Count;
 
                     var end = start + limit;
-                    if(end > models.Count)
+                    if (end > models.Count)
                         end = models.Count;
 
-                    for(int i = start; i < end; i++) {
+                    for (int i = start; i < end; i++) {
                         data.data.Add(new ActAlarmModel {
                             index = i + 1,
                             id = models[i].Id,
@@ -519,7 +519,7 @@ namespace Rcm.Site.WebService {
                         });
                     }
                 }
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.success = false;
                 data.message = exc.Message;
             }
@@ -537,23 +537,23 @@ namespace Rcm.Site.WebService {
             };
 
             try {
-                if(string.IsNullOrWhiteSpace(token))
+                if (string.IsNullOrWhiteSpace(token))
                     throw new Exception("无效的令牌");
 
-                if(!_cacheManager.IsSet(token))
+                if (!_cacheManager.IsSet(token))
                     throw new Exception("无效的令牌");
 
                 var user = _cacheManager.Get<User>(token);
                 var models = RequestHisAlarms(user.GroupId, node, type, level, startDate, endDate);
-                if(models.Count > 0) {
+                if (models.Count > 0) {
                     data.message = "200 Ok";
                     data.total = models.Count;
 
                     var end = start + limit;
-                    if(end > models.Count)
+                    if (end > models.Count)
                         end = models.Count;
 
-                    for(int i = start; i < end; i++) {
+                    for (int i = start; i < end; i++) {
                         data.data.Add(new HisAlarmModel {
                             index = i + 1,
                             id = models[i].Id,
@@ -576,7 +576,7 @@ namespace Rcm.Site.WebService {
                         });
                     }
                 }
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 data.success = false;
                 data.message = exc.Message;
             }
@@ -586,19 +586,19 @@ namespace Rcm.Site.WebService {
 
         private List<Alarm> RequestActAlarms(int gid, int node, int type, int[] level) {
             var result = new List<Alarm>();
-            if(node == -1) {
+            if (node == -1) {
                 #region root
                 result = _alarmService.GetAllActAlarms();
-                if(level != null && level.Length > 0)
+                if (level != null && level.Length > 0)
                     result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                 #endregion
             } else {
                 var nodeType = Enum.IsDefined(typeof(EnmScType), type) ? (EnmScType)type : EnmScType.None;
-                if(nodeType == EnmScType.Area) {
+                if (nodeType == EnmScType.Area) {
                     #region area organization
                     var areas = _areaService.GetAreas(gid);
                     var current = areas.Find(a => a.Id == node);
-                    if(current == null) return result;
+                    if (current == null) return result;
 
                     var children = new List<Area>();
                     children.Add(current);
@@ -606,25 +606,25 @@ namespace Rcm.Site.WebService {
 
                     var matchs = children.Select(c => c.Name);
                     result = _alarmService.GetAllActAlarms().FindAll(a => matchs.Contains(a.AreaName));
-                    if(level != null && level.Length > 0)
+                    if (level != null && level.Length > 0)
                         result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                     #endregion
-                } else if(nodeType == EnmScType.Station) {
+                } else if (nodeType == EnmScType.Station) {
                     #region station organization
                     var station = _stationService.GetStation(node);
-                    if(station == null) return result;
+                    if (station == null) return result;
 
                     result = _alarmService.GetAllActAlarms().FindAll(a => a.StationName == station.Name);
-                    if(level != null && level.Length > 0)
+                    if (level != null && level.Length > 0)
                         result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                     #endregion
-                } else if(nodeType == EnmScType.Device) {
+                } else if (nodeType == EnmScType.Device) {
                     #region device organization
                     var device = _deviceService.GetDevice(node);
-                    if(device == null) return result;
+                    if (device == null) return result;
 
                     result = _alarmService.GetAllActAlarms().FindAll(a => a.DeviceId == device.Id);
-                    if(level != null && level.Length > 0)
+                    if (level != null && level.Length > 0)
                         result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                     #endregion
                 }
@@ -636,45 +636,45 @@ namespace Rcm.Site.WebService {
         private List<Alarm> RequestHisAlarms(int gid, int node, int type, int[] level, DateTime startDate, DateTime endDate) {
             endDate = endDate.AddSeconds(86399);
             var result = new List<Alarm>();
-            if(node == -1) {
+            if (node == -1) {
                 #region root
                 result = _alarmService.GetHisAlarms(startDate, endDate);
-                if(level != null && level.Length > 0)
+                if (level != null && level.Length > 0)
                     result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                 #endregion
             } else {
                 var nodeType = Enum.IsDefined(typeof(EnmScType), type) ? (EnmScType)type : EnmScType.None;
-                if(nodeType == EnmScType.Area) {
+                if (nodeType == EnmScType.Area) {
                     #region area organization
                     var areas = _areaService.GetAreas(gid);
                     var current = areas.Find(a => a.Id == node);
-                    if(current == null) return result;
+                    if (current == null) return result;
 
                     var children = new List<Area>();
                     children.Add(current);
                     GetChildArea(areas, current.Id, children);
 
                     var matchs = children.Select(c => c.Name);
-                    result = _alarmService.GetHisAlarms(startDate, endDate).FindAll(a=>matchs.Contains(a.AreaName));
-                    if(level != null && level.Length > 0)
+                    result = _alarmService.GetHisAlarms(startDate, endDate).FindAll(a => matchs.Contains(a.AreaName));
+                    if (level != null && level.Length > 0)
                         result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                     #endregion
-                } else if(nodeType == EnmScType.Station) {
+                } else if (nodeType == EnmScType.Station) {
                     #region station organization
                     var station = _stationService.GetStation(node);
-                    if(station == null) return result;
+                    if (station == null) return result;
 
                     result = _alarmService.GetHisAlarms(startDate, endDate).FindAll(a => a.StationName == station.Name);
-                    if(level != null && level.Length > 0)
+                    if (level != null && level.Length > 0)
                         result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                     #endregion
-                } else if(nodeType == EnmScType.Device) {
+                } else if (nodeType == EnmScType.Device) {
                     #region device organization
                     var device = _deviceService.GetDevice(node);
-                    if(device == null) return result;
+                    if (device == null) return result;
 
                     result = _alarmService.GetHisAlarms(startDate, endDate).FindAll(a => a.DeviceId == device.Id);
-                    if(level != null && level.Length > 0)
+                    if (level != null && level.Length > 0)
                         result = result.FindAll(a => level.Contains((int)a.AlarmLevel));
                     #endregion
                 }
@@ -686,9 +686,9 @@ namespace Rcm.Site.WebService {
 
         private void GetChildArea(List<Area> areas, int pid, List<Area> result) {
             var children = areas.FindAll(a => a.LastId == pid);
-            if(children.Count == 0) return;
+            if (children.Count == 0) return;
 
-            foreach(var child in children) {
+            foreach (var child in children) {
                 result.Add(child);
                 GetChildArea(areas, child.Id, result);
             }

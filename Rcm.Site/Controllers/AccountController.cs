@@ -77,7 +77,7 @@ namespace Rcm.Site.Controllers {
         public ActionResult Download(string v) {
             try {
                 if("mobile".Equals(v, StringComparison.CurrentCultureIgnoreCase)) {
-                    var filePath = Server.MapPath(@"/Content/files/rcms.apk");
+                    var filePath = Server.MapPath(@"/Content/files/peims.apk");
                     using(var fs = new FileStream(filePath, FileMode.Open)) {
                         var bytes = new byte[(Int32)fs.Length];
                         fs.Read(bytes, 0, bytes.Length);
