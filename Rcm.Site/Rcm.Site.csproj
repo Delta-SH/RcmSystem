@@ -21,6 +21,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -206,6 +208,7 @@
     <Content Include="Content\themes\icons\user.png" />
     <Content Include="Content\themes\images\brand1.png" />
     <Content Include="Content\themes\images\brand.png" />
+    <Content Include="Content\themes\images\brand2.png" />
     <Content Include="Content\themes\images\help-arrow.png" />
     <Content Include="Content\themes\images\help-icon.png" />
     <Content Include="Content\themes\images\location0.png" />
@@ -213,10 +216,13 @@
     <Content Include="Content\themes\images\location2.png" />
     <Content Include="Content\themes\images\location3.png" />
     <Content Include="Content\themes\images\location4.png" />
-    <Content Include="Content\themes\images\logo\favicon.ico" />
-    <Content Include="Content\themes\images\logo\logo.png" />
+    <Content Include="Content\themes\images\logo.png" />
+    <Content Include="Content\themes\images\logo\favicon2.ico" />
+    <Content Include="Content\themes\images\logo\favicon3.ico" />
     <Content Include="Content\themes\images\logo\logo1.png" />
     <Content Include="Content\themes\images\logo\favicon1.ico" />
+    <Content Include="Content\themes\images\logo\logo2.png" />
+    <Content Include="Content\themes\images\logo\logo3.png" />
     <Content Include="Content\themes\images\point.png" />
     <Content Include="Content\themes\images\search.png" />
     <Content Include="Content\themes\images\shadow.png" />
@@ -226,10 +232,11 @@
     <Content Include="Content\themes\images\ux\util\splitter\mini-left.png" />
     <Content Include="Content\themes\images\ux\util\splitter\mini-right.png" />
     <Content Include="Content\themes\images\ux\util\splitter\mini-top.png" />
-    <Content Include="favicon.ico" />
     <Content Include="favicon1.ico" />
+    <Content Include="favicon2.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\global.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\account.login.js" />
     <Content Include="Scripts\account.login.min.js" />
     <Content Include="Scripts\bootstrap-3.3.5.js" />
@@ -3487,8 +3494,9 @@
     <Content Include="Content\themes\fonts\barfont.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\files\rcms.apk" />
+    <Content Include="Content\files\peims.apk" />
     <None Include="Properties\PublishProfiles\WebDeployConfig.pubxml" />
+    <Content Include="Views\Account\iLogin.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

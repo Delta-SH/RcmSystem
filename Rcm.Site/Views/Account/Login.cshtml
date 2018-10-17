@@ -18,63 +18,48 @@
             top.location.href = window.location.href;
     </script>
 </head>
-<body>
-    <div class="header">
-        <div class="container">
-            <div class="brand">
-                @*<span class="bar-font-delta"></span>*@
-                @*<span class="logo"></span>*@
-            </div>
-        </div>
-    </div>
+<body class="text-center">
     <div class="center">
-        <div class="container">
-            <div class="brand">
-                <h3>@System.Configuration.ConfigurationManager.AppSettings["Application"]</h3>
+        <div class="brand">
+            <img alt="logo" class="logo" src="~/Content/themes/images/logo.png" />
+        </div>
+        <div class="title">
+            <h3>@System.Configuration.ConfigurationManager.AppSettings["Application"]</h3>
+        </div>
+        <div class="panel panel-default login">
+            <div class="panel-heading">
+                登录系统
             </div>
-            <div class="panel panel-default login">
-                <div class="panel-heading header">
-                    <span style="margin-left:5px;">登录系统</span>
-                </div>
-                <div class="panel-body">
-                    @using(Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "login-form" })) {
-                        @Html.AntiForgeryToken()
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input id="uid" name="uid" type="text" class="form-control" placeholder="请输入用户名" value="@(ViewBag.UId != null ? ViewBag.Uid : "")" required />
-                        </div>
-                        <div class="error-tips"></div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                            <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" required />
-                        </div>
-                        <div class="error-tips"></div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
-                            <input id="captcha" name="captcha" type="text" maxlength="5" class="form-control" placeholder="请输入验证码" style="width:55%;" required />
-                            <img class="captcha" src="/Account/GetCaptcha" alt="点击换一张" title="点击换一张" />
-                        </div>
-                        <div class="error-tips"></div>
-                        <button class="btn btn-success btn-block" type="submit">登录</button>
-                        var validationSummary = Html.ValidationSummary(true);
-                        if(!MvcHtmlString.IsNullOrEmpty(validationSummary)) {
-                            <div id="alert" class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom:0;margin-top:5px;padding:10px 30px 10px 10px;">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                @validationSummary
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="qrcode">
-                <div>
-                    <img src="/Account/GetQRCode" alt="扫描二维码,下载手机客户端" />
-                    <div class="comment">
-                        扫二维码 移动监控更实时
+            <div class="panel-body">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "login-form" })) {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input id="uid" name="uid" type="text" class="form-control" placeholder="请输入用户名" value="@(ViewBag.UId != null ? ViewBag.Uid : "")" required />
                     </div>
-                </div>
+                    <div class="error-tips"></div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" required />
+                    </div>
+                    <div class="error-tips"></div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></span>
+                        <input id="captcha" name="captcha" type="text" maxlength="5" class="form-control" placeholder="请输入验证码" style="width:55%;" required />
+                        <img class="captcha" src="/Account/GetCaptcha" alt="点击换一张" title="点击换一张" />
+                    </div>
+                    <div class="error-tips"></div>
+                    <button class="btn btn-success btn-block" type="submit">登录</button>
+                    var validationSummary = Html.ValidationSummary(true);
+                    if (!MvcHtmlString.IsNullOrEmpty(validationSummary)) {
+                        <div id="alert" class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom:0;margin-top:5px;padding:10px 30px 10px 10px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @validationSummary
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -82,6 +67,12 @@
         <div class="container">
             <p>@System.Configuration.ConfigurationManager.AppSettings["Version"]</p>
             <p>浏览器：IE10+、Firefox、Chrome</p>
+        </div>
+    </div>
+    <div class="qrcode">
+        <img src="/Account/GetQRCode" alt="扫描二维码,下载手机客户端" />
+        <div class="comment">
+            下载手机客户端
         </div>
     </div>
 
