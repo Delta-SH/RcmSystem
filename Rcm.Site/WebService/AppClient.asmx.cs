@@ -24,6 +24,7 @@ namespace Rcm.Site.WebService {
         private readonly RoleService _roleService;
         private readonly AlarmService _alarmService;
         private readonly AreaService _areaService;
+        private readonly GVideoService _gvideoService;
         private readonly StationService _stationService;
         private readonly DeviceService _deviceService;
         private readonly PointService _pointService;
@@ -40,6 +41,7 @@ namespace Rcm.Site.WebService {
             this._roleService = new RoleService();
             this._alarmService = new AlarmService();
             this._areaService = new AreaService();
+            this._gvideoService = new GVideoService();
             this._stationService = new StationService();
             this._deviceService = new DeviceService();
             this._pointService = new PointService();
@@ -54,7 +56,7 @@ namespace Rcm.Site.WebService {
 
         [WebMethod(Description = "<b>用户权限验证</b><br><i>输入参数：</i><br><font color='blue'>string</font> uid:用户名<br><font color='blue'>string</font> password:密码</br><i>输出结果：</i><br/><font color='blue'>json</font> 登录成功，返回用户令牌token。调用其它API接口，需传入获得的令牌验证身份。")]
         public string Validate(string uid, string password) {
-            var result = new AjaxResultModel { code = 400, success = false, message = "登录失败" };
+            var result = new AjaxLoginResultModel { code = 400, success = false, message = "登录失败" };
             try {
                 if (String.IsNullOrWhiteSpace(uid))
                     throw new Exception("用户名不能为空。");
@@ -66,8 +68,6 @@ namespace Rcm.Site.WebService {
                 var uResult = _userService.Validate(uid, password);
                 switch (uResult) {
                     case LoginResult.Successful:
-                        result.code = 300;
-                        result.message = "用户验证通过，角色待验证。";
                         break;
                     case LoginResult.NotExist:
                         throw new Exception("用户名不存在。");
@@ -76,30 +76,34 @@ namespace Rcm.Site.WebService {
                     case LoginResult.Expired:
                         throw new Exception("用户已过期，请与管理员联系。");
                     case LoginResult.WrongPassword:
-                    default:
                         throw new Exception("密码错误，登录失败。");
+                    default:
+                        throw new Exception("未知错误，登录失败。");
                 }
 
-                if (result.code == 300) {
-                    var current = _userService.GetUser(uid);
-                    var rResult = _roleService.Validate(current.GroupId);
-                    switch (rResult) {
-                        case LoginResult.Successful:
-                            result.code = 200;
-                            result.success = true;
-                            result.message = Guid.NewGuid().ToString("N");
-                            if (current.LastId == 0) current.GroupId = 10078;
-                            _cacheManager.Set<User>(result.message, current, TimeSpan.FromMinutes(10));
-                            break;
-                        case LoginResult.RoleNotExist:
-                            throw new Exception("角色不存在。");
-                        case LoginResult.RoleNotEnabled:
-                            throw new Exception("角色已禁用，请与管理员联系。");
-                        default:
-                            throw new Exception("角色错误。");
-                    }
+                var current = _userService.GetUser(uid);
+                var rResult = _roleService.Validate(current.GroupId);
+                switch (rResult) {
+                    case LoginResult.Successful:
+                        var token = Guid.NewGuid().ToString("N");
+                        if (current.LastId == 0) current.GroupId = 10078;
+                        _cacheManager.Set<User>(token, current, TimeSpan.FromSeconds(600));
+
+                        result.code = 200;
+                        result.success = true;
+                        result.message = token;
+                        result.roleId = current.GroupId;
+                        break;
+                    case LoginResult.RoleNotExist:
+                        throw new Exception("角色不存在。");
+                    case LoginResult.RoleNotEnabled:
+                        throw new Exception("角色已禁用，请与管理员联系。");
+                    default:
+                        throw new Exception("未知错误，登录失败。");
                 }
             } catch (Exception exc) {
+                result.code = 400;
+                result.success = false;
                 result.message = exc.Message;
             }
 
@@ -582,6 +586,72 @@ namespace Rcm.Site.WebService {
             }
 
             return JsonConvert.SerializeObject(data, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
+        }
+
+        [WebMethod(Description = "<b>视频配置参数接口</b><br><i>输入参数：</i><br><font color='blue'>string</font> token:用户令牌<br><i>输出结果：</i><br/><font color='blue'>json</font> 返回全部视频的所有字段参数的列表")]
+        public string GetVideoPoints(string token) {
+            var data = new AjaxDataModel<List<GVideoModel>> {
+                success = true,
+                message = "无数据",
+                total = 0,
+                data = new List<GVideoModel>()
+            };
+
+            try {
+                if (string.IsNullOrWhiteSpace(token) || !_cacheManager.IsSet(token))
+                    throw new Exception("无效令牌");
+
+                var models = _gvideoService.GetEntities();
+                if (models.Count > 0) {
+                    data.message = "200 OK";
+                    data.total = models.Count;
+                    foreach (var model in models) {
+                        data.data.Add(new GVideoModel {
+                            id = model.Id,
+                            enabled = model.Enabled,
+                            name = model.Name,
+                            type = model.Type,
+                            ip = model.Ip,
+                            port = model.Port,
+                            uid = model.Uid,
+                            pwd = model.Pwd,
+                            auxSet = model.AuxSet,
+                            imgPort = model.ImgPort,
+                            portId = model.PortId
+                        });
+                    }
+                }
+            } catch (Exception exc) {
+                data.success = false;
+                data.message = exc.Message;
+            }
+            return JsonConvert.SerializeObject(data, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Include });
+        }
+
+        [WebMethod(Description = "<b>心跳维持</b><br><i>输入参数：</i><br><font color='blue'>string</font> token:用户令牌<br><i>输出结果：</i><br/><font color='blue'>json</font> 返回简单的判断数据")]
+        public string KeepAlive(string token) {
+            var data = new AjaxResultModel {
+                success = false,
+                code = 400,
+                message = "400 err"
+            };
+
+            try {
+                if (String.IsNullOrWhiteSpace(token))
+                    throw new Exception("TOKEN不能为空。");
+
+                if (!_cacheManager.IsSet(token))
+                    throw new Exception("TOKEN已过期。");
+
+                data.success = true;
+                data.code = 200;
+                data.message = "200 ok";
+            } catch (Exception err) {
+                data.success = false;
+                data.code = 400;
+                data.message = err.Message;
+            }
+            return JsonConvert.SerializeObject(data);
         }
 
         private List<Alarm> RequestActAlarms(int gid, int node, int type, int[] level) {

@@ -42,6 +42,7 @@
     <Compile Include="AlarmService.cs" />
     <Compile Include="AreaService.cs" />
     <Compile Include="DeviceService.cs" />
+    <Compile Include="GVideoService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PointService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

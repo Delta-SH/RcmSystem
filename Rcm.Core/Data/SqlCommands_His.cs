@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Rcm.Core.Data {
+﻿namespace Rcm.Core.Data {
     /// <summary>
     /// The SqlText class is intended to encapsulate high performance, 
     /// scalable best practices for common uses of SqlClient.

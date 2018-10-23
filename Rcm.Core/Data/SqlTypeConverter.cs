@@ -1,8 +1,7 @@
 ﻿using Rcm.Core.Enum;
 using System;
-using System.Collections.Generic;
 
-namespace iPem.Data.Common {
+namespace Rcm.Data.Common {
     public partial class SqlTypeConverter {
 
         #region base handler 

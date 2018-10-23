@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Rcm.Core.Data {
+﻿namespace Rcm.Core.Data {
     /// <summary>
     /// The SqlText class is intended to encapsulate high performance, 
     /// scalable best practices for common uses of SqlClient.
@@ -70,5 +68,8 @@ namespace Rcm.Core.Data {
         public const string Sql_Point_Repository_GetDIP = @"SELECT [Id],[Name],[StateDesc] AS [Comment],[AuxSet],[PID],[Enabled] FROM [dbo].[MDic] WHERE [PID]=@PID ORDER BY [Id];";
         public const string Sql_Point_Repository_GetDO = @"SELECT [Id],[Name],[StateDesc] AS [Comment],[AuxSet],[PID],[Enabled] FROM [dbo].[MDoc] ORDER BY [Id];";
         public const string Sql_Point_Repository_GetDOP = @"SELECT [Id],[Name],[StateDesc] AS [Comment],[AuxSet],[PID],[Enabled] FROM [dbo].[MDoc] WHERE [PID]=@PID ORDER BY [Id];";
+
+        //video repository
+        public const string Sql_Gvideo_Repository_GetEntities = @"SELECT GV.[ID],GV.[Enabled],MV.[Name],GV.[Type],GV.[IP],GV.[Port],GV.[Uid],GV.[Pwd],GV.[AuxSet],GV.[ImgPort],MV.[PortId] FROM [dbo].[GVideo] GV INNER JOIN [dbo].[MVic] MV ON GV.[ID] = MV.[VideoID];";
     }
 }

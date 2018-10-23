@@ -78,6 +78,7 @@
     <Compile Include="Domain\Alarm.cs" />
     <Compile Include="Domain\Area.cs" />
     <Compile Include="Domain\Device.cs" />
+    <Compile Include="Domain\GVideo.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\Point.cs" />
     <Compile Include="Domain\Role.cs" />

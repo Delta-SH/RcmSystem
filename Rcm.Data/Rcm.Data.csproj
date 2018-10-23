@@ -42,6 +42,7 @@
     <Compile Include="AlarmRepository.cs" />
     <Compile Include="AreaRepository.cs" />
     <Compile Include="DeviceRepository.cs" />
+    <Compile Include="GVideoRepository.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="PointRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

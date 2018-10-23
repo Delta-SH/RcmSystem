@@ -154,7 +154,15 @@ namespace Rcm.Site.Controllers {
 
         public ActionResult GetQRCode() {
             try {
-                var code = @"http://www.peims.net:8085/Account/Download?v=mobile";
+                var ip = ConfigurationManager.AppSettings["IP"];
+                var port = ConfigurationManager.AppSettings["Port"];
+                if (string.IsNullOrWhiteSpace(ip))
+                    ip = "120.76.218.2";
+
+                if (string.IsNullOrWhiteSpace(port))
+                    port = "8085";
+
+                var code = string.Format(@"http://{0}:{1}/Account/Download?v=mobile", ip, port);
                 var image = CommonHelper.CreateQRCode(code);
                 return File(image, @"image/png");
             } catch(Exception exc) {
