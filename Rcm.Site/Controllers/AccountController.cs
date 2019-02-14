@@ -41,6 +41,12 @@ namespace Rcm.Site.Controllers {
             Response.Cookies.Clear();
             Request.Cookies.Clear();
             FormsAuthentication.SignOut();
+
+            var uri = ConfigurationManager.AppSettings["ExitUri"];
+            if (!string.IsNullOrWhiteSpace(uri)) {
+                return Redirect(uri);
+            }
+
             return RedirectToRoute("HomePage");
         }
 
