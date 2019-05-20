@@ -121,7 +121,7 @@ namespace Rcm.Site.Extensions {
             }
         }
 
-        public static string GetValueDisplay(Rcm.Core.Domain.Point current, float value) {
+        public static string GetValueDisplay(Rcm.Core.Domain.Point current, double value) {
             switch(current.Type) {
                 case EnmScType.Dic:
                 case EnmScType.Doc:

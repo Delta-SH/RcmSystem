@@ -10,7 +10,7 @@ namespace Rcm.Site.Models {
 
         public string typeDisplay { get; set; }
 
-        public float value { get; set; }
+        public double value { get; set; }
 
         public string valueDisplay { get; set; }
 

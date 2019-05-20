@@ -1,8 +1,8 @@
 /*
-* Web Sql Script Library v1.0.0
-* Copyright 2018, Delta
+* Web Sql Script Library v1.4.1
+* Copyright 2019, Delta
 * Author: Steven
-* Date: 2018/10/23
+* Date: 2019/05/20
 */
 
 USE [RDA]
@@ -58,6 +58,22 @@ END
 GO
 
 --■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--修改表[dbo].[MNode]
+IF EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[MNode]') AND name = N'OpValue')
+BEGIN
+	ALTER TABLE [dbo].[MNode] ALTER COLUMN [OpValue] FLOAT NULL;
+END
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--修改表[dbo].[HNode]
+IF EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[HNode]') AND name = N'Value')
+BEGIN
+	ALTER TABLE [dbo].[HNode] ALTER COLUMN [Value] FLOAT NOT NULL;
+END
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 --创建存储过程[dbo].[UpdateHNode]
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UpdateHNode]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[UpdateHNode]
@@ -70,14 +86,14 @@ GO
 
 -- =============================================
 -- Author:		<Steven>
--- Create date: <2016/07/20>
+-- Create date: <2019/05/20>
 -- Description:	<Update HNode Table>
 -- =============================================
 CREATE PROCEDURE [dbo].[UpdateHNode]
 	@DevID int,
 	@NodeID int,
 	@NodeType int,
-	@Value real,
+	@Value float,
 	@State int,
 	@UpdateTime datetime
 AS

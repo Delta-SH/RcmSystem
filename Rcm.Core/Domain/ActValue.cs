@@ -10,7 +10,7 @@ namespace Rcm.Core.Domain {
 
         public EnmScType NodeType { get; set; }
 
-        public float Value { get; set; }
+        public double Value { get; set; }
 
         public EnmPointStatus State { get; set; }
 

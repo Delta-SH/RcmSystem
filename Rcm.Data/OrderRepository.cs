@@ -31,7 +31,7 @@ namespace Rcm.Data {
             SqlParameter[] parms = { new SqlParameter("@NodeID", SqlDbType.Int),
                                      new SqlParameter("@NodeType", SqlDbType.Int),
                                      new SqlParameter("@OpType", SqlDbType.Int),
-                                     new SqlParameter("@OpValue", SqlDbType.Real) };
+                                     new SqlParameter("@OpValue", SqlDbType.Float) };
 
             using(var conn = new SqlConnection(this._databaseConnectionString)) {
                 conn.Open();

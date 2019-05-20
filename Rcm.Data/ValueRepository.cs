@@ -35,14 +35,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetAI, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -57,14 +57,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetAIP, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -77,14 +77,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetAO, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -99,14 +99,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetAOP, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -119,14 +119,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetDI, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -141,14 +141,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetDIP, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -161,14 +161,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetDO, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;
@@ -183,14 +183,14 @@ namespace Rcm.Data {
             var entities = new List<ActValue>();
             using(var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetDOP, parms)) {
                 while(rdr.Read()) {
-                    var entity = new ActValue();
-                    entity.DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]);
-                    entity.NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]);
-                    entity.NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]);
-                    entity.Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]);
-                    entity.State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]);
-                    entity.UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"]);
-                    entities.Add(entity);
+                    entities.Add(new ActValue {
+                        DevId = SqlTypeConverter.DBNullInt32Handler(rdr["DevId"]),
+                        NodeId = SqlTypeConverter.DBNullInt32Handler(rdr["NodeId"]),
+                        NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
+                        State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
                 }
             }
             return entities;

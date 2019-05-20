@@ -376,7 +376,7 @@ namespace Rcm.Site.WebService {
                         name = pv.Point.Name,
                         type = (int)pv.Point.Type,
                         typeDisplay = Common.GetScTypeDisplay(pv.Point.Type),
-                        value = pv.Value != null ? pv.Value.Value : 0f,
+                        value = pv.Value != null ? pv.Value.Value : 0d,
                         valueDisplay = pv.Value != null ? Common.GetValueDisplay(pv.Point, pv.Value.Value) : Common.GetValueDisplay(pv.Point, 0),
                         status = pv.Value != null ? (int)pv.Value.State : (int)EnmPointStatus.Invalid,
                         statusDisplay = pv.Value != null ? Common.GetPointStatusDisplay(pv.Value.State) : Common.GetPointStatusDisplay(EnmPointStatus.Invalid),
