@@ -31,32 +31,19 @@ namespace Rcm.Site.Controllers {
 
         #region Actions
 
-        public ActionResult Login(string returnUrl) {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
-        public ActionResult LogOut() {
-            Session.RemoveAll();
-            Response.Cookies.Clear();
-            Request.Cookies.Clear();
-            FormsAuthentication.SignOut();
-
-            var uri = ConfigurationManager.AppSettings["ExitUri"];
-            if (!string.IsNullOrWhiteSpace(uri)) {
-                return Redirect(uri);
-            }
-
-            return RedirectToRoute("HomePage");
-        }
-
-        public ActionResult iLogin(string returnUrl) {
+        public ActionResult Login(string returnUrl, string OUid, string OPwd) {
             try {
-                var uid = ConfigurationManager.AppSettings["OUid"];
+                var OAuth = "1".Equals(ConfigurationManager.AppSettings["OAuth"]);
+                if (!OAuth) {
+                    ViewBag.ReturnUrl = returnUrl;
+                    return View();
+                }
+
+                var uid = string.IsNullOrWhiteSpace(OUid) ? ConfigurationManager.AppSettings["OUid"] : OUid.Trim();
                 if (String.IsNullOrWhiteSpace(uid))
                     ModelState.AddModelError("", "接口用户名未配置。");
 
-                var password = ConfigurationManager.AppSettings["OPwd"];
+                var password = string.IsNullOrWhiteSpace(OPwd) ? ConfigurationManager.AppSettings["OPwd"] : OPwd.Trim();
                 if (ModelState.IsValid && String.IsNullOrWhiteSpace(password))
                     ModelState.AddModelError("", "接口密码未配置。");
 
@@ -135,6 +122,20 @@ namespace Rcm.Site.Controllers {
             }
 
             return View();
+        }
+
+        public ActionResult LogOut() {
+            Session.RemoveAll();
+            Response.Cookies.Clear();
+            Request.Cookies.Clear();
+            FormsAuthentication.SignOut();
+
+            var uri = ConfigurationManager.AppSettings["ExitUri"];
+            if (!string.IsNullOrWhiteSpace(uri)) {
+                return Redirect(uri);
+            }
+
+            return RedirectToRoute("HomePage");
         }
 
         public ActionResult GetCaptcha() {

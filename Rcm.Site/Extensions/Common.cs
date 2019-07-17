@@ -1,6 +1,7 @@
 ﻿using Rcm.Core.Domain;
 using Rcm.Core.Enum;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Web;
 using System.Web.Security;
@@ -45,6 +46,25 @@ namespace Rcm.Site.Extensions {
                 return new string[] { };
 
             return key.Split(new string[] { GlobalSeparator }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static string[] SplitCondition(string conditions) {
+            if (string.IsNullOrWhiteSpace(conditions))
+                return new string[0];
+
+            return conditions.Split(new char[] { ';', '；' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static bool ConditionContain(string target, string[] source) {
+            if (target == null || source == null)
+                return false;
+
+            foreach (var src in source) {
+                if (target.ToLowerInvariant().Contains(src.ToLowerInvariant()))
+                    return true;
+            }
+
+            return false;
         }
 
         public static string GetScTypeDisplay(EnmScType type) {
@@ -194,6 +214,30 @@ namespace Rcm.Site.Extensions {
                     return Color.SkyBlue;
                 default:
                     return Color.White;
+            }
+        }
+
+        public static string[] GetAreaPaths(List<Area> entities, Area current) {
+            var paths = new List<string>() { current.Id.ToString() };
+            GetAreaPaths(entities, current, paths);
+            return paths.ToArray();
+        }
+
+        private static void GetAreaPaths(List<Area> entities, Area current, List<string> paths) {
+            var parent = entities.Find(a => a.Id.Equals(current.LastId));
+            if (parent != null) {
+                paths.Insert(0, parent.Id.ToString());
+                GetAreaPaths(entities, parent, paths);
+            }
+        }
+
+        public static void GetChildArea(List<Area> areas, int pid, List<Area> result) {
+            var children = areas.FindAll(a => a.LastId == pid);
+            if (children.Count == 0) return;
+
+            foreach (var child in children) {
+                result.Add(child);
+                GetChildArea(areas, child.Id, result);
             }
         }
     }

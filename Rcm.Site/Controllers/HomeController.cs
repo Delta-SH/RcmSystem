@@ -60,13 +60,28 @@ namespace Rcm.Site.Controllers {
             return View();
         }
 
-        public ActionResult HistoryAlarm() {
+        public ActionResult HistoryData() {
             ViewBag.BarIndex = 3;
             return View();
         }
 
-        public ActionResult Map() {
+        public ActionResult HistoryAlarm() {
             ViewBag.BarIndex = 4;
+            return View();
+        }
+
+        public ActionResult Statistics() {
+            ViewBag.BarIndex = 5;
+            return View();
+        }
+
+        public ActionResult Configure() {
+            ViewBag.BarIndex = 6;
+            return View();
+        }
+
+        public ActionResult Map() {
+            ViewBag.BarIndex = 7;
             return View();
         }
 
@@ -148,157 +163,6 @@ namespace Rcm.Site.Controllers {
 
                         data.data.Add(model);
                     }
-                }
-            } catch(Exception exc) {
-                data.success = false;
-                data.message = exc.Message;
-            }
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-        [AjaxAuthorize]
-        public JsonResult GetOrganization(string node) {
-            var data = new AjaxDataModel<List<TreeModel>> {
-                success = true,
-                message = "No data",
-                total = 0,
-                data = new List<TreeModel>()
-            };
-
-            try {
-                if(!string.IsNullOrWhiteSpace(node)) {
-                    if(node == "root") {
-                        #region root
-
-                        var roots = _areaService.GetAreas(Common.GroupId).FindAll(a => a.LastId == 0);
-                        for(var i = 0; i < roots.Count; i++) {
-                            var root = new TreeModel {
-                                id = Common.JoinKeys((int)EnmScType.Area, roots[i].Id),
-                                text = roots[i].Name,
-                                selected = false,
-                                icon = Icons.Diqiu,
-                                expanded = false,
-                                leaf = false
-                            };
-
-                            data.data.Add(root);
-                        }
-
-                        #endregion
-                    } else {
-                        var keys = Common.SplitKeys(node);
-                        if(keys.Length == 2) {
-                            var type = int.Parse(keys[0]);
-                            var id = int.Parse(keys[1]);
-                            var gid = Common.GroupId;
-                            var nodeType = Enum.IsDefined(typeof(EnmScType), type) ? (EnmScType)type : EnmScType.None;
-                            if(nodeType == EnmScType.Area) {
-                                #region area organization
-                                var areas = _areaService.GetAreas(gid);
-                                var children = areas.FindAll(a => a.LastId == id);
-                                if(children.Count > 0) {
-                                    data.success = true;
-                                    data.message = "200 Ok";
-                                    data.total = children.Count;
-                                    for(var i = 0; i < children.Count; i++) {
-                                        var root = new TreeModel {
-                                            id = Common.JoinKeys((int)EnmScType.Area, children[i].Id),
-                                            text = children[i].Name,
-                                            selected = false,
-                                            icon = Icons.Diqiu,
-                                            expanded = false,
-                                            leaf = false
-                                        };
-
-                                        data.data.Add(root);
-                                    }
-                                } else {
-                                    var stations = _stationService.GetStations(gid, id);
-                                    if(stations.Count > 0) {
-                                        data.success = true;
-                                        data.message = "200 Ok";
-                                        data.total = stations.Count;
-                                        for(var i = 0; i < stations.Count; i++) {
-                                            var root = new TreeModel {
-                                                id = Common.JoinKeys((int)EnmScType.Station, stations[i].Id),
-                                                text = stations[i].Name,
-                                                selected = false,
-                                                icon = Icons.Juzhan,
-                                                expanded = false,
-                                                leaf = false
-                                            };
-
-                                            data.data.Add(root);
-                                        }
-                                    }
-                                }
-                                #endregion
-                            } else if(nodeType == EnmScType.Station) {
-                                #region station organization
-                                var devices = _deviceService.GetDevices(id);
-                                if(devices.Count > 0) {
-                                    data.success = true;
-                                    data.message = "200 Ok";
-                                    data.total = devices.Count;
-                                    for(var i = 0; i < devices.Count; i++) {
-                                        var root = new TreeModel {
-                                            id = Common.JoinKeys((int)EnmScType.Device, devices[i].Id),
-                                            text = devices[i].Name,
-                                            selected = false,
-                                            icon = Icons.Shebei,
-                                            expanded = false,
-                                            leaf = true
-                                        };
-
-                                        data.data.Add(root);
-                                    }
-                                }
-                                #endregion
-                            }
-                        }
-                    }
-                }
-            } catch(Exception exc) {
-                data.success = false;
-                data.message = exc.Message;
-            }
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-        [AjaxAuthorize]
-        public JsonResult SearchOrganization(string text) {
-            var data = new AjaxDataModel<List<string[]>> {
-                success = true,
-                message = "No data",
-                total = 0,
-                data = new List<string[]>()
-            };
-
-            try {
-                if(!string.IsNullOrWhiteSpace(text)) {
-                    text = text.Trim().ToLower();
-
-                    var gid = Common.GroupId;
-                    var areas = _areaService.GetAreas(gid);
-                    var areaMatchs = areas.FindAll(a => a.Name.ToLower().Contains(text));
-                    foreach(var match in areaMatchs) {
-                        var paths = GetAreaPath(areas, match);
-                        if(paths.Count > 0)
-                            data.data.Add(paths.ToArray());
-                    }
-
-                    var stations = _stationService.GetStations(gid);
-                    var staMatchs = stations.FindAll(s => s.Name.ToLower().Contains(text));
-                    foreach(var match in staMatchs) {
-                        var paths = GetAreaPath(areas, match.AreaId);
-                        paths.Add(Common.JoinKeys((int)EnmScType.Station, match.Id));
-                        data.data.Add(paths.ToArray());
-                    }
-
-                    data.message = "200 Ok";
-                    data.total = data.data.Count;
                 }
             } catch(Exception exc) {
                 data.success = false;
@@ -523,7 +387,7 @@ namespace Rcm.Site.Controllers {
         }
 
         [AjaxAuthorize]
-        public JsonResult RequestHisAlarms(string node, int[] stationtypes, int[] devicetypes, int[] alarmlevels, DateTime startdate, DateTime enddate, double interval, int start, int limit) {
+        public JsonResult RequestHisAlarms(string parent, int[] stationtypes, int[] devicetypes, int[] alarmlevels, DateTime startdate, DateTime enddate, int start, int limit) {
             var data = new AjaxDataModel<List<HisAlarmModel>> {
                 success = true,
                 message = "无数据",
@@ -532,7 +396,7 @@ namespace Rcm.Site.Controllers {
             };
 
             try {
-                var models = this.GetHisAlarms(node, stationtypes, devicetypes, alarmlevels, startdate, enddate, interval);
+                var models = this.GetHisAlarms(parent, stationtypes, devicetypes, alarmlevels, startdate, enddate);
                 if(models.Count > 0) {
                     data.message = "200 Ok";
                     data.total = models.Count;
@@ -574,10 +438,10 @@ namespace Rcm.Site.Controllers {
 
         [HttpPost]
         [Authorize]
-        public ActionResult DownloadHisAlarms(string node, int[] stationtypes, int[] devicetypes, int[] alarmlevels, DateTime startdate, DateTime enddate, double interval) {
+        public ActionResult DownloadHisAlarms(string parent, int[] stationtypes, int[] devicetypes, int[] alarmlevels, DateTime startdate, DateTime enddate) {
             try {
                 var result = new List<HisAlarmModel>();
-                var models = this.GetHisAlarms(node, stationtypes, devicetypes, alarmlevels, startdate, enddate, interval);
+                var models = this.GetHisAlarms(parent, stationtypes, devicetypes, alarmlevels, startdate, enddate);
                 if(models != null && models.Count > 0) {
                     for(int i = 0; i < models.Count; i++) {
                         result.Add(new HisAlarmModel {
@@ -607,6 +471,57 @@ namespace Rcm.Site.Controllers {
                     return File(ms.ToArray(), _excelManager.ContentType, _excelManager.RandomFileName);
                 }
             } catch(Exception exc) {
+                return Json(new AjaxResultModel { success = false, code = 400, message = exc.Message });
+            }
+        }
+
+        [AjaxAuthorize]
+        public JsonResult RequestHisData(string parent, int[] stationtypes, int[] devicetypes, DateTime startdate, DateTime enddate, string keyword, int start, int limit) {
+            var data = new AjaxDataModel<List<HisDataModel>> {
+                success = true,
+                message = "无数据",
+                total = 0,
+                data = new List<HisDataModel>()
+            };
+
+            try {
+                var models = this.GetHisData(parent, stationtypes, devicetypes, startdate, enddate, keyword);
+                if (models.Count > 0) {
+                    data.message = "200 Ok";
+                    data.total = models.Count;
+
+                    var end = start + limit;
+                    if (end > models.Count)
+                        end = models.Count;
+
+                    for (int i = start; i < end; i++) {
+                        data.data.Add(models[i]);
+                    }
+                }
+            } catch (Exception exc) {
+                data.success = false;
+                data.message = exc.Message;
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DownloadHisData(string parent, int[] stationtypes, int[] devicetypes, DateTime startdate, DateTime enddate, string keyword) {
+            try {
+                var result = new List<HisDataModel>();
+                var models = this.GetHisData(parent, stationtypes, devicetypes, startdate, enddate, keyword);
+                if (models != null && models.Count > 0) {
+                    for (int i = 0; i < models.Count; i++) {
+                        result.Add(models[i]);
+                    }
+                }
+
+                using (var ms = _excelManager.Export<HisDataModel>(result, "历时测值列表", string.Format("操作人员：{0}  操作日期：{1}", User.Identity.Name, CommonHelper.DateTimeConverter(DateTime.Now)))) {
+                    return File(ms.ToArray(), _excelManager.ContentType, _excelManager.RandomFileName);
+                }
+            } catch (Exception exc) {
                 return Json(new AjaxResultModel { success = false, code = 400, message = exc.Message });
             }
         }
@@ -648,9 +563,8 @@ namespace Rcm.Site.Controllers {
                             var current = areas.Find(a => a.Id == id);
                             if(current == null) return result;
 
-                            var children = new List<Area>();
-                            children.Add(current);
-                            GetChildArea(areas, current.Id, children);
+                            var children = new List<Area> {current};
+                            Common.GetChildArea(areas, current.Id, children);
 
                             var devices = _deviceService.GetAllDevices(gid);
                             if(devicetypes != null && devicetypes.Length > 0)
@@ -716,7 +630,7 @@ namespace Rcm.Site.Controllers {
             return result;
         }
 
-        private List<Alarm> GetHisAlarms(string node, int[] stationtypes, int[] devicetypes, int[] alarmlevels, DateTime startdate, DateTime enddate, double interval) {
+        private List<Alarm> GetHisAlarms(string node, int[] stationtypes, int[] devicetypes, int[] alarmlevels, DateTime startdate, DateTime enddate) {
             enddate = enddate.AddSeconds(86399);
             var result = new List<Alarm>();
             if(!string.IsNullOrWhiteSpace(node)) {
@@ -734,11 +648,6 @@ namespace Rcm.Site.Controllers {
                     var alarms = _alarmService.GetHisAlarms(startdate, enddate);
                     if(alarmlevels != null && alarmlevels.Length > 0)
                         alarms = alarms.FindAll(a => alarmlevels.Contains((int)a.AlarmLevel));
-
-                    if(interval > 0) {
-                        interval = interval * 60;
-                        alarms = alarms.FindAll(a => a.EndTime.Subtract(a.StartTime).TotalSeconds >= interval);
-                    }
 
                     var models = from alarm in alarms
                                  join device in devices on alarm.DeviceId equals device.Id
@@ -761,7 +670,7 @@ namespace Rcm.Site.Controllers {
 
                             var children = new List<Area>();
                             children.Add(current);
-                            GetChildArea(areas, current.Id, children);
+                            Common.GetChildArea(areas, current.Id, children);
 
                             var devices = _deviceService.GetAllDevices(gid);
                             if(devicetypes != null && devicetypes.Length > 0)
@@ -775,11 +684,6 @@ namespace Rcm.Site.Controllers {
                             var alarms = _alarmService.GetHisAlarms(startdate, enddate);
                             if(alarmlevels != null && alarmlevels.Length > 0)
                                 alarms = alarms.FindAll(a => alarmlevels.Contains((int)a.AlarmLevel));
-
-                            if(interval > 0) {
-                                interval = interval * 60;
-                                alarms = alarms.FindAll(a => a.EndTime.Subtract(a.StartTime).TotalSeconds >= interval);
-                            }
 
                             var models = from alarm in alarms
                                          join device in devices on alarm.DeviceId equals device.Id
@@ -802,11 +706,6 @@ namespace Rcm.Site.Controllers {
                             if(alarmlevels != null && alarmlevels.Length > 0)
                                 alarms = alarms.FindAll(a => alarmlevels.Contains((int)a.AlarmLevel));
 
-                            if(interval > 0) {
-                                interval = interval * 60;
-                                alarms = alarms.FindAll(a => a.EndTime.Subtract(a.StartTime).TotalSeconds >= interval);
-                            }
-
                             var models = from alarm in alarms
                                          join device in devices on alarm.DeviceId equals device.Id
                                          select alarm;
@@ -827,11 +726,6 @@ namespace Rcm.Site.Controllers {
                             if(alarmlevels != null && alarmlevels.Length > 0)
                                 alarms = alarms.FindAll(a => alarmlevels.Contains((int)a.AlarmLevel));
 
-                            if(interval > 0) {
-                                interval = interval * 60;
-                                alarms = alarms.FindAll(a => a.EndTime.Subtract(a.StartTime).TotalSeconds >= interval);
-                            }
-
                             result.AddRange(alarms);
                             #endregion
                         }
@@ -842,42 +736,201 @@ namespace Rcm.Site.Controllers {
             return result;
         }
 
-        private List<string> GetAreaPath(List<Area> areas, int id) {
-            var paths = new List<string>();
-            var current = areas.Find(a => a.Id == id);
-            if(current == null) return paths;
-            return GetAreaPath(areas, current);
-        }
+        private List<HisDataModel> GetHisData(string node, int[] stationtypes, int[] devicetypes, DateTime startdate, DateTime enddate, string keyword) {
+            enddate = enddate.AddSeconds(86399);
 
-        private List<string> GetAreaPath(List<Area> areas, Area current) {
-            var paths = new List<string>();
-            if(current == null) return paths;
+            var result = new List<HisDataModel>();
+            if (!string.IsNullOrWhiteSpace(node)) {
+                var gid = Common.GroupId;
+                if (node == "root") {
+                    #region root
+                    var devices = _deviceService.GetAllDevices(gid);
+                    if (devicetypes != null && devicetypes.Length > 0)
+                        devices = devices.FindAll(d => devicetypes.Contains(d.DeviceType));
 
-            var pid = current.LastId;
-            var index = 1;
-            paths.Add(Common.JoinKeys((int)EnmScType.Area, current.Id));
-            while(true) {
-                if(index > 10) break;
-                var parent = areas.Find(a => a.Id == pid);
-                if(parent == null) break;
+                    var stations = _stationService.GetStations(gid);
+                    if (stationtypes != null && stationtypes.Length > 0)
+                        stations = stations.FindAll(s => stationtypes.Contains(s.StationType));
 
-                paths.Add(Common.JoinKeys((int)EnmScType.Area, parent.Id));
-                pid = parent.LastId;
-                index++;
+                    var areas = _areaService.GetAreas(gid);
+                    var values = _valueService.GetHisValues(startdate, enddate);
+                    var points = _pointService.GetPoints(true, false, false, false);
+                    if (!string.IsNullOrWhiteSpace(keyword)) {
+                        var matchs = Common.SplitCondition(keyword);
+                        if (matchs.Length > 0) {
+                            points = points.FindAll(s => Common.ConditionContain(s.Name, matchs));
+                        }
+                    }
+
+                    var models = from value in values
+                                 join point in points on value.PointID equals point.Id
+                                 join device in devices on point.PId equals device.Id
+                                 join station in stations on device.PId equals station.Id
+                                 join area in areas on station.AreaId equals area.Id
+                                 select new HisDataModel {
+                                     id = point.Id,
+                                     area = area.Name,
+                                     station = station.Name,
+                                     device = device.Name,
+                                     point = point.Name,
+                                     type = Common.GetScTypeDisplay(point.Type),
+                                     value = value.Value,
+                                     time = CommonHelper.DateTimeConverter(value.UpdateTime),
+                                     unit = point.Comment
+                                 };
+
+                    var index = 0;
+                    foreach(var model in models) {
+                        model.index = ++index;
+                        result.Add(model);
+                    }
+                    #endregion
+                } else {
+                    var keys = Common.SplitKeys(node);
+                    if (keys.Length == 2) {
+                        var type = int.Parse(keys[0]);
+                        var id = int.Parse(keys[1]);
+                        var nodeType = Enum.IsDefined(typeof(EnmScType), type) ? (EnmScType)type : EnmScType.None;
+                        if (nodeType == EnmScType.Area) {
+                            #region area organization
+                            var areas = _areaService.GetAreas(gid);
+                            var current = areas.Find(a => a.Id == id);
+                            if (current == null) return result;
+
+                            var children = new List<Area> { current };
+                            Common.GetChildArea(areas, current.Id, children);
+
+                            var devices = _deviceService.GetAllDevices(gid);
+                            if (devicetypes != null && devicetypes.Length > 0)
+                                devices = devices.FindAll(d => devicetypes.Contains(d.DeviceType));
+
+                            var stations = _stationService.GetStations(gid);
+                            if (stationtypes != null && stationtypes.Length > 0)
+                                stations = stations.FindAll(s => stationtypes.Contains(s.StationType));
+
+                            var values = _valueService.GetHisValues(startdate, enddate);
+                            var points = _pointService.GetPoints(true, false, false, false);
+                            if (!string.IsNullOrWhiteSpace(keyword)) {
+                                var matchs = Common.SplitCondition(keyword);
+                                if (matchs.Length > 0) {
+                                    points = points.FindAll(s => Common.ConditionContain(s.Name, matchs));
+                                }
+                            }
+
+                            var models = from value in values
+                                         join point in points on value.PointID equals point.Id
+                                         join device in devices on point.PId equals device.Id
+                                         join station in stations on device.PId equals station.Id
+                                         join child in children on station.AreaId equals child.Id
+                                         select new HisDataModel {
+                                             id = point.Id,
+                                             area = child.Name,
+                                             station = station.Name,
+                                             device = device.Name,
+                                             point = point.Name,
+                                             type = Common.GetScTypeDisplay(point.Type),
+                                             value = value.Value,
+                                             time = CommonHelper.DateTimeConverter(value.UpdateTime),
+                                             unit = point.Comment
+                                         };
+
+                            var index = 0;
+                            foreach (var model in models) {
+                                model.index = ++index;
+                                result.Add(model);
+                            }
+                            #endregion
+                        } else if (nodeType == EnmScType.Station) {
+                            #region station organization
+                            var station = _stationService.GetStation(id);
+                            if (station == null) return result;
+                            if (stationtypes != null && stationtypes.Length > 0 && !stationtypes.Contains(station.StationType)) return result;
+
+                            var area = _areaService.GetArea(station.AreaId);
+                            if(area == null) return result;
+
+                            var devices = _deviceService.GetDevices(id);
+                            if (devicetypes != null && devicetypes.Length > 0)
+                                devices = devices.FindAll(d => devicetypes.Contains(d.DeviceType));
+
+                            var values = _valueService.GetHisValues(startdate, enddate);
+                            var points = _pointService.GetPoints(true, false, false, false);
+                            if (!string.IsNullOrWhiteSpace(keyword)) {
+                                var matchs = Common.SplitCondition(keyword);
+                                if (matchs.Length > 0) {
+                                    points = points.FindAll(s => Common.ConditionContain(s.Name, matchs));
+                                }
+                            }
+
+                            var models = from value in values
+                                         join point in points on value.PointID equals point.Id
+                                         join device in devices on point.PId equals device.Id
+                                         select new HisDataModel {
+                                             id = point.Id,
+                                             area = area.Name,
+                                             station = station.Name,
+                                             device = device.Name,
+                                             point = point.Name,
+                                             type = Common.GetScTypeDisplay(point.Type),
+                                             value = value.Value,
+                                             time = CommonHelper.DateTimeConverter(value.UpdateTime),
+                                             unit = point.Comment
+                                         };
+
+                            var index = 0;
+                            foreach (var model in models) {
+                                model.index = ++index;
+                                result.Add(model);
+                            }
+                            #endregion
+                        } else if (nodeType == EnmScType.Device) {
+                            #region device organization
+                            var device = _deviceService.GetDevice(id);
+                            if (device == null) return result;
+                            if (devicetypes != null && devicetypes.Length > 0 && !devicetypes.Contains(device.DeviceType)) return result;
+
+                            var station = _stationService.GetStation(device.PId);
+                            if (station == null) return result;
+                            if (stationtypes != null && stationtypes.Length > 0 && !stationtypes.Contains(station.StationType)) return result;
+
+                            var area = _areaService.GetArea(station.AreaId);
+                            if (area == null) return result;
+
+                            var values = _valueService.GetHisValues(startdate, enddate);
+                            var points = _pointService.GetPoints(device.Id, true, false, false, false);
+                            if (!string.IsNullOrWhiteSpace(keyword)) {
+                                var matchs = Common.SplitCondition(keyword);
+                                if (matchs.Length > 0) {
+                                    points = points.FindAll(s => Common.ConditionContain(s.Name, matchs));
+                                }
+                            }
+
+                            var models = from value in values
+                                         join point in points on value.PointID equals point.Id
+                                         select new HisDataModel {
+                                             id = point.Id,
+                                             area = area.Name,
+                                             station = station.Name,
+                                             device = device.Name,
+                                             point = point.Name,
+                                             type = Common.GetScTypeDisplay(point.Type),
+                                             value = value.Value,
+                                             time = CommonHelper.DateTimeConverter(value.UpdateTime),
+                                             unit = point.Comment
+                                         };
+
+                            var index = 0;
+                            foreach (var model in models) {
+                                model.index = ++index;
+                                result.Add(model);
+                            }
+                            #endregion
+                        }
+                    }
+                }
             }
 
-            paths.Reverse();
-            return paths;
-        }
-
-        private void GetChildArea(List<Area> areas, int pid, List<Area> result) {
-            var children = areas.FindAll(a => a.LastId == pid);
-            if(children.Count == 0) return;
-            
-            foreach(var child in children) {
-                result.Add(child);
-                GetChildArea(areas, child.Id, result);
-            }
+            return result;
         }
 
         #endregion

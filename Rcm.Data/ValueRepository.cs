@@ -2,6 +2,7 @@
 using Rcm.Core.Domain;
 using Rcm.Core.Enum;
 using Rcm.Data.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -189,6 +190,25 @@ namespace Rcm.Data {
                         NodeType = SqlTypeConverter.DBNullEnmScTypeHandler(rdr["NodeType"]),
                         Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
                         State = SqlTypeConverter.DBNullEnmPointStatusHandler(rdr["State"]),
+                        UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
+                }
+            }
+            return entities;
+        }
+
+        public virtual List<HisValue> GetValues(DateTime start, DateTime end) {
+            SqlParameter[] parms = { new SqlParameter("@Start", SqlDbType.DateTime),
+                                     new SqlParameter("@End", SqlDbType.DateTime) };
+            parms[0].Value = start;
+            parms[1].Value = end;
+
+            var entities = new List<HisValue>();
+            using (var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetValues, parms)) {
+                while (rdr.Read()) {
+                    entities.Add(new HisValue {
+                        PointID = SqlTypeConverter.DBNullInt32Handler(rdr["PointID"]),
+                        Value = Math.Round(SqlTypeConverter.DBNullFloatHandler(rdr["Value"]), 3),
                         UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
                     });
                 }

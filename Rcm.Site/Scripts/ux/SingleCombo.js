@@ -1,4 +1,10 @@
-﻿Ext.define("Ext.ux.SingleCombo", {
+﻿/* ========================================================================
+ * Ux: SingleCombo.js
+ * /Scripts/ux/SingleCombo.js
+ * ========================================================================
+ */
+
+Ext.define("Ext.ux.SingleCombo", {
     extend: "Ext.form.field.ComboBox",
     xtype: "singlecombo",
     storeUrl: null,
@@ -9,7 +15,7 @@
             me.store = Ext.create('Ext.data.Store', {
                 pageSize: 1024,
                 fields: [
-                    { name: 'id', type: 'int' },
+                    { name: 'id', type: 'auto' },
                     { name: 'text', type: 'string' },
                     { name: 'comment', type: 'string' }
                 ],

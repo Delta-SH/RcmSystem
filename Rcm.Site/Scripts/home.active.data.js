@@ -87,7 +87,7 @@
                         if (grid.getSelectionModel().hasSelection()) {
                             var key = grid.getSelectionModel().getSelection()[0].getId();
                             var record = me.getById(key);
-                            if (record != null) {
+                            if (record !== null) {
                                 var t = actChart.getOption();
                                 if (actOption.xAxis[0].data.length > 90)
                                     actOption.xAxis[0].data.shift();
@@ -313,7 +313,7 @@
             nodeParam: 'node',
             proxy: {
                 type: 'ajax',
-                url: '/Home/GetOrganization',
+                url: '/Component/GetDevices',
                 reader: {
                     type: 'json',
                     successProperty: 'success',
@@ -360,7 +360,7 @@
                         return;
                     }
 
-                    if (search._filterData != null && search._filterIndex != null) {
+                    if (Ext.isEmpty(search._filterData) === false && Ext.isEmpty(search._filterIndex) === false) {
                         var index = search._filterIndex + 1;
                         var paths = search._filterData;
                         if (index >= paths.length) {
@@ -372,7 +372,7 @@
                         search._filterIndex = index;
                     } else {
                         Ext.Ajax.request({
-                            url: '/Home/SearchOrganization',
+                            url: '/Component/FilterDevicePath',
                             params: { text: text },
                             mask: new Ext.LoadMask({ target: tree, msg: '正在处理，请稍后...' }),
                             success: function (response, options) {
@@ -435,7 +435,7 @@
                                 { xtype: 'checkboxfield', boxLabel: '遥信', inputValue: $$Rcms.Organization.Dic, checked: true, boxLabelCls: 'x-label-header x-form-cb-label' },
                                 { xtype: 'checkboxfield', boxLabel: '遥测', inputValue: $$Rcms.Organization.Aic, checked: true, boxLabelCls: 'x-label-header x-form-cb-label' },
                                 { xtype: 'checkboxfield', boxLabel: '遥调', inputValue: $$Rcms.Organization.Aoc, checked: true, boxLabelCls: 'x-label-header x-form-cb-label' },
-                                { xtype: 'checkboxfield', boxLabel: '遥控', inputValue: $$Rcms.Organization.Doc, checked: true, boxLabelCls: 'x-label-header x-form-cb-label' },
+                                { xtype: 'checkboxfield', boxLabel: '遥控', inputValue: $$Rcms.Organization.Doc, checked: true, boxLabelCls: 'x-label-header x-form-cb-label' }
                             ],
                             listeners: {
                                 change: function (me, newValue, oldValue) {
@@ -560,7 +560,7 @@
             Ext.Ajax.request({
                 url: '/Home/SetOrders',
                 params: {
-                    node: (currentNode != null ? currentNode.getId() : '-1')
+                    node: (currentNode !== null ? currentNode.getId() : '-1')
                 },
                 success: function (response, options) {
                     $$Rcms.Tasks.actOrderTask.fireOnStart = false;

@@ -79,6 +79,7 @@
     <Compile Include="Domain\Area.cs" />
     <Compile Include="Domain\Device.cs" />
     <Compile Include="Domain\GVideo.cs" />
+    <Compile Include="Domain\HisValue.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\Point.cs" />
     <Compile Include="Domain\Role.cs" />

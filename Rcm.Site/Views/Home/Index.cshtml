@@ -17,39 +17,56 @@
         </div>
     </div>
 </div>*@
-<div id="welcome" class="welcome">
-    <div class="welcome-header">
-        <h2>@(string.Format("欢迎使用{0}",System.Configuration.ConfigurationManager.AppSettings["Application"]))</h2>
-        <p>系统可实现对设备的遥测、遥信、遥控及遥调，告警的统计分析等功能，为设备建设及维护提供客观、科学的依据。</p>
+    <div id="welcome" class="welcome">
+        <div class="welcome-header">
+            <h2>@(string.Format("欢迎使用{0}", System.Configuration.ConfigurationManager.AppSettings["Application"]))</h2>
+            <p>系统可实现对设备的遥测、遥信、遥控及遥调，告警的统计分析等功能，为设备建设及维护提供客观、科学的依据。</p>
+        </div>
+        <div class="welcome-list">
+            <a href="/Home/ActiveData" target="_self" class="custom-button custom-primary iconfont icon-gauge shorticon">
+                <span class="words">
+                    实时数据
+                </span>
+            </a>
+            <a href="/Home/ActiveAlarm" target="_self" class="custom-button custom-primary iconfont icon-alarm shorticon">
+                <span class="words">
+                    实时告警
+                </span>
+            </a>
+            <a href="/Home/Map" target="_self" class="custom-button custom-success iconfont icon-report shorticon">
+                <span class="words">
+                    历史测值
+                </span>
+            </a>
+            <a href="/Home/HistoryAlarm" target="_self" class="custom-button custom-success iconfont icon-pie shorticon">
+                <span class="words">
+                    历时告警
+                </span>
+            </a>
+        </div>
+        <div class="welcome-list">
+            <a href="/Home/ActiveData" target="_self" class="custom-button custom-info iconfont icon-process shorticon">
+                <span class="words">
+                    统计曲线
+                </span>
+            </a>
+            <a href="/Home/ActiveAlarm" target="_self" class="custom-button custom-info iconfont icon-zutai shorticon">
+                <span class="words">
+                    图形组态
+                </span>
+            </a>
+            <a href="/Home/Map" target="_self" class="custom-button custom-warning iconfont icon-map shorticon">
+                <span class="words">
+                    电子地图
+                </span>
+            </a>
+            <a href="/Account/LogOut" target="_self" class="custom-button custom-danger iconfont icon-exit shorticon">
+                <span class="words">
+                    安全退出
+                </span>
+            </a>
+        </div>
     </div>
-    <div class="welcome-list">
-        <a href="/Home/ActiveData" target="_self" class="custom-button custom-primary bar-font-meter shorticon">
-            <span class="words">
-                实时数据
-            </span>
-        </a>
-        <a href="/Home/ActiveAlarm" target="_self" class="custom-button custom-success bar-font-bell shorticon">
-            <span class="words">
-                实时告警
-            </span>
-        </a>
-        <a href="/Home/HistoryAlarm" target="_self" class="custom-button custom-info bar-font-stats-bars shorticon">
-            <span class="words">
-                历时告警
-            </span>
-        </a>
-        <a href="/Home/Map" target="_self" class="custom-button custom-warning bar-font-map shorticon">
-            <span class="words">
-                电子地图
-            </span>
-        </a>
-        <a href="/Account/LogOut" target="_self" class="custom-button custom-danger bar-font-exit shorticon">
-            <span class="words">
-                安全退出
-            </span>
-        </a>
-    </div>
-</div>
 @section scripts {
-    <script src="@Url.Content("~/Scripts/home.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/home.js")" type="text/javascript"></script>
 }

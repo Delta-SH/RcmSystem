@@ -1,8 +1,15 @@
-﻿Ext.define("Ext.ux.MultiCombo", {
+﻿/* ========================================================================
+ * Ux: MultiCombo.js
+ * /Scripts/ux/MultiCombo.js
+ * ========================================================================
+ */
+
+Ext.define("Ext.ux.MultiCombo", {
     extend: "Ext.form.field.ComboBox",
     xtype: "multicombo",
     selectionMode: "checkbox",
     storeUrl: null,
+    idType: 1,
     multiSelect: true,
     assertValue: function () {
         this.collapse();
@@ -14,7 +21,7 @@
             if (!this.listConfig.getInnerTpl) {
                 this.listConfig.getInnerTpl = function (displayField) {
                     return '<div class="x-combo-list-item {[this.getItemClass(values)]}">' +
-				           '<div class="x-mcombo-text">{' + displayField + '}</div></div>';
+                        '<div class="x-mcombo-text">{' + displayField + '}</div></div>';
                 };
             }
 
@@ -30,7 +37,7 @@
                 if (this.selectionMode === "selection") return "";
 
                 Ext.each(this.store.getRange(), function (r) {
-                    if (r.get(this.valueField) == values[this.valueField]) {
+                    if (r.get(this.valueField) === values[this.valueField]) {
                         record = r;
                         return false;
                     }
@@ -68,7 +75,7 @@
             me.store = Ext.create('Ext.data.Store', {
                 pageSize: 1024,
                 fields: [
-                    { name: 'id', type: 'int' },
+                    { name: 'id', type: 'auto' },
                     { name: 'text', type: 'string' },
                     { name: 'comment', type: 'string' }
                 ],
@@ -99,7 +106,7 @@
 
         if (Ext.isString(record)) {
             Ext.each(this.store.getRange(), function (r) {
-                if (r.get(this.valueField) == record) {
+                if (r.get(this.valueField) === record) {
                     record = r;
                     return false;
                 }
@@ -155,7 +162,7 @@
 
         if (Ext.isString(record)) {
             Ext.each(this.store.getRange(), function (r) {
-                if (r.get(this.valueField) == record) {
+                if (r.get(this.valueField) === record) {
                     record = r;
                     return false;
                 }
@@ -173,7 +180,7 @@
 
         if (Ext.isString(record)) {
             Ext.each(this.store.getRange(), function (r) {
-                if (r.get(this.valueField) == record) {
+                if (r.get(this.valueField) === record) {
                     record = r;
                     return false;
                 }
@@ -237,6 +244,12 @@
         }
     },
     clearValue: function () {
+        this.callParent(arguments);
+        if (this.picker && this.picker.rendered) {
+            this.picker.refresh();
+        }
+    },
+    onExpand: function () {
         this.callParent(arguments);
         if (this.picker && this.picker.rendered) {
             this.picker.refresh();

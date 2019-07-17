@@ -1,3 +1,9 @@
+/* ========================================================================
+ * Ux: IFrame.js
+ * /Scripts/ux/IFrame.js
+ * ========================================================================
+ */
+
 /*!
  * Ext JS Library 4.0
  * Copyright(c) 2006-2011 Sencha Inc.
@@ -38,25 +44,25 @@ Ext.define('Ext.ux.IFrame', {
         });
     },
 
-    initEvents : function() {
+    initEvents: function () {
         var me = this;
         me.callParent();
         me.iframeEl.on('load', me.onLoad, me);
     },
 
-    initRenderData: function() {
+    initRenderData: function () {
         return Ext.apply(this.callParent(), {
             src: this.src,
             frameName: this.frameName
         });
     },
 
-    getBody: function() {
+    getBody: function () {
         var doc = this.getDoc();
         return doc.body || doc.documentElement;
     },
 
-    getDoc: function() {
+    getDoc: function () {
         try {
             return this.getWin().document;
         } catch (ex) {
@@ -64,7 +70,7 @@ Ext.define('Ext.ux.IFrame', {
         }
     },
 
-    getWin: function() {
+    getWin: function () {
         var me = this,
             name = me.frameName,
             win = Ext.isIE
@@ -73,7 +79,7 @@ Ext.define('Ext.ux.IFrame', {
         return win;
     },
 
-    getFrame: function() {
+    getFrame: function () {
         var me = this;
         return me.iframeEl.dom;
     },
@@ -82,8 +88,8 @@ Ext.define('Ext.ux.IFrame', {
         this.cleanupListeners(true);
         this.callParent();
     },
-    
-    cleanupListeners: function(destroying){
+
+    cleanupListeners: function (destroying) {
         var doc, prop;
 
         if (this.rendered) {
@@ -99,11 +105,11 @@ Ext.define('Ext.ux.IFrame', {
                         }
                     }
                 }
-            } catch(e) { }
+            } catch (e) { }
         }
     },
 
-    onLoad: function() {
+    onLoad: function () {
         var me = this,
             doc = me.getDoc(),
             fn = me.onRelayedEvent;
@@ -125,7 +131,7 @@ Ext.define('Ext.ux.IFrame', {
                     dblclick: fn,  // not sure again
                     scope: me
                 });
-            } catch(e) {
+            } catch (e) {
                 // cannot do this xss
             }
 
@@ -135,7 +141,7 @@ Ext.define('Ext.ux.IFrame', {
             this.el.unmask();
             this.fireEvent('load', this);
 
-        } else if(me.src && me.src != '') {
+        } else if (me.src && me.src !== '') {
 
             this.el.unmask();
             this.fireEvent('error', this);

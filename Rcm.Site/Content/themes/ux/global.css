@@ -1,0 +1,158 @@
+﻿/*!
+ * global.css
+ * /Content/ux/global.css
+ */
+
+.x-panel-body-default {
+    border: 1px solid #c0c0c0;
+    border-top: none;
+}
+
+.x-grid-body {
+    border-top: 1px solid #c0c0c0;
+}
+
+.x-docked-top-with-bottom {
+    border-bottom-width:1px !important
+}
+
+.x-panel-header-default .x-panel-header-glyph {
+    line-height: 18px;
+    opacity: 0.8;
+}
+
+.x-btn-default-toolbar-small .x-btn-glyph {
+    line-height: 18px;
+    opacity: 0.8;
+}
+
+.x-window-header-default .x-window-header-glyph {
+    line-height: 18px;
+    opacity: 0.8;
+}
+
+.x-tab-default .x-tab-glyph {
+    opacity: 0.8;
+}
+
+.x-menu-item-glyph {
+    line-height: 18px;
+    opacity: 0.8;
+}
+
+.x-border-layout-ct {
+    background-color: #fff;
+}
+
+.x-grid-locked .x-grid-inner-locked {
+    border-color: #c0c0c0;
+}
+
+.x-grid-expander .x-grid-rowbody {
+    background-color: #f8f8f8;
+    color: #666;
+    font: 12px/15px helvetica,arial,verdana,sans-serif;
+    padding: 5px 10px;
+}
+
+.x-grid-expander .row-table td {
+    padding: 5px 5px 5px 0;
+}
+
+.x-cell-icon {
+    margin:0 5px;
+}
+
+.x-danger-panel .x-tool-img {
+    background-color: #df3e3e;
+}
+
+.x-danger-panel .x-panel-header-default {
+    line-height: 18px;
+    opacity: 1;
+
+    background-color: #df3e3e;
+    background-image: none;
+    border: 1px solid #df3e3e;
+}
+
+.x-border-body-panel {
+    border: 1px solid #c0c0c0;
+}
+
+.x-tip-default {
+  border-radius: 4px;
+  border: 0px solid rgb(51, 51, 51);
+  background-color: rgba(50, 50, 50, 0.5)
+}
+
+.x-tip-header-text-container-default {
+  color: rgb(255, 255, 255);
+}
+
+.x-tip-body-default {
+  color: rgb(255, 255, 255);
+}
+
+.x-tip-body-default a {
+  color: rgb(255, 255, 255);
+}
+
+.x-custom-tool .x-tool-print {
+    background-image: url('/Content/themes/icons/print.png');
+}
+
+.x-toolbar-footer {
+    background: #f8f8f8 none repeat scroll 0 0;
+    border-top: 1px solid #c0c0c0 !important;
+    border-right: 0 none;
+    border-bottom: 0 none;
+    border-left: 0 none;
+    margin: 0;
+    padding: 6px 0 6px 6px;
+}
+
+.x-layout-split-left,
+.x-layout-split-right,
+.x-layout-split-top,
+.x-layout-split-bottom,
+.x-splitter-collapsed .x-layout-split-left,
+.x-splitter-collapsed .x-layout-split-right,
+.x-splitter-collapsed .x-layout-split-top,
+.x-splitter-collapsed .x-layout-split-bottom {
+    background-image: url('/Content/themes/ux/images/spliter.png');
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.x-layout-split-left {
+    background-position: -95px -5px;
+}
+
+.x-layout-split-right {
+    background-position: -110px -5px;
+}
+
+.x-layout-split-top {
+    background-position: -5px -5px;
+}
+
+.x-layout-split-bottom {
+    background-position: -50px -5px;
+}
+
+.x-splitter-collapsed .x-layout-split-left {
+    background-position: -110px -5px;
+}
+
+.x-splitter-collapsed .x-layout-split-right {
+    background-position: -95px -5px;
+}
+
+.x-splitter-collapsed .x-layout-split-top {
+    background-position: -50px -5px;
+}
+
+.x-splitter-collapsed .x-layout-split-bottom {
+    background-position: -5px -5px;
+}

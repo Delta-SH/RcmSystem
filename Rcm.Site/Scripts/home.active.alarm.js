@@ -113,7 +113,7 @@
             nodeParam: 'node',
             proxy: {
                 type: 'ajax',
-                url: '/Home/GetOrganization',
+                url: '/Component/GetDevices',
                 reader: {
                     type: 'json',
                     successProperty: 'success',
@@ -159,7 +159,7 @@
                         return;
                     }
 
-                    if (search._filterData != null && search._filterIndex != null) {
+                    if (Ext.isEmpty(search._filterData) === false && Ext.isEmpty(search._filterIndex) === false) {
                         var index = search._filterIndex + 1;
                         var paths = search._filterData;
                         if (index >= paths.length) {
@@ -171,7 +171,7 @@
                         search._filterIndex = index;
                     } else {
                         Ext.Ajax.request({
-                            url: '/Home/SearchOrganization',
+                            url: '/Component/FilterDevicePath',
                             params: { text: text },
                             mask: new Ext.LoadMask({ target: tree, msg: '正在处理，请稍后...' }),
                             success: function (response, options) {

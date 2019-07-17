@@ -1,0 +1,20 @@
+﻿/*!
+ * multicombo.css
+ * /Content/ux/multicombo.css
+ */
+
+.x-mcombo-item-checked {
+    background-image: url(/Content/themes/ux/images/checked.png);
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding-left: 18px;
+}
+
+.x-mcombo-item-unchecked {
+    background-image: url(/Content/themes/ux/images/unchecked.png);
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding-left: 18px;
+}

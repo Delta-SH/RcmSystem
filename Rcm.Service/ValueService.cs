@@ -61,6 +61,9 @@ namespace Rcm.Service {
             return values;
         }
 
+        public virtual List<HisValue> GetHisValues(DateTime start, DateTime end) {
+            return _valueRepository.GetValues(start, end);
+        }
         #endregion
 
     }
