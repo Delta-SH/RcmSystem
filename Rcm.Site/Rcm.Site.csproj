@@ -251,6 +251,10 @@
     <Content Include="Scripts\components\DeviceComponent.js" />
     <Content Include="Scripts\components\PointComponent.js" />
     <Content Include="Scripts\components\StationComponent.js" />
+    <Content Include="Scripts\echarts\echarts.js" />
+    <Content Include="Scripts\echarts\echarts.min.js" />
+    <Content Include="Scripts\echarts\shine.js" />
+    <Content Include="Scripts\echarts\shine.min.js" />
     <Content Include="Scripts\ext-4.2.1\ext-all.js" />
     <Content Include="Scripts\ext-4.2.1\locale\ext-lang-cn.js" />
     <Content Include="Scripts\ext-4.2.1\locale\ext-lang-cn.min.js" />
@@ -672,10 +676,6 @@
     <Content Include="Scripts\components\AlarmLevelComponent.js" />
     <Content Include="Scripts\components\DeviceTypeComponent.js" />
     <Content Include="Scripts\components\StationTypeComponent.js" />
-    <Content Include="Scripts\echarts\echarts.js" />
-    <Content Include="Scripts\echarts\echarts.min.js" />
-    <Content Include="Scripts\echarts\shine.js" />
-    <Content Include="Scripts\echarts\shine.min.js" />
     <Content Include="Scripts\global\all.js" />
     <Content Include="Scripts\global\global.js" />
     <Content Include="Scripts\home.active.data.js" />
