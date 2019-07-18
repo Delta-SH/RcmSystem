@@ -1,44 +1,47 @@
 ﻿(function () {
-    var currentNode = null,
-        actChart = null,
-        actOption = {
-        tooltip: {
-            trigger: 'axis'
-        },
-        grid: {
-            top: 15,
-            left: 5,
-            right: 15,
-            bottom: 0,
-            containLabel: true
-        },
-        xAxis: [{
-            type: 'category',
-            boundaryGap: false,
-            splitLine: { show: false },
-            data: []
-        }],
-        yAxis: [{
-            type: 'value'
-        }],
-        series: [
-            {
-                name: '实时测值',
-                type: 'line',
-                smooth: true,
-                symbol: 'none',
-                sampling: 'average',
-                itemStyle: {
-                    normal: {
-                        color: '#0892cd'
-                    }
-                },
-                areaStyle: { normal: {} },
-                data: []
-            }
-        ]
-    };
+    var currentNode = null;
 
+    //#region Chart
+    var lineChart = null,
+        lineOption = {
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{b}: {c} {a}'
+            },
+            grid: {
+                top: 15,
+                left: 0,
+                right: 5,
+                bottom: 0,
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                splitLine: { show: false },
+                data: ['00′00″']
+            }],
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [
+                {
+                    name: '',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'none',
+                    sampling: 'average',
+                    itemStyle: {
+                        normal: {
+                            color: '#0892cd'
+                        }
+                    },
+                    areaStyle: { normal: {} },
+                    data: [0]
+                }
+            ]
+        };
+    //#endregion
     Ext.define('PointModel', {
         extend: 'Ext.data.Model',
         fields: [
@@ -87,17 +90,8 @@
                         if (grid.getSelectionModel().hasSelection()) {
                             var key = grid.getSelectionModel().getSelection()[0].getId();
                             var record = me.getById(key);
-                            if (record !== null) {
-                                var t = actChart.getOption();
-                                if (actOption.xAxis[0].data.length > 90)
-                                    actOption.xAxis[0].data.shift();
-
-                                if (actOption.series[0].data.length > 90)
-                                    actOption.series[0].data.shift();
-
-                                actOption.xAxis[0].data.push(record.get('shortTime'));
-                                actOption.series[0].data.push(record.get('value'));
-                                actChart.setOption(actOption);
+                            if (Ext.isEmpty(record) === false) {
+                                loadChart(record);
                             }
                         }
                     }
@@ -531,26 +525,47 @@
                 ],
                 listeners: {
                     selectionchange: function (model, selected) {
-                        if (actOption.xAxis[0].data.length > 0)
-                            actOption.xAxis[0].data = [];
-
-                        if (actOption.series[0].data.length > 0)
-                            actOption.series[0].data = [];
-
-                        actOption.tooltip.formatter = null;
-
+                        resetChart();
                         if (selected.length > 0) {
-                            actOption.tooltip.formatter = 'X: {b}<br/>Y: {c} ' + selected[0].get('valueDisplay');
-                            actOption.xAxis[0].data.push(selected[0].get('shortTime'));
-                            actOption.series[0].data.push(selected[0].get('value'));
+                            loadChart(selected[0]);
                         }
-
-                        actChart.setOption(actOption);
                     }
                 }
             }
         ]
     });
+
+    var loadChart = function (record) {
+        if (!Ext.isEmpty(record)) {
+            var maxcount = 90,
+                timestamp = record.get('shortTime'),
+                point = record.get('point'),
+                value = record.get('value'),
+                unit = record.get('valueDisplay');
+
+            if (value === 'NULL')
+                value = 0;
+
+            if (lineOption.series[0].data.length >= maxcount) {
+                lineOption.series[0].data.shift();
+                lineOption.xAxis[0].data.shift();
+            }
+
+            lineOption.series[0].name = unit;
+            lineOption.series[0].data.push(value);
+            lineOption.xAxis[0].data.push(timestamp);
+            lineChart.setOption(lineOption, true);
+        }
+    };
+
+    var resetChart = function (fill) {
+        fill = fill || false;
+
+        lineOption.series[0].name = '';
+        lineOption.series[0].data = fill ? [0] : [];
+        lineOption.xAxis[0].data = fill ? ['00′00″'] : [];
+        lineChart.setOption(lineOption, true);
+    };
 
     Ext.onReady(function () {
         $$Rcms.Tasks.actPointTask.run = function () {
@@ -577,7 +592,7 @@
             pageContentPanel.add([leftLayout, centerLayout]);
         }
         
-        actChart = echarts.init(Ext.getCmp('active-line').body.dom, 'shine');
-        actChart.setOption(actOption);
+        lineChart = echarts.init(Ext.getCmp('active-line').body.dom, 'shine');
+        lineChart.setOption(lineOption);
     });
 })();

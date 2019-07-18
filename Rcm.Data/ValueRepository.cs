@@ -208,8 +208,34 @@ namespace Rcm.Data {
                 while (rdr.Read()) {
                     entities.Add(new HisValue {
                         PointID = SqlTypeConverter.DBNullInt32Handler(rdr["PointID"]),
-                        Value = Math.Round(SqlTypeConverter.DBNullFloatHandler(rdr["Value"]), 3),
+                        Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]),
                         UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
+                    });
+                }
+            }
+            return entities;
+        }
+
+        public virtual List<StaticValue> GetStaticValues(int point, DateTime start, DateTime end) {
+            SqlParameter[] parms = { new SqlParameter("@Point", SqlDbType.Int),
+                                     new SqlParameter("@Start", SqlDbType.DateTime),
+                                     new SqlParameter("@End", SqlDbType.DateTime) };
+            parms[0].Value = point;
+            parms[1].Value = start;
+            parms[2].Value = end;
+
+            var entities = new List<StaticValue>();
+            using (var rdr = SqlHelper.ExecuteReader(this._databaseConnectionString, CommandType.Text, SqlCommands_His.Sql_Value_Repository_GetStaticValues, parms)) {
+                while (rdr.Read()) {
+                    entities.Add(new StaticValue {
+                        PointID = SqlTypeConverter.DBNullInt32Handler(rdr["PointID"]),
+                        BeginTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["BeginTime"]),
+                        EndTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["EndTime"]),
+                        AvgValue = SqlTypeConverter.DBNullFloatHandler(rdr["AvgValue"]),
+                        MaxValue = SqlTypeConverter.DBNullFloatHandler(rdr["MaxValue"]),
+                        MaxTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["MaxTime"]),
+                        MinValue = SqlTypeConverter.DBNullFloatHandler(rdr["MinValue"]),
+                        MinTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["MinTime"])
                     });
                 }
             }

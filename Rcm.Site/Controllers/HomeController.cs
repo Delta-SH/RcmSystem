@@ -526,6 +526,44 @@ namespace Rcm.Site.Controllers {
             }
         }
 
+        [AjaxAuthorize]
+        public JsonResult RequestStatics(int point, DateTime starttime, DateTime endtime) {
+            var data = new AjaxDataModel<List<ChartsModel>> {
+                success = true,
+                message = "无数据",
+                total = 0,
+                data = new List<ChartsModel>()
+            };
+
+            try {
+                var models = _valueService.GetStaticValues(point, starttime, endtime);
+                if (models.Count > 0) {
+                    data.message = "200 Ok";
+                    data.total = models.Count;
+
+                    for (var i = 0; i < models.Count; i++) {
+                        var values = new List<ChartModel> {
+                            new ChartModel { index = 1, name = CommonHelper.DateTimeConverter(models[i].MaxTime), value = Math.Round(models[i].MaxValue,3), comment = "" },
+                            new ChartModel { index = 2, name = "--", value = Math.Round(models[i].AvgValue,3), comment = "" },
+                            new ChartModel { index = 3, name = CommonHelper.DateTimeConverter(models[i].MinTime), value = Math.Round(models[i].MinValue,3), comment = "" }
+                        };
+
+                        data.data.Add(new ChartsModel {
+                            index = i + 1,
+                            name = CommonHelper.DateTimeConverter(models[i].BeginTime),
+                            models = values,
+                            comment = CommonHelper.DateTimeConverter(models[i].EndTime)
+                        });
+                    }
+                }
+            } catch (Exception exc) {
+                data.success = false;
+                data.message = exc.Message;
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         private List<Alarm> GetActAlarms(string node, int[] stationtypes, int[] devicetypes, int[] alarmlevels) {
             var result = new List<Alarm>();
             if(!string.IsNullOrWhiteSpace(node)) {

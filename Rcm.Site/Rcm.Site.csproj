@@ -155,6 +155,8 @@
     <Compile Include="Models\AjaxLoginResultModel.cs" />
     <Compile Include="Models\AjaxResultModel.cs" />
     <Compile Include="Models\ActAlarmModel.cs" />
+    <Compile Include="Models\ChartModel.cs" />
+    <Compile Include="Models\ChartsModel.cs" />
     <Compile Include="Models\ComboItem.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\GVideoModel.cs" />
@@ -247,6 +249,7 @@
     <Content Include="Scripts\components\all.js" />
     <Content Include="Scripts\components\AreaComponent.js" />
     <Content Include="Scripts\components\DeviceComponent.js" />
+    <Content Include="Scripts\components\PointComponent.js" />
     <Content Include="Scripts\components\StationComponent.js" />
     <Content Include="Scripts\ext-4.2.1\ext-all.js" />
     <Content Include="Scripts\ext-4.2.1\locale\ext-lang-cn.js" />

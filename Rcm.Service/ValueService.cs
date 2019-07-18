@@ -64,6 +64,10 @@ namespace Rcm.Service {
         public virtual List<HisValue> GetHisValues(DateTime start, DateTime end) {
             return _valueRepository.GetValues(start, end);
         }
+
+        public virtual List<StaticValue> GetStaticValues(int point, DateTime start, DateTime end) {
+            return _valueRepository.GetStaticValues(point, start, end);
+        }
         #endregion
 
     }

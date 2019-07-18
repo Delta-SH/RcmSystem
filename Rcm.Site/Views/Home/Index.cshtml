@@ -20,7 +20,7 @@
     <div id="welcome" class="welcome">
         <div class="welcome-header">
             <h2>@(string.Format("欢迎使用{0}", System.Configuration.ConfigurationManager.AppSettings["Application"]))</h2>
-            <p>系统可实现对设备的遥测、遥信、遥控及遥调，告警的统计分析等功能，为设备建设及维护提供客观、科学的依据。</p>
+            <p>系统可实现对动力设备的遥测、遥信、遥控和遥调功能，实时监测设备运行参数及故障告警，为设备建设及维护提供准确、科学的依据。</p>
         </div>
         <div class="welcome-list">
             <a href="/Home/ActiveData" target="_self" class="custom-button custom-primary iconfont icon-gauge shorticon">
@@ -33,7 +33,7 @@
                     实时告警
                 </span>
             </a>
-            <a href="/Home/Map" target="_self" class="custom-button custom-success iconfont icon-report shorticon">
+            <a href="/Home/HistoryData" target="_self" class="custom-button custom-success iconfont icon-report shorticon">
                 <span class="words">
                     历史测值
                 </span>
@@ -45,12 +45,12 @@
             </a>
         </div>
         <div class="welcome-list">
-            <a href="/Home/ActiveData" target="_self" class="custom-button custom-info iconfont icon-process shorticon">
+            <a href="/Home/Statistics" target="_self" class="custom-button custom-info iconfont icon-process shorticon">
                 <span class="words">
                     统计曲线
                 </span>
             </a>
-            <a href="/Home/ActiveAlarm" target="_self" class="custom-button custom-info iconfont icon-zutai shorticon">
+            <a href="/Home/Configure" target="_self" class="custom-button custom-info iconfont icon-zutai shorticon">
                 <span class="words">
                     图形组态
                 </span>

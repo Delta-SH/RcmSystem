@@ -16,6 +16,7 @@ namespace Rcm.Site.Controllers {
         private readonly AreaService _areaService;
         private readonly StationService _stationService;
         private readonly DeviceService _deviceService;
+        private readonly PointService _pointService;
 
         #endregion
 
@@ -25,6 +26,7 @@ namespace Rcm.Site.Controllers {
             this._areaService = new AreaService();
             this._stationService = new StationService();
             this._deviceService = new DeviceService();
+            this._pointService = new PointService();
         }
 
         #endregion
@@ -718,6 +720,30 @@ namespace Rcm.Site.Controllers {
                 if (data.data.Count > 0) {
                     data.total = data.data.Count;
                     data.message = "200 Ok";
+                }
+            } catch (Exception exc) {
+                data.success = false;
+                data.message = exc.Message;
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [AjaxAuthorize]
+        public JsonResult GetPoints(int device, bool _ai = true, bool _ao = true, bool _di = true, bool _do = true, bool _al = true) {
+            var data = new AjaxDataModel<List<ComboItem<int, string>>> {
+                success = true,
+                message = "No data",
+                total = 0,
+                data = new List<ComboItem<int, string>>()
+            };
+
+            try {
+                var points = _pointService.GetPoints(device, _ai, _ao, _di, _do);
+                if (points.Count > 0) {
+                    data.message = "200 Ok";
+                    data.total = points.Count;
+                    data.data.AddRange(points.Select(s => new ComboItem<int, string> { id = s.Id, text = s.Name }));
                 }
             } catch (Exception exc) {
                 data.success = false;

@@ -83,6 +83,7 @@
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\Point.cs" />
     <Compile Include="Domain\Role.cs" />
+    <Compile Include="Domain\StaticValue.cs" />
     <Compile Include="Domain\Station.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\ActValue.cs" />
