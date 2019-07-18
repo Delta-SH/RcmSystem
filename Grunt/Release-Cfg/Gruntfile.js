@@ -83,6 +83,8 @@ module.exports = function (grunt) {
       	'Release/Scripts/global/',
       	'Release/Scripts/ux/',
       	'Release/Scripts/*.js',
+      	'Release/*.ico',
+      	'!Release/favicon.ico'
       	]
       }
     },
