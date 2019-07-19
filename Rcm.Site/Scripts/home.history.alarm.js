@@ -55,6 +55,7 @@
         dockedItems: [{
             xtype: 'panel',
             glyph: 0xe61a,
+            cls: 'x-custom-toolbar',
             dock: 'top',
             items: [
                 {

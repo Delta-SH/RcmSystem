@@ -13,6 +13,9 @@ body {
     -ms-flex-align: center;
     align-items: center;
     padding-bottom: 50px;
+    background-color: transparent;
+    background: url('/Content/themes/images/main.png');
+    background-size: cover;
 }
 
 a, a:active, a:visited, a:link {
@@ -51,13 +54,14 @@ a:hover {
     text-align: center;
 }
 
-.title h3 {
-    font-weight: 600;
-    font-size: 22px;
-    letter-spacing: 4px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
+    .title h3 {
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: 4px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        color: #f9f9f9;
+    }
 
 .login {
     margin: 0 auto;
@@ -79,10 +83,10 @@ a:hover {
     width: 100%;
     height: 50px;
     text-align: center;
-    color: #999;
-    position: absolute;  
+    color: #9D9EAE;
+    position: absolute;
     bottom: 0;
-    left:0;
+    left: 0;
 }
 
 .footer p {
@@ -96,7 +100,7 @@ a:hover {
 }
 
 .qrcode .comment {
-    color: #999;
+    color: #9D9EAE;
     font-size: 12px;
 }
 

@@ -26,7 +26,7 @@ Ext.onReady(function () {
                     region: 'north',
                     contentEl: 'top-nav-panel',
                     hidden: $$Rcms.__PYLON__4XtnBeCZz97O0PzX__ === '1',
-                    height: 51,
+                    height: 68,
                     border: false
                 },
                 {

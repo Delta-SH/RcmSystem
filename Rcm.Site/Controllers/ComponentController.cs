@@ -449,7 +449,7 @@ namespace Rcm.Site.Controllers {
         }
 
         [AjaxAuthorize]
-        public JsonResult GetDevices(string node, bool? multiselect, bool? leafselect) {
+        public JsonResult GetDevices(string node, bool? multiselect, bool? leafselect, bool whiteicon = false) {
             var data = new AjaxDataModel<List<TreeModel>> {
                 success = true,
                 message = "No data",
@@ -469,7 +469,7 @@ namespace Rcm.Site.Controllers {
                             var root = new TreeModel {
                                 id = Common.JoinKeys((int)EnmScType.Area, roots[i].Id),
                                 text = roots[i].Name,
-                                icon = Icons.Diqiu,
+                                icon = whiteicon ? Icons.Diqiu_W : Icons.Diqiu,
                                 expanded = false,
                                 leaf = false
                             };
@@ -501,7 +501,7 @@ namespace Rcm.Site.Controllers {
                                     var root = new TreeModel {
                                         id = Common.JoinKeys((int)EnmScType.Area, children[i].Id),
                                         text = children[i].Name,
-                                        icon = Icons.Diqiu,
+                                        icon = whiteicon ? Icons.Diqiu_W : Icons.Diqiu,
                                         expanded = false,
                                         leaf = false
                                     };
@@ -523,7 +523,7 @@ namespace Rcm.Site.Controllers {
                                         var root = new TreeModel {
                                             id = Common.JoinKeys((int)EnmScType.Station, stations[i].Id),
                                             text = stations[i].Name,
-                                            icon = Icons.Juzhan,
+                                            icon = whiteicon ? Icons.Juzhan_W : Icons.Juzhan,
                                             expanded = false,
                                             leaf = false
                                         };
@@ -547,7 +547,7 @@ namespace Rcm.Site.Controllers {
                                     var root = new TreeModel {
                                         id = Common.JoinKeys((int)EnmScType.Device, devices[i].Id),
                                         text = devices[i].Name,
-                                        icon = Icons.Shebei,
+                                        icon = whiteicon ? Icons.Shebei_W : Icons.Shebei,
                                         expanded = false,
                                         leaf = true
                                     };

@@ -92,6 +92,7 @@
         region: 'west',
         title: '系统设备列表',
         glyph: 0xe619,
+        cls: 'x-custom-tree-panel',
         width: 220,
         split: true,
         collapsible: true,
@@ -103,7 +104,7 @@
             id: 'root',
             text: '监控中心',
             expanded: true,
-            icon: '/Content/themes/icons/home.png'
+            icon: '/Content/themes/icons/home_w.png'
         },
         viewConfig: {
             loadMask: true
@@ -114,6 +115,9 @@
             proxy: {
                 type: 'ajax',
                 url: '/Component/GetDevices',
+                extraParams: {
+                    whiteicon: true
+                },
                 reader: {
                     type: 'json',
                     successProperty: 'success',
@@ -205,6 +209,7 @@
         dockedItems: [{
             xtype: 'panel',
             glyph: 0xe61a,
+            cls:'x-custom-toolbar',
             dock: 'top',
             items: [
                 {

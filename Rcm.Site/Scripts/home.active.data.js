@@ -4,6 +4,10 @@
     //#region Chart
     var lineChart = null,
         lineOption = {
+            backgroundColor: 'rgba(70,78,143, 0.6)',
+            textStyle:{
+                color:'#9d9eae'
+            },
             tooltip: {
                 trigger: 'axis',
                 formatter: '{b}: {c} {a}'
@@ -16,12 +20,22 @@
                 containLabel: true
             },
             xAxis: [{
+                axisLine: {
+                    lineStyle: {
+                        color: '#9d9eae'
+                    }
+                },
                 type: 'category',
                 boundaryGap: false,
                 splitLine: { show: false },
                 data: ['00′00″']
             }],
             yAxis: [{
+                axisLine: {
+                    lineStyle: {
+                        color: '#9d9eae'
+                    }
+                },
                 type: 'value'
             }],
             series: [
@@ -41,7 +55,8 @@
                 }
             ]
         };
-    //#endregion
+    //#endregion
+
     Ext.define('PointModel', {
         extend: 'Ext.data.Model',
         fields: [
@@ -288,6 +303,7 @@
         glyph: 0xe619,
         width: 220,
         split: true,
+        cls:'x-custom-tree-panel',
         collapsible: true,
         collapsed: false,
         autoScroll: true,
@@ -297,7 +313,7 @@
             id: 'root',
             text: '监控中心',
             expanded: true,
-            icon: '/Content/themes/icons/home.png'
+            icon: '/Content/themes/icons/home_w.png'
         },
         viewConfig: {
             loadMask: true
@@ -308,6 +324,9 @@
             proxy: {
                 type: 'ajax',
                 url: '/Component/GetDevices',
+                extraParams: {
+                    whiteicon: true
+                },
                 reader: {
                     type: 'json',
                     successProperty: 'success',

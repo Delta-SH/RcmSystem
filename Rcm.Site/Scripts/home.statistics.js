@@ -1,5 +1,9 @@
 ﻿var lineChart = null,
     lineOption = {
+        backgroundColor: 'rgba(70,78,143, 0.6)',
+        textStyle: {
+            color: '#9d9eae'
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -22,6 +26,9 @@
             }
         },
         legend: {
+            textStyle: {
+                color: '#fff'
+            },
             type: 'scroll',
             left: 'center',
             top: 'top',
@@ -41,6 +48,9 @@
                 end: 100
             },
             {
+                textStyle: {
+                    color: '#9d9eae'
+                },
                 type: 'slider',
                 show: true,
                 start: 0,
@@ -48,12 +58,22 @@
             }
         ],
         xAxis: [{
+            axisLine: {
+                lineStyle: {
+                    color: '#9d9eae'
+                }
+            },
             type: 'category',
             boundaryGap: false,
             splitLine: { show: false },
             data: ['无数据']
         }],
         yAxis: [{
+            axisLine: {
+                lineStyle: {
+                    color: '#9d9eae'
+                }
+            },
             type: 'value',
             min: function (value) {
                 return (value.min - (value.max - value.min) / 2).toFixed(2);
@@ -83,21 +103,21 @@ var currentLayout = Ext.create('Ext.panel.Panel', {
     id: 'currentLayout',
     region: 'center',
     border: false,
-    bodyCls: 'x-border-body-panel',
-    layout: 'fit',
+    layout: {
+        type: 'vbox',
+        align: 'stretch'
+    },
     items: [{
+        id:'line-chart',
         xtype: 'panel',
         glyph: 0xe61c,
         title: '统计曲线',
         margin: '5 0 0 0',
+        flex: 1,
         layout: 'fit',
-        items: [{
-            xtype: 'container',
-            contentEl: 'line-chart'
-        }],
         listeners: {
             resize: function (me, width, height, oldWidth, oldHeight) {
-                var lineContainer = Ext.get('line-chart');
+                var lineContainer = Ext.getCmp('line-chart');
                 lineContainer.setHeight(height - 40);
                 if (lineChart) lineChart.resize();
             }
@@ -107,6 +127,7 @@ var currentLayout = Ext.create('Ext.panel.Panel', {
         xtype: 'panel',
         glyph: 0xe61a,
         title: '筛选条件',
+        cls: 'x-custom-toolbar',
         collapsible: true,
         collapsed: false,
         dock: 'top',
@@ -255,6 +276,6 @@ Ext.onReady(function () {
 });
 
 Ext.onReady(function () {
-    lineChart = echarts.init(document.getElementById("line-chart"), 'shine');
+    lineChart = echarts.init(Ext.getCmp('line-chart').body.dom, 'shine');
     lineChart.setOption(lineOption);
 });
