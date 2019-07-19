@@ -181,7 +181,6 @@
     <Content Include="Content\themes\css\account.login.css" />
     <Content Include="Content\themes\css\home.css" />
     <Content Include="Content\themes\css\home.map.iframe.css" />
-    <Content Include="Content\themes\images\cfg.png" />
     <Content Include="Content\themes\ux\all.css" />
     <Content Include="Content\themes\ux\global.css" />
     <Content Include="Content\themes\ux\icon.css" />
