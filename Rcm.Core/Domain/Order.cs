@@ -3,7 +3,7 @@ using System;
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class Order {
+    public class Order {
         public int NodeId { get; set; }
 
         public EnmScType NodeType { get; set; }

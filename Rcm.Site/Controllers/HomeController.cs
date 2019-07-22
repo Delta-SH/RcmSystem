@@ -543,9 +543,9 @@ namespace Rcm.Site.Controllers {
 
                     for (var i = 0; i < models.Count; i++) {
                         var values = new List<ChartModel> {
-                            new ChartModel { index = 1, name = CommonHelper.DateTimeConverter(models[i].MaxTime), value = Math.Round(models[i].MaxValue,3), comment = "" },
-                            new ChartModel { index = 2, name = "--", value = Math.Round(models[i].AvgValue,3), comment = "" },
-                            new ChartModel { index = 3, name = CommonHelper.DateTimeConverter(models[i].MinTime), value = Math.Round(models[i].MinValue,3), comment = "" }
+                            new ChartModel { index = 1, name = CommonHelper.DateTimeConverter(models[i].MaxTime), value = models[i].MaxValue, comment = "" },
+                            new ChartModel { index = 2, name = "--", value = models[i].AvgValue, comment = "" },
+                            new ChartModel { index = 3, name = CommonHelper.DateTimeConverter(models[i].MinTime), value = models[i].MinValue, comment = "" }
                         };
 
                         data.data.Add(new ChartsModel {

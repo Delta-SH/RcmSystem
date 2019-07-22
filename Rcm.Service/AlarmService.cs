@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Rcm.Service {
-    public partial class AlarmService {
+    public class AlarmService {
 
         #region Fields
 

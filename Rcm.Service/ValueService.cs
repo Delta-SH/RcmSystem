@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Rcm.Service {
-    public partial class ValueService {
+    public class ValueService {
 
         #region Fields
 

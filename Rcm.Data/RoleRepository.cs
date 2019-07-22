@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 namespace Rcm.Data {
-    public partial class RoleRepository {
+    public class RoleRepository {
 
         #region Fields
 

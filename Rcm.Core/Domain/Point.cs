@@ -3,7 +3,7 @@ using System;
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class Point {
+    public class Point {
         public int Id { get; set; }
 
         public EnmScType Type { get; set; }

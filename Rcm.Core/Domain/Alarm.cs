@@ -3,7 +3,7 @@ using System;
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class Alarm {
+    public class Alarm {
         public int Id { get; set; }
 
         public int PointId { get; set; }

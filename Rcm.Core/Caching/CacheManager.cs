@@ -8,7 +8,7 @@ namespace Rcm.Core.Caching {
     /// <summary>
     /// Represents a manager for caching between HTTP requests (long term caching)
     /// </summary>
-    public partial class CacheManager : ICacheManager {
+    public class CacheManager : ICacheManager {
         /// <summary>
         /// CacheTime Interval
         /// </summary>

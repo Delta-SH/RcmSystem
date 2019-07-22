@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Rcm.Service {
-    public partial class AreaService {
+    public class AreaService {
 
         #region Fields
 

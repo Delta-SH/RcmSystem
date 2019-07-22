@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 namespace Rcm.Data {
-    public partial class PointRepository {
+    public class PointRepository {
 
         #region Fields
 

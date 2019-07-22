@@ -2,7 +2,7 @@
 using System;
 
 namespace Rcm.Data.Common {
-    public partial class SqlTypeConverter {
+    public class SqlTypeConverter {
 
         #region base handler 
 

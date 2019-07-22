@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace Rcm.Core {
-    public partial class CommonHelper {
+    public class CommonHelper {
         public static string CaptchaId {
             get { return "rcms.login.captcha"; }
         }
