@@ -1,8 +1,8 @@
 /*
-* Web Sql Script Library v1.4.1
-* Copyright 2019, Delta
+* Web Sql Script Library v1.5.0
+* Copyright 2019, Pylon
 * Author: Steven
-* Date: 2019/05/20
+* Date: 2019/07/22
 */
 
 USE [RDA]
@@ -105,4 +105,135 @@ BEGIN
 		INSERT INTO [dbo].[HNode]([DevID],[NodeID],[NodeType],[Value],[State],[UpdateTime]) VALUES(@DevID,@NodeID,@NodeType,@Value,@State,@UpdateTime);
 	END
 END
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新表[dbo].[AAlarm]
+ALTER TABLE [dbo].[AAlarm] ALTER COLUMN [AlarmValue] FLOAT NOT NULL;
+ALTER TABLE [dbo].[AAlarm] ALTER COLUMN [EndValue] FLOAT NOT NULL;
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新分月表[dbo].[HAlarm]
+DECLARE @Start DATETIME = '2018-01-01', 
+		@End DATETIME = GETDATE(),
+        @tbName NVARCHAR(255),
+        @SQL NVARCHAR(MAX) = N'';
+
+WHILE(DATEDIFF(MM,@Start,@End)>=0)
+BEGIN
+    SET @tbName = N'[dbo].[HAlarm'+CONVERT(VARCHAR(6),@Start,112)+ N']';
+    IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@tbName) AND type in (N'U'))
+    BEGIN
+		SET @SQL += N'
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [AlarmValue] FLOAT NOT NULL;
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [EndValue] FLOAT NOT NULL;
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [AlarmLast] FLOAT NOT NULL;';
+    END
+    SET @Start = DATEADD(MM,1,@Start);
+END
+EXECUTE sp_executesql @SQL;
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新分月表[dbo].[HAlarmCurve]
+DECLARE @Start DATETIME = '2018-01-01', 
+		@End DATETIME = GETDATE(),
+        @tbName NVARCHAR(255),
+        @SQL NVARCHAR(MAX) = N'';
+
+WHILE(DATEDIFF(MM,@Start,@End)>=0)
+BEGIN
+    SET @tbName = N'[dbo].[HAlarmCurve'+CONVERT(VARCHAR(6),@Start,112)+ N']';
+    IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@tbName) AND type in (N'U'))
+    BEGIN
+		SET @SQL += N'
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [Value] FLOAT NOT NULL;';
+    END
+    SET @Start = DATEADD(MM,1,@Start);
+END
+EXECUTE sp_executesql @SQL;
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新分月表[dbo].[HBatCurve]
+DECLARE @Start DATETIME = '2018-01-01', 
+		@End DATETIME = GETDATE(),
+        @tbName NVARCHAR(255),
+        @SQL NVARCHAR(MAX) = N'';
+
+WHILE(DATEDIFF(MM,@Start,@End)>=0)
+BEGIN
+    SET @tbName = N'[dbo].[HBatCurve'+CONVERT(VARCHAR(6),@Start,112)+ N']';
+    IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@tbName) AND type in (N'U'))
+    BEGIN
+		SET @SQL += N'
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [Value] FLOAT NOT NULL;';
+    END
+    SET @Start = DATEADD(MM,1,@Start);
+END
+EXECUTE sp_executesql @SQL;
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新分月表[dbo].[HEnergy]
+DECLARE @Start DATETIME = '2018-01-01', 
+		@End DATETIME = GETDATE(),
+        @tbName NVARCHAR(255),
+        @SQL NVARCHAR(MAX) = N'';
+
+WHILE(DATEDIFF(MM,@Start,@End)>=0)
+BEGIN
+    SET @tbName = N'[dbo].[HEnergy'+CONVERT(VARCHAR(6),@Start,112)+ N']';
+    IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@tbName) AND type in (N'U'))
+    BEGIN
+		SET @SQL += N'
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [Value] FLOAT NOT NULL;';
+    END
+    SET @Start = DATEADD(MM,1,@Start);
+END
+EXECUTE sp_executesql @SQL;
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新分月表[dbo].[HRealCurve]
+DECLARE @Start DATETIME = '2018-01-01', 
+		@End DATETIME = GETDATE(),
+        @tbName NVARCHAR(255),
+        @SQL NVARCHAR(MAX) = N'';
+
+WHILE(DATEDIFF(MM,@Start,@End)>=0)
+BEGIN
+    SET @tbName = N'[dbo].[HRealCurve'+CONVERT(VARCHAR(6),@Start,112)+ N']';
+    IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@tbName) AND type in (N'U'))
+    BEGIN
+		SET @SQL += N'
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [Value] FLOAT NOT NULL;';
+    END
+    SET @Start = DATEADD(MM,1,@Start);
+END
+EXECUTE sp_executesql @SQL;
+GO
+
+--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+--更新分月表[dbo].[HStaticCurve]
+DECLARE @Start DATETIME = '2018-01-01', 
+		@End DATETIME = GETDATE(),
+        @tbName NVARCHAR(255),
+        @SQL NVARCHAR(MAX) = N'';
+
+WHILE(DATEDIFF(MM,@Start,@End)>=0)
+BEGIN
+    SET @tbName = N'[dbo].[HStaticCurve'+CONVERT(VARCHAR(6),@Start,112)+ N']';
+    IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@tbName) AND type in (N'U'))
+    BEGIN
+		SET @SQL += N'
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [AvgValue] FLOAT NOT NULL;
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [MaxValue] FLOAT NOT NULL;
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [MinValue] FLOAT NOT NULL;
+		ALTER TABLE ' + @tbName + N' ALTER COLUMN [TotalValue] FLOAT NOT NULL;';
+    END
+    SET @Start = DATEADD(MM,1,@Start);
+END
+EXECUTE sp_executesql @SQL;
 GO
