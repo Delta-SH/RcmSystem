@@ -1,6 +1,6 @@
 /*
 * Web Sql Script Library v1.0.0
-* Copyright 2018, Delta
+* Copyright 2018, Pylon
 * Author: Steven
 * Date: 2018/10/23
 */
