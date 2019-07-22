@@ -217,7 +217,7 @@
         title: '信号遥调参数',
         height: 250,
         width: 400,
-        glyph: 0xe613,
+        glyph: 0xe61b,
         modal: true,
         border: false,
         hidden: true,
