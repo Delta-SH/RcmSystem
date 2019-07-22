@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace Rcm.Data {
-    public partial class UserRepository {
+    public class UserRepository {
 
         #region Fields
 

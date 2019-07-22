@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Rcm.Service {
-    public partial class StationService {
+    public class StationService {
 
         #region Fields
 

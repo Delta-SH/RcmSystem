@@ -1,11 +1,8 @@
 ﻿using System;
 
 namespace Rcm.Core.Domain {
-    /// <summary>
-    /// gvideo
-    /// </summary>
     [Serializable]
-    public partial class GVideo {
+    public class GVideo {
         public int Id { get; set; }
 
         public bool Enabled { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class Device {
+    public class Device {
         public int Id { get; set; }
 
         public string Name { get; set; }

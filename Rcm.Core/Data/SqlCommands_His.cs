@@ -3,7 +3,7 @@
     /// The SqlText class is intended to encapsulate high performance, 
     /// scalable best practices for common uses of SqlClient.
     /// </summary>
-    public partial class SqlCommands_His {
+    public class SqlCommands_His {
         /// <summary>
         /// alarm repository
         /// </summary>

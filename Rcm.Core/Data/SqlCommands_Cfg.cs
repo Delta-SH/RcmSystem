@@ -3,7 +3,7 @@
     /// The SqlText class is intended to encapsulate high performance, 
     /// scalable best practices for common uses of SqlClient.
     /// </summary>
-    public partial class SqlCommands_Cfg {
+    public class SqlCommands_Cfg {
         //user repository
         public const string Sql_User_Repository_GetEntity = @"SELECT [Id],[Name],[Uid],[Pwd] AS [Password],[GroupId],[DeptId],[LastId],[EmpNO],[DutyType],[LimitTime],[Enabled] FROM [dbo].[UUser] WHERE [Uid] =@Uid;";
         public const string Sql_User_Repository_GetEntities = @"SELECT [Id],[Name],[Uid],[Pwd] AS [Password],[GroupId],[DeptId],[LastId],[EmpNO],[DutyType],[LimitTime],[Enabled] FROM [dbo].[UUser] ORDER BY [Id];";

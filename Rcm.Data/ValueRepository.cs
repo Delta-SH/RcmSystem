@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 namespace Rcm.Data {
-    public partial class ValueRepository {
+    public class ValueRepository {
 
         #region Fields
 
@@ -208,7 +208,7 @@ namespace Rcm.Data {
                 while (rdr.Read()) {
                     entities.Add(new HisValue {
                         PointID = SqlTypeConverter.DBNullInt32Handler(rdr["PointID"]),
-                        Value = SqlTypeConverter.DBNullFloatHandler(rdr["Value"]),
+                        Value = SqlTypeConverter.DBNullDoubleHandler(rdr["Value"]),
                         UpdateTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["UpdateTime"])
                     });
                 }
@@ -231,10 +231,10 @@ namespace Rcm.Data {
                         PointID = SqlTypeConverter.DBNullInt32Handler(rdr["PointID"]),
                         BeginTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["BeginTime"]),
                         EndTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["EndTime"]),
-                        AvgValue = SqlTypeConverter.DBNullFloatHandler(rdr["AvgValue"]),
-                        MaxValue = SqlTypeConverter.DBNullFloatHandler(rdr["MaxValue"]),
+                        AvgValue = SqlTypeConverter.DBNullDoubleHandler(rdr["AvgValue"]),
+                        MaxValue = SqlTypeConverter.DBNullDoubleHandler(rdr["MaxValue"]),
                         MaxTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["MaxTime"]),
-                        MinValue = SqlTypeConverter.DBNullFloatHandler(rdr["MinValue"]),
+                        MinValue = SqlTypeConverter.DBNullDoubleHandler(rdr["MinValue"]),
                         MinTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["MinTime"])
                     });
                 }

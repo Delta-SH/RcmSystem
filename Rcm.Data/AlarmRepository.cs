@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 namespace Rcm.Data {
-    public partial class AlarmRepository {
+    public class AlarmRepository {
 
         #region Fields
 
@@ -43,7 +43,7 @@ namespace Rcm.Data {
                     entity.AreaName = SqlTypeConverter.DBNullStringHandler(rdr["AreaName"]);
                     entity.DriverName = SqlTypeConverter.DBNullStringHandler(rdr["DriverName"]);
                     entity.AlarmLevel = SqlTypeConverter.DBNullEnmAlarmLevelHandler(rdr["AlarmLevel"]);
-                    entity.AlarmValue = SqlTypeConverter.DBNullFloatHandler(rdr["AlarmValue"]);
+                    entity.AlarmValue = SqlTypeConverter.DBNullDoubleHandler(rdr["AlarmValue"]);
                     entity.AlarmDesc = SqlTypeConverter.DBNullStringHandler(rdr["AlarmDesc"]);
                     entity.AlarmClassId = SqlTypeConverter.DBNullInt32Handler(rdr["AlarmClassId"]);
                     entity.StartTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["StartTime"]);
@@ -52,7 +52,7 @@ namespace Rcm.Data {
                     entity.ConfirmName = SqlTypeConverter.DBNullStringHandler(rdr["ConfirmName"]);
                     var endTime = SqlTypeConverter.DBNullStringHandler(rdr["EndTime"]);
                     if(!string.IsNullOrWhiteSpace(endTime)) entity.EndTime = DateTime.Parse(endTime);
-                    entity.EndValue = SqlTypeConverter.DBNullFloatHandler(rdr["EndValue"]);
+                    entity.EndValue = SqlTypeConverter.DBNullDoubleHandler(rdr["EndValue"]);
                     entity.EndType = SqlTypeConverter.DBNullEnmAlarmEndHandler(rdr["EndType"]);
                     entity.AuxSet = SqlTypeConverter.DBNullStringHandler(rdr["AuxSet"]);
                     entities.Add(entity);
@@ -81,7 +81,7 @@ namespace Rcm.Data {
                     entity.AreaName = SqlTypeConverter.DBNullStringHandler(rdr["AreaName"]);
                     entity.DriverName = SqlTypeConverter.DBNullStringHandler(rdr["DriverName"]);
                     entity.AlarmLevel = SqlTypeConverter.DBNullEnmAlarmLevelHandler(rdr["AlarmLevel"]);
-                    entity.AlarmValue = SqlTypeConverter.DBNullFloatHandler(rdr["AlarmValue"]);
+                    entity.AlarmValue = SqlTypeConverter.DBNullDoubleHandler(rdr["AlarmValue"]);
                     entity.AlarmDesc = SqlTypeConverter.DBNullStringHandler(rdr["AlarmDesc"]);
                     entity.AlarmClassId = SqlTypeConverter.DBNullInt32Handler(rdr["AlarmClassId"]);
                     entity.StartTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["StartTime"]);
@@ -90,7 +90,7 @@ namespace Rcm.Data {
                     entity.ConfirmName = SqlTypeConverter.DBNullStringHandler(rdr["ConfirmName"]);
                     var endTime = SqlTypeConverter.DBNullStringHandler(rdr["EndTime"]);
                     if(!string.IsNullOrWhiteSpace(endTime)) entity.EndTime = DateTime.Parse(endTime);
-                    entity.EndValue = SqlTypeConverter.DBNullFloatHandler(rdr["EndValue"]);
+                    entity.EndValue = SqlTypeConverter.DBNullDoubleHandler(rdr["EndValue"]);
                     entity.EndType = SqlTypeConverter.DBNullEnmAlarmEndHandler(rdr["EndType"]);
                     entity.AuxSet = SqlTypeConverter.DBNullStringHandler(rdr["AuxSet"]);
                     entities.Add(entity);
@@ -119,7 +119,7 @@ namespace Rcm.Data {
                     entity.AreaName = SqlTypeConverter.DBNullStringHandler(rdr["AreaName"]);
                     entity.DriverName = SqlTypeConverter.DBNullStringHandler(rdr["DriverName"]);
                     entity.AlarmLevel = SqlTypeConverter.DBNullEnmAlarmLevelHandler(rdr["AlarmLevel"]);
-                    entity.AlarmValue = SqlTypeConverter.DBNullFloatHandler(rdr["AlarmValue"]);
+                    entity.AlarmValue = SqlTypeConverter.DBNullDoubleHandler(rdr["AlarmValue"]);
                     entity.AlarmDesc = SqlTypeConverter.DBNullStringHandler(rdr["AlarmDesc"]);
                     entity.AlarmClassId = SqlTypeConverter.DBNullInt32Handler(rdr["AlarmClassId"]);
                     entity.StartTime = SqlTypeConverter.DBNullDateTimeHandler(rdr["StartTime"]);
@@ -128,7 +128,7 @@ namespace Rcm.Data {
                     entity.ConfirmName = SqlTypeConverter.DBNullStringHandler(rdr["ConfirmName"]);
                     var endTime = SqlTypeConverter.DBNullStringHandler(rdr["EndTime"]);
                     if(!string.IsNullOrWhiteSpace(endTime)) entity.EndTime = DateTime.Parse(endTime);
-                    entity.EndValue = SqlTypeConverter.DBNullFloatHandler(rdr["EndValue"]);
+                    entity.EndValue = SqlTypeConverter.DBNullDoubleHandler(rdr["EndValue"]);
                     entity.EndType = SqlTypeConverter.DBNullEnmAlarmEndHandler(rdr["EndType"]);
                     entities.Add(entity);
                 }

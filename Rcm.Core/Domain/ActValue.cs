@@ -3,7 +3,7 @@ using System;
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class ActValue {
+    public class ActValue {
         public int DevId { get; set; }
 
         public int NodeId { get; set; }

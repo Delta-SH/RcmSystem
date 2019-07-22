@@ -3,7 +3,7 @@ using Rcm.Data;
 using System.Collections.Generic;
 
 namespace Rcm.Service {
-    public partial class GVideoService {
+    public class GVideoService {
 
         #region Fields
         private readonly GVideoRepository _gvideorepository;

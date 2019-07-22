@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 
 namespace Rcm.Data {
-    public partial class GVideoRepository {
+    public class GVideoRepository {
 
         #region Fields
         private readonly string _databaseConnectionString;

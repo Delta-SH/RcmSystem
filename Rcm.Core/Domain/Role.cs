@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class Role {
+    public class Role {
         public int Id { get; set; }
 
         public string Name { get; set; }

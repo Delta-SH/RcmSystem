@@ -2,7 +2,7 @@
 
 namespace Rcm.Core.Domain {
     [Serializable]
-    public partial class Area {
+    public class Area {
         public int Id { get; set; }
 
         public string Name { get; set; }

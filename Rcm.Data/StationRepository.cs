@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 namespace Rcm.Data {
-    public partial class StationRepository {
+    public class StationRepository {
 
         #region Fields
 
