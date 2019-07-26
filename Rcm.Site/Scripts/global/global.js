@@ -310,6 +310,16 @@ window.$$Rcms.AlmLevel = {
     Level3: 3,
     Level4: 4
 };
+window.$$Rcms.SSH = {
+    Lsc: -2,
+    Area: -1,
+    Station: 0,
+    Device: 1,
+    Dic: 2,
+    Aic: 3,
+    Doc: 4,
+    Aoc: 5
+};
 
 /*Alarm Css Class*/
 window.$$Rcms.GetAlmLevelCls = function (value) {
@@ -325,6 +335,73 @@ window.$$Rcms.GetAlmLevelCls = function (value) {
         default:
             return '';
     }
+};
+
+window.$$Rcms.UpdateIcons = function (tree, nodes) {
+    nodes = nodes || [];
+
+    if (nodes.length === 0) {
+        var root = tree.getRootNode();
+        nodes.push(root.getId());
+
+        if (root.hasChildNodes()) {
+            root.eachChild(function (c) {
+                c.cascadeBy(function (n) {
+                    nodes.push(n.getId());
+                });
+            });
+        }
+    }
+
+    if (nodes.length === 0)
+        return;
+
+    Ext.Ajax.request({
+        url: '/Component/GetNodeIcons',
+        method: 'POST',
+        jsonData: nodes,
+        success: function (response, options) {
+            var data = Ext.decode(response.responseText, true);
+            if (data.success) {
+                var icons = {},
+                    root = tree.getRootNode();
+
+                Ext.each(data.data, function (item, index, allItems) {
+                    icons[item.id] = item;
+                });
+
+                $$Rcms.SetIcon(root, icons[root.getId()]);
+                if (root.hasChildNodes()) {
+                    root.eachChild(function (c) {
+                        c.cascadeBy(function (n) {
+                            $$Rcms.SetIcon(n, icons[n.getId()]);
+                        });
+                    });
+                }
+            }
+        }
+    });
+};
+
+window.$$Rcms.SetIcon = function (node, icon) {
+    if (Ext.isEmpty(icon))
+        return;
+
+    var prefix = 'all';
+    if (icon.id !== 'root') {
+        var keys = $$Rcms.SplitKeys(icon.id);
+        if (keys.length === 2) {
+            var type = parseInt(keys[0]);
+            if (type === $$Rcms.SSH.Area)
+                prefix = 'diqiu';
+            else if (type === $$Rcms.SSH.Station)
+                prefix = 'juzhan';
+            else if (type === $$Rcms.SSH.Device)
+                prefix = 'device';
+        }
+    }
+
+    node.set('iconCls', Ext.String.format('{0}-level-{1}', prefix, icon.level));
 };
 
 /*Split Node Keys*/

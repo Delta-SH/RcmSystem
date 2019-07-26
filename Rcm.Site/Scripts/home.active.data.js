@@ -41,7 +41,8 @@
                 }
             ]
         };
-    //#endregion
+    //#endregion
+
     Ext.define('PointModel', {
         extend: 'Ext.data.Model',
         fields: [
@@ -297,7 +298,7 @@
             id: 'root',
             text: '监控中心',
             expanded: true,
-            icon: '/Content/themes/icons/home.png'
+            icon: '/Content/themes/icons/all.png'
         },
         viewConfig: {
             loadMask: true
@@ -314,6 +315,20 @@
                     messageProperty: 'message',
                     totalProperty: 'total',
                     root: 'data'
+                }
+            },
+            listeners: {
+                load: function (me, node, records, successful) {
+                    if (successful) {
+                        var nodes = [];
+                        Ext.Array.each(records, function (item, index, allItems) {
+                            nodes.push(item.getId());
+                        });
+
+                        if (nodes.length > 0) {
+                            $$Rcms.UpdateIcons(leftLayout, nodes);
+                        }
+                    }
                 }
             }
         }),
@@ -570,6 +585,7 @@
     Ext.onReady(function () {
         $$Rcms.Tasks.actPointTask.run = function () {
             currentStore.loadPage(1);
+            $$Rcms.UpdateIcons(leftLayout, null);
         };
         $$Rcms.Tasks.actOrderTask.run = function () {
             Ext.Ajax.request({
