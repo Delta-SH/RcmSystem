@@ -1,4 +1,5 @@
-﻿using Rcm.Core.Enum;
+﻿using Rcm.Core.Domain;
+using Rcm.Core.Enum;
 using Rcm.Service;
 using Rcm.Site.Extensions;
 using Rcm.Site.Models;
@@ -13,6 +14,7 @@ namespace Rcm.Site.Controllers {
 
         #region Fields
 
+        private readonly AlarmService _alarmService;
         private readonly AreaService _areaService;
         private readonly StationService _stationService;
         private readonly DeviceService _deviceService;
@@ -23,6 +25,7 @@ namespace Rcm.Site.Controllers {
         #region Ctor
 
         public ComponentController() {
+            this._alarmService = new AlarmService();
             this._areaService = new AreaService();
             this._stationService = new StationService();
             this._deviceService = new DeviceService();
@@ -449,7 +452,7 @@ namespace Rcm.Site.Controllers {
         }
 
         [AjaxAuthorize]
-        public JsonResult GetDevices(string node, bool? multiselect, bool? leafselect, bool whiteicon = false) {
+        public JsonResult GetDevices(string node, bool? multiselect, bool? leafselect) {
             var data = new AjaxDataModel<List<TreeModel>> {
                 success = true,
                 message = "No data",
@@ -469,7 +472,7 @@ namespace Rcm.Site.Controllers {
                             var root = new TreeModel {
                                 id = Common.JoinKeys((int)EnmScType.Area, roots[i].Id),
                                 text = roots[i].Name,
-                                icon = whiteicon ? Icons.Diqiu_W : Icons.Diqiu,
+                                icon = Icons.Diqiu,
                                 expanded = false,
                                 leaf = false
                             };
@@ -501,7 +504,7 @@ namespace Rcm.Site.Controllers {
                                     var root = new TreeModel {
                                         id = Common.JoinKeys((int)EnmScType.Area, children[i].Id),
                                         text = children[i].Name,
-                                        icon = whiteicon ? Icons.Diqiu_W : Icons.Diqiu,
+                                        icon = Icons.Diqiu,
                                         expanded = false,
                                         leaf = false
                                     };
@@ -523,7 +526,7 @@ namespace Rcm.Site.Controllers {
                                         var root = new TreeModel {
                                             id = Common.JoinKeys((int)EnmScType.Station, stations[i].Id),
                                             text = stations[i].Name,
-                                            icon = whiteicon ? Icons.Juzhan_W : Icons.Juzhan,
+                                            icon = Icons.Juzhan,
                                             expanded = false,
                                             leaf = false
                                         };
@@ -547,7 +550,7 @@ namespace Rcm.Site.Controllers {
                                     var root = new TreeModel {
                                         id = Common.JoinKeys((int)EnmScType.Device, devices[i].Id),
                                         text = devices[i].Name,
-                                        icon = whiteicon ? Icons.Shebei_W : Icons.Shebei,
+                                        icon = Icons.Shebei,
                                         expanded = false,
                                         leaf = true
                                     };
@@ -751,6 +754,101 @@ namespace Rcm.Site.Controllers {
             }
 
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [AjaxAuthorize]
+        public JsonResult GetNodeIcons(string[] nodes) {
+            var data = new AjaxDataModel<List<NodeIcon<string>>> {
+                success = true,
+                message = "无数据",
+                total = 0,
+                data = new List<NodeIcon<string>>()
+            };
+
+            try {
+                if (nodes != null && nodes.Length > 0) {
+                    data.message = "200 Ok";
+                    data.total = nodes.Length;
+
+                    var alarms = _alarmService.GetAllActAlarms();
+                    if (alarms.Count == 0) {
+                        data.data.AddRange(nodes.Select(n => new NodeIcon<string> { id = n, level = (int)EnmAlarmLevel.NoAlarm }));
+                        return Json(data);
+                    }
+
+                    var devices = _deviceService.GetAllDevices(Common.GroupId);
+                    var stations = _stationService.GetStations(Common.GroupId);
+                    var areas = _areaService.GetAreas(Common.GroupId);
+                    var xmans = from alarm in alarms
+                                join device in devices on alarm.DeviceId equals device.Id
+                                join station in stations on device.PId equals station.Id
+                                join area in areas on station.AreaId equals area.Id
+                                select new { AreaId = area.Id, StationId = station.Id, DeviceId = device.Id, Alarm = alarm };
+
+                    if (!xmans.Any()) {
+                        data.data.AddRange(nodes.Select(n => new NodeIcon<string> { id = n, level = (int)EnmAlarmLevel.NoAlarm }));
+                        return Json(data);
+                    }
+
+                    var areaicons = new List<NodeIcon<int>>();
+                    var staticons = new List<NodeIcon<int>>();
+                    var roomicons = new List<NodeIcon<int>>();
+                    var deviicons = new List<NodeIcon<int>>();
+                    foreach (var node in nodes) {
+                        if ("root".Equals(node)) {
+                            data.data.Add(new NodeIcon<string> { id = node, level = xmans.Min(a => (int)a.Alarm.AlarmLevel) });
+                        } else {
+                            var keys = Common.SplitKeys(node);
+                            if (keys.Length != 2) continue;
+                            var type = int.Parse(keys[0]); var id = int.Parse(keys[1]);
+                            var target = new NodeIcon<string> { id = node, level = (int)EnmAlarmLevel.NoAlarm };
+
+                            if (type == (int)EnmScType.Area) {
+                                if (areaicons.Count == 0) {
+                                    areaicons.AddRange(xmans.GroupBy(a => a.AreaId).Select(g => new NodeIcon<int> { id = g.Key, level = g.Min(a => (int)a.Alarm.AlarmLevel) }));
+                                }
+
+                                var current = areas.Find(a => a.Id.Equals(id));
+                                if (current != null) {
+                                    var children = new List<Area>();
+                                    Common.GetChildArea(areas, current.Id, children);
+
+                                    if (children.Any()) {
+                                        var akeys = new HashSet<int>(children.Select(c => c.Id));
+                                        var icons = areaicons.FindAll(i => akeys.Contains(i.id));
+                                        if (icons.Count > 0) target.level = icons.Min(i => i.level);
+                                    } else {
+                                        var icon = areaicons.Find(i => i.id.Equals(id));
+                                        if (icon != null) target.level = icon.level;
+                                    }
+                                }
+                            } else if (type == (int)EnmScType.Station) {
+                                if (staticons.Count == 0) {
+                                    staticons.AddRange(xmans.GroupBy(a => a.StationId).Select(g => new NodeIcon<int> { id = g.Key, level = g.Min(a => (int)a.Alarm.AlarmLevel) }));
+                                }
+
+                                var icon = staticons.Find(i => i.id.Equals(id));
+                                if (icon != null) target.level = icon.level;
+                            } else if (type == (int)EnmScType.Device) {
+                                if (deviicons.Count == 0) {
+                                    deviicons.AddRange(xmans.GroupBy(a => a.DeviceId).Select(g => new NodeIcon<int> { id = g.Key, level = g.Min(a => (int)a.Alarm.AlarmLevel) }));
+                                }
+
+                                var icon = deviicons.Find(i => i.id.Equals(id));
+                                if (icon != null) target.level = icon.level;
+                            }
+
+                            data.data.Add(target);
+                        }
+                    }
+                }
+            } catch (Exception exc) {
+                data.success = false;
+                data.message = exc.Message;
+            }
+
+            return Json(data);
         }
 
         #endregion
