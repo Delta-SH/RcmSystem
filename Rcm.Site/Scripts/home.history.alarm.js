@@ -55,6 +55,7 @@
         dockedItems: [{
             xtype: 'panel',
             glyph: 0xe61a,
+            cls: 'x-custom-toolbar',
             dock: 'top',
             items: [
                 {
@@ -101,21 +102,24 @@
                         },
                         {
                             id: 'startField',
-                            xtype: 'datefield',
+                            xtype: 'datetimepicker',
                             fieldLabel: '开始时间',
                             labelWidth: 60,
                             width: 220,
-                            value: Ext.Date.add(new Date(), Ext.Date.DAY, -1),
-                            editable: false,
+                            value: Ext.ux.DateTime.addDays(Ext.ux.DateTime.today(), -1, 'Y-m-d'),
+                            maxDate: '%y-%M-%d',
+                            format: "yyyy-MM-dd",
                             allowBlank: false
                         }, {
                             id: 'endField',
-                            xtype: 'datefield',
+                            xtype: 'datetimepicker',
                             fieldLabel: '结束时间',
                             labelWidth: 60,
                             width: 220,
-                            value: Ext.Date.add(new Date(), Ext.Date.DAY, -1),
-                            editable: false,
+                            value: Ext.ux.DateTime.addDays(Ext.ux.DateTime.today(), -1, 'Y-m-d'),
+                            minDate: '#F{Ext.getCmp(\'startField\').getRawValue()}',
+                            maxDate: '%y-%M-%d',
+                            format: "yyyy-MM-dd",
                             allowBlank: false
                         },
                         {

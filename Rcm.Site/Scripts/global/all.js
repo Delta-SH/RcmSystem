@@ -310,6 +310,7 @@ window.$$Rcms.AlmLevel = {
     Level3: 3,
     Level4: 4
 };
+
 window.$$Rcms.SSH = {
     Lsc: -2,
     Area: -1,
@@ -412,7 +413,7 @@ window.$$Rcms.SplitKeys = function (key) {
 
 /*Icons */
 window.$$Rcms.icons = {
-    Home: '/content/themes/icons/home.png'
+    Root: '/content/themes/icons/all.png'
 };
 
 /*global delimiter*/

@@ -161,7 +161,7 @@ var currentLayout = Ext.create('Ext.panel.Panel', {
                         labelWidth: 60,
                         width: 280,
                         value: Ext.ux.DateTime.addDays(Ext.ux.DateTime.today(), -1),
-                        editable: false,
+                        maxDate: '%y-%M-%d',
                         allowBlank: false
                     },
                     {
@@ -171,7 +171,8 @@ var currentLayout = Ext.create('Ext.panel.Panel', {
                         labelWidth: 60,
                         width: 280,
                         value: Ext.ux.DateTime.addSeconds(Ext.ux.DateTime.today(), -1),
-                        editable: false,
+                        minDate: '#F{Ext.getCmp(\'startField\').getRawValue()}',
+                        maxDate: '%y-%M-%d',
                         allowBlank: false
                     }
                 ]
