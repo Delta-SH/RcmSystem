@@ -221,7 +221,6 @@
     <Content Include="Content\themes\icons\control.png" />
     <Content Include="Content\themes\icons\delete.png" />
     <Content Include="Content\themes\icons\junheng.png" />
-    <Content Include="Content\themes\icons\shebei.png" />
     <Content Include="Content\themes\icons\dingwei.png" />
     <Content Include="Content\themes\icons\diqiu.png" />
     <Content Include="Content\themes\icons\edit.png" />
