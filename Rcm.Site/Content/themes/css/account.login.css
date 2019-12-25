@@ -13,9 +13,7 @@ body {
     -ms-flex-align: center;
     align-items: center;
     padding-bottom: 50px;
-    background-color: transparent;
-    background: url('/Content/themes/images/main.png');
-    background-size: cover;
+    background: radial-gradient(circle at 50px 50px,#071c36,#062b4b,rgba(7,23,46,1));
 }
 
 a, a:active, a:visited, a:link {
@@ -30,7 +28,6 @@ a:hover {
 
 .center {
     width: 100%;
-    max-width: 330px;
     padding: 15px;
     margin: auto;
 }
@@ -54,21 +51,22 @@ a:hover {
     text-align: center;
 }
 
-    .title h3 {
-        font-weight: 600;
-        font-size: 22px;
-        letter-spacing: 4px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        color: #f9f9f9;
-    }
+.title h3 {
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 4px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    color: #7fb7ff;
+}
 
 .login {
     margin: 0 auto;
-    width: 300px;
+    width: 320px;
     height: auto;
     border: 1px solid #ddd;
     overflow: hidden;
+    border-radius: 0;
 }
 
 .panel-default > .panel-heading {
@@ -83,14 +81,14 @@ a:hover {
     width: 100%;
     height: 50px;
     text-align: center;
-    color: #9D9EAE;
+    color: #7fb7ff;
     position: absolute;
     bottom: 0;
     left: 0;
 }
 
 .footer p {
-     margin: 0 auto 5px auto;
+    margin: 0 auto 5px auto;
 }
 
 .qrcode {
@@ -102,17 +100,17 @@ a:hover {
 .qrcode .comment {
     color: #9D9EAE;
     font-size: 12px;
+    margin-top: 5px;
 }
 
-.error-tips
-{
-    color:#A94442;
-    font-size:12px;
-    height:20px;
-    line-height:20px;
-    padding-left:40px;
-    text-align:left;
-    overflow:hidden;
+.error-tips {
+    color: #A94442;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    padding-left: 40px;
+    text-align: left;
+    overflow: hidden;
 }
 
 .validation-summary-errors ul {
@@ -122,11 +120,10 @@ a:hover {
     list-style: none;
 }
 
-.captcha
-{
-    margin-left:5px;
-    float:left;
-    width:95px;
-    height:33px;
-    cursor:pointer;
+.captcha {
+    margin-left: 5px;
+    float: left;
+    width: 95px;
+    height: 33px;
+    cursor: pointer;
 }

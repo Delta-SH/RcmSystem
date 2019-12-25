@@ -222,7 +222,6 @@
     <Content Include="Content\themes\icons\control.png" />
     <Content Include="Content\themes\icons\delete.png" />
     <Content Include="Content\themes\icons\junheng.png" />
-    <Content Include="Content\themes\icons\shebei.png" />
     <Content Include="Content\themes\icons\dingwei.png" />
     <Content Include="Content\themes\icons\diqiu.png" />
     <Content Include="Content\themes\icons\edit.png" />
@@ -730,17 +729,6 @@
     <Content Include="Scripts\My97DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="Scripts\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="Scripts\My97DatePicker\WdatePicker.js" />
-    <Content Include="Scripts\My97DatePicker\开发包\lang\en.js" />
-    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-cn.js" />
-    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-tw.js" />
-    <Content Include="Scripts\My97DatePicker\开发包\readme.txt" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\datePicker.gif" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\default\datepicker.css" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\default\img.gif" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\WdatePicker.css" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
-    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="Scripts\ux\all.js" />
     <Content Include="Scripts\ux\DateTimePicker.js" />
     <Content Include="Scripts\ux\IFrame.js" />

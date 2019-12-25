@@ -4,9 +4,9 @@
     //#region Chart
     var lineChart = null,
         lineOption = {
-            backgroundColor: 'rgba(70,78,143, 0.6)',
+            backgroundColor: '#174f99',
             textStyle:{
-                color:'#9d9eae'
+                color:'#b9d2ea'
             },
             tooltip: {
                 trigger: 'axis',
@@ -22,7 +22,7 @@
             xAxis: [{
                 axisLine: {
                     lineStyle: {
-                        color: '#9d9eae'
+                        color: '#aeaeae'
                     }
                 },
                 type: 'category',
@@ -33,7 +33,7 @@
             yAxis: [{
                 axisLine: {
                     lineStyle: {
-                        color: '#9d9eae'
+                        color: '#aeaeae'
                     }
                 },
                 type: 'value'
@@ -505,9 +505,9 @@
                 columns: [
                     { text: '信号状态', dataIndex: 'statusDisplay', tdCls: 'x-status-cell', align: 'center' },
                     { text: '信号类型', dataIndex: 'typeDisplay', align: 'center' },
-                    { text: '信号名称', dataIndex: 'name', width:150 },
+                    { text: '信号名称', dataIndex: 'name', width: 150 },
                     { text: '信号测值', dataIndex: 'value' },
-                    { text: '单位/描述', dataIndex: 'valueDisplay', align: 'center' },
+                    { text: '单位/描述', dataIndex: 'valueDisplay' },
                     { text: '值变时间', dataIndex: 'timestamp', width: 150, align: 'center' },
                     {
                         xtype: 'actioncolumn',

@@ -94,7 +94,6 @@
                             width: 220,
                             value: Ext.ux.DateTime.addDays(Ext.ux.DateTime.today(), -1),
                             maxDate: '%y-%M-%d',
-                            editable: false,
                             allowBlank: false
                         }, {
                             id: 'endField',
@@ -104,8 +103,7 @@
                             width: 220,
                             value: Ext.ux.DateTime.addSeconds(Ext.ux.DateTime.today(), -1),
                             minDate: '#F{Ext.getCmp(\'startField\').getRawValue()}',
-                            maxDate: '#F{$dp.$DV(Ext.getCmp(\'startField\').getRawValue(),{d:1,s:-1})}',
-                            editable: false,
+                            maxDate: '%y-%M-%d',
                             allowBlank: false
                         },
                         {

@@ -550,7 +550,7 @@ namespace Rcm.Site.Controllers {
                                     var root = new TreeModel {
                                         id = Common.JoinKeys((int)EnmScType.Device, devices[i].Id),
                                         text = devices[i].Name,
-                                        icon = Icons.Shebei,
+                                        icon = Icons.Device,
                                         expanded = false,
                                         leaf = true
                                     };

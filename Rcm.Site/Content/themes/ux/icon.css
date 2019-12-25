@@ -7,11 +7,7 @@
 @font-face {
     font-family: 'iconfont';
     src: url('/Content/themes/fonts/iconfont.eot');
-    src: url('/Content/themes/fonts/iconfont.eot?#iefix') format('embedded-opentype'), 
-        url('/Content/themes/fonts/iconfont.woff2') format('woff2'), 
-        url('/Content/themes/fonts/iconfont.woff') format('woff'), 
-        url('/Content/themes/fonts/iconfont.ttf') format('truetype'), 
-        url('/Content/themes/fonts/iconfont.svg#iconfont') format('svg');
+    src: url('/Content/themes/fonts/iconfont.eot?#iefix') format('embedded-opentype'), url('/Content/themes/fonts/iconfont.woff2') format('woff2'), url('/Content/themes/fonts/iconfont.woff') format('woff'), url('/Content/themes/fonts/iconfont.ttf') format('truetype'), url('/Content/themes/fonts/iconfont.svg#iconfont') format('svg');
 }
 
 .iconfont {

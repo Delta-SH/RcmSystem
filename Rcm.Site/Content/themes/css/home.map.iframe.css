@@ -80,29 +80,29 @@ body {
 }
 
 #unconnected-panel p {
-    font-size: 13px; 
+    font-size: 13px;
     margin-bottom: 5px;
 }
 
 #unconnected-panel .title {
-    font-size: 15px; 
-    font-weight: bold; 
-    color: #cc0000; 
-    text-align: center; 
+    font-size: 15px;
+    font-weight: bold;
+    color: #cc0000;
+    text-align: center;
     margin: 10px 0;
 }
 
-input::-webkit-input-placeholder { 
+input::-webkit-input-placeholder {
     color: #aaa;
     font-size: 14px;
 }
 
-input::-moz-placeholder { 
+input::-moz-placeholder {
     color: #aaa;
     font-size: 14px;
 }
 
-input:-ms-input-placeholder { 
+input:-ms-input-placeholder {
     color: #aaa;
     font-size: 14px;
 }
@@ -121,28 +121,35 @@ input:-ms-input-placeholder {
     color: #4d4d4d;
     margin: 5px;
 }
+
 .contentWndBox .content td {
-    padding-bottom:5px;
+    padding-bottom: 5px;
 }
+
 .contentWndBox .content td.title {
     width: 40px;
 }
+
 .contentWndBox .alarm {
     width: 100%;
     color: #4d4d4d;
     margin-right: 5px;
     margin-left: 5px;
 }
+
 .contentWndBox .alarm td {
-    padding-bottom:5px;
+    padding-bottom: 5px;
 }
+
 .contentWndBox .alarm td.title {
     width: 65px;
-} 
+}
+
 .contentWndBox .alarm td a {
     color: #3d6dcc;
     text-decoration: none;
 }
+
 .contentWndBox .alarm td a:hover {
     text-decoration: underline;
 }

@@ -1,6 +1,6 @@
 ﻿.welcome {
     text-align: center;
-    color: #9D9EAE;
+    color: #fff;
 }
 
 .welcome h2 {
@@ -29,15 +29,15 @@
 .welcome-list .shorticon {
     position: relative;
     height: 100px;
-    width: 100px; 
+    width: 100px;
     line-height: 1.8;
-    font-size: 42px; 
+    font-size: 42px;
     margin: auto 35px;
 }
 
 .welcome-list .words {
-    position: absolute; 
-    bottom: 2px; 
-    left: 21px; 
+    position: absolute;
+    bottom: 2px;
+    left: 21px;
     font: 14px/30px 'Microsoft Yahei', Arial, SimSun, Sans-Serif;
 }

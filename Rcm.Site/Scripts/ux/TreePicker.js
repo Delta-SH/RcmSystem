@@ -227,7 +227,7 @@ Ext.define('Ext.ux.TreePicker', {
                 root: {
                     id: 'root',
                     text: '全部',
-                    icon: $$Rcms.icons.Home,
+                    icon: $$Rcms.icons.Root,
                     root: true
                 },
                 proxy: {
@@ -396,6 +396,7 @@ Ext.define('Ext.ux.TreePicker', {
             width: me.pickerWidth,
             minWidth: me.pickerWidth,
             shadow: false,
+            cls:'x-treepicker',
             resizable: {
                 transparent: true
             },

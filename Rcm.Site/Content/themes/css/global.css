@@ -12,22 +12,22 @@ a, a:hover, a:active, a:visited, a:link {
     width: 100%;
     padding: 8px;
     overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid #aeaeae;
 }
 
-    .header .brand {
-        float: left;
-        background-image: url("/Content/themes/images/brand.png");
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        width: 267px;
-        height: 50px;
-    }
+.header .brand {
+    float: left;
+    background-image: url("/Content/themes/images/brand.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width: 267px;
+    height: 50px;
+}
 
-    .header .top-nav {
-        float: right;
-        margin-top: 2px;
-    }
+.header .top-nav {
+    float: right;
+    margin-top: 2px;
+}
 
 .top-nav ul {
     margin: 0;
@@ -40,23 +40,25 @@ a, a:hover, a:active, a:visited, a:link {
     position: relative;
 }
 
-    .icon-nav li > a {
-        position: relative;
-        color: #fff;
-        display: block;
-        padding: 15px 13px;
-        margin: auto 5px;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.3);
-    }
+.icon-nav li > a {
+    position: relative;
+    color: #7fb7ff;
+    display: block;
+    padding: 15px 13px;
+    margin: auto 5px;
+    border-radius: 5px;
+    background: #255492;
+}
 
-        .icon-nav li > a:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
+.icon-nav li > a:hover {
+    color: #fff;
+    background: #4c9aff;
+}
 
-    .icon-nav li > .current {
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
+.icon-nav li > .current {
+    color: #fff;
+    background: #4c9aff;
+}
 
 .icon-nav > li > a .label {
     position: absolute;
@@ -90,30 +92,30 @@ div.title-bar {
     position: relative;
 }
 
-    div.title-bar h1 {
-        padding: 0;
-        margin: 0;
-        color: #f9f9f9;
-        font-size: 14px;
-    }
+div.title-bar h1 {
+    padding: 0;
+    margin: 0;
+    color: #f9f9f9;
+    font-size: 14px;
+}
 
-    div.title-bar div.desc {
-        display: inline;
-        white-space: nowrap;
-        margin-left: 5px;
-        font-size: 12px;
-    }
+div.title-bar div.desc {
+    display: inline;
+    white-space: nowrap;
+    margin-left: 5px;
+    font-size: 12px;
+}
 
-    div.title-bar a.help {
-        display: inline-block;
-        height: 20px;
-        margin-left: 5px;
-        padding-right: 14px;
-        text-decoration: none;
-        background-image: url("/Content/themes/images/help-icon.png");
-        background-repeat: no-repeat;
-        background-position: 0 3px;
-    }
+div.title-bar a.help {
+    display: inline-block;
+    height: 20px;
+    margin-left: 5px;
+    padding-right: 14px;
+    text-decoration: none;
+    background-image: url("/Content/themes/images/help-icon.png");
+    background-repeat: no-repeat;
+    background-position: 0 3px;
+}
 
 div.help-tip {
     zoom: 1;
@@ -121,37 +123,37 @@ div.help-tip {
     margin-bottom: 6px;
 }
 
-    div.help-tip div.help-arrow {
-        height: 5px;
-        width: 9px;
-        left: 10px;
-        top: -5px;
-        position: absolute;
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        background-image: url("/Content/themes/images/help-arrow.png");
-    }
+div.help-tip div.help-arrow {
+    height: 5px;
+    width: 9px;
+    left: 10px;
+    top: -5px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-image: url("/Content/themes/images/help-arrow.png");
+}
 
-    div.help-tip div.help-tip-content {
-        padding: 10px;
-        background: rgba(71,79,144, 0.5);
-        border: 1px solid rgba(71,79,144, 0.8);
-    }
+div.help-tip div.help-tip-content {
+    padding: 10px;
+    background: #255492;
+    border: 1px solid #255492;
+}
 
-        div.help-tip div.help-tip-content p.label {
-            color: #fff;
-            font-weight: bold;
-        }
+div.help-tip div.help-tip-content p.label {
+    color: #fff;
+    font-weight: bold;
+}
 
-        div.help-tip div.help-tip-content p.text {
-            color: #fff;
-        }
+div.help-tip div.help-tip-content p.text {
+    color: #fff;
+}
 
-        div.help-tip div.help-tip-content p {
-            padding: 0;
-            margin: 0;
-            line-height: 1.5;
-        }
+div.help-tip div.help-tip-content p {
+    padding: 0;
+    margin: 0;
+    line-height: 1.5;
+}
 
 .l {
     float: left;
@@ -167,51 +169,63 @@ div.help-tip {
 
 /**point status css*/
 .point-status-normal .x-status-cell {
+    color: #fff;
     background-color: #32cd32;
 }
 
 .point-status-level1 .x-status-cell {
+    color: #fff;
     background-color: #ff0000;
 }
 
 .point-status-level2 .x-status-cell {
+    color: #fff;
     background-color: #ffa500;
 }
 
 .point-status-level3 .x-status-cell {
+    color: #000;
     background-color: #ffff00;
 }
 
 .point-status-level4 .x-status-cell {
+    color: #000;
     background-color: #87ceeb;
 }
 
 .point-status-opevent .x-status-cell {
+    color: #fff;
     background-color: #0000ff;
 }
 
 .point-status-invalid .x-status-cell {
+    color: #000;
     background-color: #d3d3d3;
 }
 
 .point-status-nullvalue .x-status-cell {
+    color: #fff;
     background-color: #0000ff;
 }
 
 /**alarm level css*/
 .alm-level1 .x-level-cell {
+    color: #fff;
     background-color: #ff0000;
 }
 
 .alm-level2 .x-level-cell {
+    color: #fff;
     background-color: #ffa500;
 }
 
 .alm-level3 .x-level-cell {
+    color: #000;
     background-color: #ffff00;
 }
 
 .alm-level4 .x-level-cell {
+    color: #000;
     background-color: #87ceeb;
 }
 
@@ -344,17 +358,17 @@ a.custom-primary {
     border-color: rgba(46,109,164, 0.5);
 }
 
-    a.custom-primary:hover {
-        color: #f9f9f9;
-        background: rgba(40,96,144, 0.5);
-        border-color: rgba(32,77,116, 0.5);
-    }
+a.custom-primary:hover {
+    color: #f9f9f9;
+    background: rgba(40,96,144, 0.5);
+    border-color: rgba(32,77,116, 0.5);
+}
 
-    a.custom-primary:active {
-        color: #f9f9f9;
-        background: rgba(40,96,144, 0.5);
-        border-color: rgba(32,77,116, 0.5);
-    }
+a.custom-primary:active {
+    color: #f9f9f9;
+    background: rgba(40,96,144, 0.5);
+    border-color: rgba(32,77,116, 0.5);
+}
 
 a.custom-success {
     color: #f9f9f9;
@@ -362,17 +376,17 @@ a.custom-success {
     border-color: rgba(76,174,76, 0.5);
 }
 
-    a.custom-success:hover {
-        color: #f9f9f9;
-        background: rgba(68,157,68, 0.5);
-        border-color: rgba(57,132,57, 0.5);
-    }
+a.custom-success:hover {
+    color: #f9f9f9;
+    background: rgba(68,157,68, 0.5);
+    border-color: rgba(57,132,57, 0.5);
+}
 
-    a.custom-success:active {
-        color: #f9f9f9;
-        background: rgba(68,157,68, 0.5);
-        border-color: rgba(57,132,57, 0.5);
-    }
+a.custom-success:active {
+    color: #f9f9f9;
+    background: rgba(68,157,68, 0.5);
+    border-color: rgba(57,132,57, 0.5);
+}
 
 a.custom-info {
     color: #f9f9f9;
@@ -380,17 +394,17 @@ a.custom-info {
     border-color: rgba(70,184,218, 0.5);
 }
 
-    a.custom-info:hover {
-        color: #f9f9f9;
-        background: rgba(49,176,213, 0.5);
-        border-color: rgba(38,154,188, 0.5);
-    }
+a.custom-info:hover {
+    color: #f9f9f9;
+    background: rgba(49,176,213, 0.5);
+    border-color: rgba(38,154,188, 0.5);
+}
 
-    a.custom-info:active {
-        color: #f9f9f9;
-        background: rgba(49,176,213, 0.5);
-        border-color: rgba(38,154,188, 0.5);
-    }
+a.custom-info:active {
+    color: #f9f9f9;
+    background: rgba(49,176,213, 0.5);
+    border-color: rgba(38,154,188, 0.5);
+}
 
 a.custom-warning {
     color: #f9f9f9;
@@ -398,17 +412,17 @@ a.custom-warning {
     border-color: rgba(238,162,54, 0.5);
 }
 
-    a.custom-warning:hover {
-        color: #f9f9f9;
-        background: rgba(236,151,31, 0.5);
-        border-color: rgba(213,133,18, 0.5);
-    }
+a.custom-warning:hover {
+    color: #f9f9f9;
+    background: rgba(236,151,31, 0.5);
+    border-color: rgba(213,133,18, 0.5);
+}
 
-    a.custom-warning:active {
-        color: #f9f9f9;
-        background: rgba(236,151,31, 0.5);
-        border-color: rgba(213,133,18, 0.5);
-    }
+a.custom-warning:active {
+    color: #f9f9f9;
+    background: rgba(236,151,31, 0.5);
+    border-color: rgba(213,133,18, 0.5);
+}
 
 a.custom-danger {
     color: #f9f9f9;
@@ -416,17 +430,17 @@ a.custom-danger {
     border-color: rgba(212,63,58, 0.5);
 }
 
-    a.custom-danger:hover {
-        color: #f9f9f9;
-        background: rgba(201,48,44, 0.5);
-        border-color: rgba(172,41,37, 0.5);
-    }
+a.custom-danger:hover {
+    color: #f9f9f9;
+    background: rgba(201,48,44, 0.5);
+    border-color: rgba(172,41,37, 0.5);
+}
 
-    a.custom-danger:active {
-        color: #f9f9f9;
-        background: rgba(201,48,44, 0.5);
-        border-color: rgba(172,41,37, 0.5);
-    }
+a.custom-danger:active {
+    color: #f9f9f9;
+    background: rgba(201,48,44, 0.5);
+    border-color: rgba(172,41,37, 0.5);
+}
 
 .alert {
     padding: 15px;
@@ -442,7 +456,35 @@ a.custom-danger {
 }
 
 .customBody {
-    background-color: transparent;
-    background: url('/Content/themes/images/main.png');
-    background-size: cover;
+    background: radial-gradient(circle at 50px 50px,#071c36,#062b4b,rgba(7,23,46,1));
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #1369bf;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 8px;
+    background-color: #2982fb;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-button:end:increment,
+::-webkit-scrollbar-button:start:decrement {
+    display: block;
+    width: 0;
+    height: 0;
+    background-color: transparent
 }

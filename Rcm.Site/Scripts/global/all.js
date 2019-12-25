@@ -413,7 +413,7 @@ window.$$Rcms.SplitKeys = function (key) {
 
 /*Icons */
 window.$$Rcms.icons = {
-    Home: '/content/themes/icons/home.png'
+    Root: '/content/themes/icons/all.png'
 };
 
 /*global delimiter*/
