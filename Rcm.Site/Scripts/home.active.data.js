@@ -491,10 +491,7 @@
                     preserveScrollOnRefresh: true,
                     stripeRows: true,
                     trackOver: true,
-                    emptyText: '<h1 style="margin:20px">没有数据记录</h1>',
-                    getRowClass: function (record, rowIndex, rowParams, store) {
-                        return $$Rcms.GetPointStatusCls(record.get("status"));
-                    }
+                    emptyText: '<h1 style="margin:20px">没有数据记录</h1>'
                 },
                 features: [{
                     ftype: 'grouping',
@@ -503,7 +500,15 @@
                     startCollapsed: false
                 }],
                 columns: [
-                    { text: '信号状态', dataIndex: 'statusDisplay', tdCls: 'x-status-cell', align: 'center' },
+                    {
+                        text: '信号状态',
+                        dataIndex: 'statusDisplay',
+                        align: 'center',
+                        renderer: function (value, meta, record) {
+                            var cls = $$Rcms.GetPointStatusCls(record.get("status"));
+                            return '<span class="cell-marker ' + cls +'"></span>'+ value;
+                        }
+                    },
                     { text: '信号类型', dataIndex: 'typeDisplay', align: 'center' },
                     { text: '信号名称', dataIndex: 'name', width: 150 },
                     { text: '信号测值', dataIndex: 'value' },

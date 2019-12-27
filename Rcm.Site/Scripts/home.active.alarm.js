@@ -283,10 +283,7 @@
             preserveScrollOnRefresh: true,
             stripeRows: true,
             trackOver: true,
-            emptyText: '<h1 style="margin:20px">没有数据记录</h1>',
-            getRowClass: function (record, rowIndex, rowParams, store) {
-                return $$Rcms.GetAlmLevelCls(record.get("level"));
-            }
+            emptyText: '<h1 style="margin:20px">没有数据记录</h1>'
         },
         columns: [
             {
@@ -298,7 +295,10 @@
                 text: '告警级别',
                 dataIndex: 'levelDisplay',
                 align: 'center',
-                tdCls: 'x-level-cell'
+                renderer: function (value, meta, record) {
+                    var cls = $$Rcms.GetAlmLevelCls(record.get("level"));
+                    return '<span class="cell-marker ' + cls + '"></span>' + value;
+                }
             },
             {
                 text: '告警时间',

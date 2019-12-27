@@ -168,65 +168,53 @@ div.help-tip div.help-tip-content p {
 }
 
 /**point status css*/
-.point-status-normal .x-status-cell {
-    color: #fff;
+.point-status-normal {
     background-color: #32cd32;
 }
 
-.point-status-level1 .x-status-cell {
-    color: #fff;
-    background-color: #ff0000;
+.point-status-level1 {
+    background-color: #a01717;
 }
 
-.point-status-level2 .x-status-cell {
-    color: #fff;
-    background-color: #ffa500;
+.point-status-level2 {
+    background-color: #deb139;
 }
 
-.point-status-level3 .x-status-cell {
-    color: #000;
-    background-color: #ffff00;
+.point-status-level3 {
+    background-color: #cfef19;
 }
 
-.point-status-level4 .x-status-cell {
-    color: #000;
-    background-color: #87ceeb;
+.point-status-level4 {
+    background-color: #218afa;
 }
 
-.point-status-opevent .x-status-cell {
-    color: #fff;
+.point-status-opevent {
     background-color: #0000ff;
 }
 
-.point-status-invalid .x-status-cell {
-    color: #000;
+.point-status-invalid {
     background-color: #d3d3d3;
 }
 
-.point-status-nullvalue .x-status-cell {
-    color: #fff;
+.point-status-nullvalue {
     background-color: #0000ff;
 }
 
 /**alarm level css*/
-.alm-level1 .x-level-cell {
-    color: #fff;
-    background-color: #ff0000;
+.alm-level1 {
+    background-color: #a01717;
 }
 
-.alm-level2 .x-level-cell {
-    color: #fff;
-    background-color: #ffa500;
+.alm-level2 {
+    background-color: #deb139;
 }
 
-.alm-level3 .x-level-cell {
-    color: #000;
-    background-color: #ffff00;
+.alm-level3 {
+    background-color: #cfef19;
 }
 
-.alm-level4 .x-level-cell {
-    color: #000;
-    background-color: #87ceeb;
+.alm-level4 {
+    background-color: #218afa;
 }
 
 .all-level-0 {
@@ -487,4 +475,12 @@ a.custom-danger:active {
     width: 0;
     height: 0;
     background-color: transparent
+}
+
+.cell-marker {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-right: 8px;
 }
