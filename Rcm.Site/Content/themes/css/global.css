@@ -15,8 +15,7 @@ a, a:hover, a:active, a:visited, a:link {
     background-color: #157fcc;
 }
 
-.header .brand 
-{
+.header .brand {
     float: left;
     background-image: url("/Content/themes/images/brand.png");
     background-repeat: no-repeat;
@@ -55,7 +54,7 @@ a, a:hover, a:active, a:visited, a:link {
 }
 
 .icon-nav li > .current {
-    color:#157fcc;
+    color: #157fcc;
     border-top: 3px solid #e93733;
     background-color: #fff;
     padding: 17px 20px;
@@ -73,8 +72,7 @@ a, a:hover, a:active, a:visited, a:link {
     position: absolute;
     right: 15px;
     top: 8px;
-
-    color:#fff;
+    color: #fff;
     border-radius: 0;
     text-shadow: none;
     background: #e63a3a none repeat scroll 0 0;
@@ -120,7 +118,7 @@ div.title-bar a.help {
     background-position: 0 3px;
 }
 
-div.help-tip{
+div.help-tip {
     zoom: 1;
     position: relative;
     margin-bottom: 6px;
@@ -167,47 +165,65 @@ div.help-tip div.help-tip-content p {
 }
 
 .hidden {
-    display:none;
+    display: none;
+}
+
+.cell-marker {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-right: 8px;
 }
 
 /**point status css*/
-.point-status-normal .x-status-cell {
-    background-color : #32cd32;
+.point-status-normal {
+    background-color: #32cd32;
 }
-.point-status-level1 .x-status-cell { 
-    background-color : #ff0000; 
+
+.point-status-level1 {
+    background-color: #ff0000;
 }
-.point-status-level2 .x-status-cell { 
-    background-color : #ffa500; 
+
+.point-status-level2 {
+    background-color: #ffa500;
 }
-.point-status-level3 .x-status-cell { 
-    background-color : #ffff00; 
+
+.point-status-level3 {
+    background-color: #ffd700;
 }
-.point-status-level4 .x-status-cell { 
-    background-color : #87ceeb; 
+
+.point-status-level4 {
+    background-color: #87ceeb;
 }
-.point-status-opevent .x-status-cell { 
-    background-color : #0000ff; 
+
+.point-status-opevent {
+    background-color: #0000ff;
 }
-.point-status-invalid .x-status-cell { 
-    background-color : #d3d3d3; 
+
+.point-status-invalid {
+    background-color: #d3d3d3;
 }
-.point-status-nullvalue .x-status-cell { 
-    background-color : #0000ff; 
+
+.point-status-nullvalue {
+    background-color: #0000ff;
 }
 
 /**alarm level css*/
-.alm-level1 .x-level-cell { 
-    background-color : #ff0000;
+.alm-level1 {
+    background-color: #ff0000;
 }
-.alm-level2 .x-level-cell { 
-    background-color : #ffa500; 
+
+.alm-level2 {
+    background-color: #ffa500;
 }
-.alm-level3 .x-level-cell { 
-    background-color : #ffff00; 
+
+.alm-level3 {
+    background-color: #ffd700;
 }
-.alm-level4 .x-level-cell { 
-    background-color : #87ceeb; 
+
+.alm-level4 {
+    background-color: #87ceeb;
 }
 
 .all-level-0 {
@@ -312,105 +328,115 @@ div.help-tip div.help-tip-content p {
 
 /**custom button css*/
 a.custom-button {
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 a.custom-primary {
-  color: #ffffff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+    color: #ffffff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
 }
+
 a.custom-primary:hover {
-  color: #ffffff;
-  background-color: #286090;
-  border-color: #204d74;
+    color: #ffffff;
+    background-color: #286090;
+    border-color: #204d74;
 }
+
 a.custom-primary:active {
-  color: #ffffff;
-  background-color: #286090;
-  border-color: #204d74;
+    color: #ffffff;
+    background-color: #286090;
+    border-color: #204d74;
 }
 
 a.custom-success {
-  color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+    color: #ffffff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
 }
+
 a.custom-success:hover {
-  color: #ffffff;
-  background-color: #449d44;
-  border-color: #398439;
+    color: #ffffff;
+    background-color: #449d44;
+    border-color: #398439;
 }
+
 a.custom-success:active {
-  color: #ffffff;
-  background-color: #449d44;
-  border-color: #398439;
+    color: #ffffff;
+    background-color: #449d44;
+    border-color: #398439;
 }
 
 a.custom-info {
-  color: #ffffff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+    color: #ffffff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
 }
+
 a.custom-info:hover {
-  color: #ffffff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+    color: #ffffff;
+    background-color: #31b0d5;
+    border-color: #269abc;
 }
+
 a.custom-info:active {
-  color: #ffffff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+    color: #ffffff;
+    background-color: #31b0d5;
+    border-color: #269abc;
 }
 
 a.custom-warning {
-  color: #ffffff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+    color: #ffffff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
 }
+
 a.custom-warning:hover {
-  color: #ffffff;
-  background-color: #ec971f;
-  border-color: #d58512;
+    color: #ffffff;
+    background-color: #ec971f;
+    border-color: #d58512;
 }
+
 a.custom-warning:active {
-  color: #ffffff;
-  background-color: #ec971f;
-  border-color: #d58512;
+    color: #ffffff;
+    background-color: #ec971f;
+    border-color: #d58512;
 }
 
 a.custom-danger {
-  color: #ffffff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+    color: #ffffff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
 }
+
 a.custom-danger:hover {
-  color: #ffffff;
-  background-color: #c9302c;
-  border-color: #ac2925;
+    color: #ffffff;
+    background-color: #c9302c;
+    border-color: #ac2925;
 }
+
 a.custom-danger:active {
-  color: #ffffff;
-  background-color: #c9302c;
-  border-color: #ac2925;
+    color: #ffffff;
+    background-color: #c9302c;
+    border-color: #ac2925;
 }
 
 .alert {
@@ -427,5 +453,5 @@ a.custom-danger:active {
 }
 
 .alert-info hr {
-  border-top-color: #a6e1ec;
+    border-top-color: #a6e1ec;
 }

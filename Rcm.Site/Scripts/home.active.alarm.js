@@ -296,7 +296,10 @@
                 text: '告警级别',
                 dataIndex: 'levelDisplay',
                 align: 'center',
-                tdCls: 'x-level-cell'
+                renderer: function (value, meta, record) {
+                    var cls = $$Rcms.GetAlmLevelCls(record.get("level"));
+                    return '<span class="cell-marker ' + cls + '"></span>' + value;
+                }
             },
             {
                 text: '告警时间',
